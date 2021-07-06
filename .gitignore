@@ -1,0 +1,8 @@
+# Ignore every auxiliary file
+*
+!*.tex
+!*.pdf
+!*.bib
+!README.md
+!.gitignore
+!.latexmkrc
