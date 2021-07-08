@@ -1,6 +1,6 @@
 # Ignore every auxiliary file
 *
-!*.tex
+!main.tex
 !*.pdf
 !*.bib
 !README.md

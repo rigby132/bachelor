@@ -1,15 +1,16 @@
-\documentclass[a4paper]{article}
-
+\documentclass[a4paper, 12pt]{report}
 
 \author{Deniz Güven}
 
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{minted}
 \usepackage{tikz}
 \usetikzlibrary{arrows, automata}
 \usepackage{xcolor}
 \usepackage{forest}
-\usepackage[T1]{fontenc}
-\usepackage[margin=23mm, top=40mm, headheight=24pt, bottom=30mm]{geometry}
+%\usepackage[margin=23mm, top=40mm, headheight=24pt, bottom=30mm]{geometry}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
@@ -21,28 +22,110 @@
 \begin{titlepage}
   \begin{center}
     \includegraphics[width=0.5\linewidth]{res/uni.png}
+    \vspace{2cm}
+
+    \huge{\textbf{Berechnung von Molekül-Grundzustandsenergien 
+    mit Ab-Initio-Methoden}}
+    \vspace{1cm}
+
+    \Large
+    Fachbereich Informatik
+
+    Bachelorarbeit
+
+    Deniz Güven
     \vfill
 
-    \large{Fachbereich Mathematik}
-    \vfill
+    Betreuer: 
 
-    \large{Bachelorarbeit}
-    \vfill
-
-    \huge{Der Satz von Radon-Nikodym}
-    \vfill
-
-        \large
-    Akilavan Ganeshkumar
-    \vfill
-
-    Datum der Abgabe
-    \vfill
-\begin{tabular}{rl}
-    Betreuer:& Prof. Dr. Robert Haller-Dintelmann
-\end{tabular}
+    \today
   \end{center}
 \end{titlepage}
 
-moin
+\tableofcontents
+
+%=========================================================================
+\chapter{Einleitung}
+\section{Chemischer Hintergrund}
+
+Definition von Chemie
+
+\subsection{Atommodelle}
+In der Chemie wurden immer präzisere 
+und umfangreichere Beschreibungen des Atoms entwickelt,
+zu diesen gehören unter anderen:
+\begin{enumerate}
+  \item Demokrit
+  \item Dalton
+  \item Rutherford
+  \item Bohr
+  \item Quantenmechanische Modell
+\end{enumerate}
+
+\section{Ziel dieser Bachelorarbeit}
+Eine wichtige Eigenschaft von Atomen und Molekülen ist die Grundzustandsenergie, 
+mit dieser können viele Prozesse in der Chemie,
+wie Reaktionsabläufe und Molekülstrukturen, erklärt werden.
+Diese Bachelorarbeit befasst sich mit der Berechnung 
+dieser Energie von einfachen Atomen und Molekülen.
+Dafür wird ein theoretisches Verständis entwickelt 
+und diese Theorie dann in einem Programm implementiert.
+
+\section{Relevanz für die Chemie}
+(Reaktionsabläufe besser verstehen ...)
+
+%=========================================================================
+\chapter{Theorie und Methoden}
+\section{Allgemeine Theorie}
+(die für beide Methoden gilt):
+- Schrödinger-Gleichung(Zeitunabhängige)
+- Beschreibung/Lösung durch Eigenfunktionen/Eigenwerte
+- Verwendete Approximationen/Annahmen (Born-Oppenheimer-Näherung, ...)
+
+\section{Hartree-Fock}
+- Herleitung (Variations-Prinzip: Minimierung der Energie,
+Schrödingergleichung u Operatoren)
+- Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
+- Verwendung von Basisfunktionen (Konstruktion der Wellenfunktion)
+- Implementierung (größten Probleme: Integral-Evaluierung und
+Matrix-Diagonalisierung)
+
+\section{DFT}
+- Herleitung (Nur die Idee/Ergebnisse, da wahrscheinlich über
+meinem Niveau)
+- Konkrete Umsetzung durch die Kohn-Sham-Gleichung (Terme in der
+Schrödinger-Glg. + XC-Funktionale)
+- Lösung durch FEM + PINVIT (+ LDA)
+- Implemtierung über UG4 LUA
+
+%=========================================================================
+\chapter{Ergebnisse/ Numerische Experimente}
+\section{Erklärung der Experimente}
+- Eigen-Energien als Benchmark + Moleküle zum Testen (Simple wie
+H2O, CH4, ... und Komplexe wie z.b. Benzol, das eine
+Elektronen-Delokalisation aufweist)
+
+\section{Experimente(HF, DFT, FULL-CI(exakt) über NWCHEM oder Literatur)}
+- Präsentation der Ergebnisse(Graphen, Tabellen, usw.)
+- Werden Effekte bei komplexen Molekülen korrekt erfasst?
+
+\section{Vergleich der Methoden/Deutung der Ergebnisse (HF vs. DFT)}
+- Genauigkeit, Kosten, Skalierbarkeit, ...
+
+%=========================================================================
+\chapter{Diskussion/Ausblick}
+\section{Einordnung von HF und DFT in der Chemie}
+-> Andere Klassen von Methoden (zb. semiempirische Methoden)
+-> Verbesserung dieser Methoden (Post-Hartree-Fock-Methoden)
+-> Eingliederung dieser Methoden in der Praxis (Was kann man mit
+diesen Eigenenergien/Funktionen eigentlich machen?).
+
+\section{Wie könnte man von diesem Punkt aus weitermachen?}
+-> Code-Optimierung, Anspruchsvoller Methoden implementieren
+(aufbauend auf HF), Geometrie-Optimierung, ...
+
+%=========================================================================
+\bibliographystyle{abbrv}
+\bibliography{main}
+
 \end{document}

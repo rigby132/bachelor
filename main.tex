@@ -19,14 +19,13 @@
 
 \begin{document}
 
-
-
 \begin{titlepage}
   \begin{center}
     \includegraphics[width=0.5\linewidth]{res/uni.png}
     \vspace{2cm}
 
-    \huge{\textbf{Berechnung von Molekül-Grundzustandsenergien mit Ab-Initio-Methoden}}
+    \huge{\textbf{Berechnung von Molekül-Grundzustandsenergien 
+    mit Ab-Initio-Methoden}}
     \vspace{1cm}
 
     \Large
@@ -45,42 +44,94 @@
 
 \tableofcontents
 
+%=========================================================================
 \chapter{Einleitung}
 \section{Chemischer Hintergrund}
 
-Atome sind cool\cite{structure_2013}, weil man die essen kann.
+TODO
+Definition von Chemie
 
-(Grundlegende Dinge über Chemie)
-Entwicklung der Atom-Modelle bis zur quantenmechanischen Formulierungen
-\section{Ziel dieser Bachelor-Arbeit}
+\subsection{Atommodelle}
+In der Chemie wurden immer präzisere 
+und umfangreichere Beschreibungen des Atoms entwickelt,
+zu diesen gehören unter anderen:
+TODO
+\begin{enumerate}
+  \item Demokrit
+  \item Dalton
+  \item Rutherford
+  \item Bohr
+  \item Quantenmechanische Modell
+\end{enumerate}
+
+\section{Ziel dieser Bachelorarbeit}
+Eine wichtige Eigenschaft von Atomen und Molekülen ist die Grundzustandsenergie, 
+mit dieser können viele Prozesse in der Chemie,
+wie Reaktionsabläufe und Molekülstrukturen, erklärt werden.
+Diese Bachelorarbeit befasst sich mit der Berechnung 
+dieser Energie von einfachen Atomen und Molekülen innerhalb einer quantenmechanischen Beschreibung.
+Dafür wird ein theoretisches Verständis entwickelt 
+und diese Theorie dann in einem Programm implementiert.
+
 \section{Relevanz für die Chemie}
-(Reaktionsabläufe besser verstehen ...)
+TODO Genaue Verwendung von GZs erklären. 
 
-
-
+%=========================================================================
 \chapter{Theorie und Methoden}
 \section{Allgemeine Theorie}
-(die für beide Methoden gilt):
-- Schrödinger-Gleichung(Zeitunabhängige)
-- Beschreibung/Lösung durch Eigenfunktionen/Eigenwerte
+
+\subsection{Postulate der Quantenmechanik}
+
+TODO cite book chapter
+
+\subsubsection{1. Postulat}
+\subsubsection{2. Postulat}
+\subsubsection{3. Postulat}
+\subsubsection{4. Postulat}
+\subsubsection{5. Die Schrödingergleichung}
+Die zeitliche Änderung dieser Wellenfunktion $\Psi(r_1, r_2, \dots, t)$ 
+wird durch die Schrödingergleichung beschrieben:
+\begin{equation}
+  i\hbar\frac{\partial\Psi}{\partial t} = \hat{H}\Psi
+\end{equation}\\
+Sollte die Zeitabhägigkeit der Wellenfunktion trivial sein (TODO erklären?),
+kann die diese in 2 Funktionen zerlegt werden:
+\begin{equation*}
+  \Psi(r_1, r_2, \dots, t) = \psi(r_1, r_2, \dots) \exp(\frac{-iEt}{\hbar})
+\end{equation*}\\
+Dabei ist $\psi$ die Lösung für die zeitunabhängige Schrödingergleichung:
+\begin{equation}
+  \hat{H}\Psi = E\Psi
+\end{equation}
+
+\subsection{Approximationen}
 - Verwendete Approximationen/Annahmen (Born-Oppenheimer-Näherung, ...)
+
+\subsection{Variationsformulierung}
 
 \section{Hartree-Fock}
 - Herleitung (Variations-Prinzip: Minimierung der Energie,
 Schrödingergleichung u Operatoren)
+
 - Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
+
 - Verwendung von Basisfunktionen (Konstruktion der Wellenfunktion)
+
 - Implementierung (größten Probleme: Integral-Evaluierung und
 Matrix-Diagonalisierung)
 
 \section{DFT}
 - Herleitung (Nur die Idee/Ergebnisse, da wahrscheinlich über
 meinem Niveau)
+
 - Konkrete Umsetzung durch die Kohn-Sham-Gleichung (Terme in der
 Schrödinger-Glg. + XC-Funktionale)
+
 - Lösung durch FEM + PINVIT (+ LDA)
+
 - Implemtierung über UG4 LUA
 
+%=========================================================================
 \chapter{Ergebnisse/ Numerische Experimente}
 \section{Erklärung der Experimente}
 - Eigen-Energien als Benchmark + Moleküle zum Testen (Simple wie
@@ -94,6 +145,7 @@ Elektronen-Delokalisation aufweist)
 \section{Vergleich der Methoden/Deutung der Ergebnisse (HF vs. DFT)}
 - Genauigkeit, Kosten, Skalierbarkeit, ...
 
+%=========================================================================
 \chapter{Diskussion/Ausblick}
 \section{Einordnung von HF und DFT in der Chemie}
 -> Andere Klassen von Methoden (zb. semiempirische Methoden)
@@ -105,6 +157,7 @@ diesen Eigenenergien/Funktionen eigentlich machen?).
 -> Code-Optimierung, Anspruchsvoller Methoden implementieren
 (aufbauend auf HF), Geometrie-Optimierung, ...
 
+%=========================================================================
 \bibliographystyle{abbrv}
 \bibliography{main}
 
