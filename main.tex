@@ -134,8 +134,10 @@ Dabei ist $\psi$ die Lösung für die zeitunabhängige Schrödingergleichung:
 \subsection{Approximationen}
 - Verwendete Approximationen/Annahmen (Born-Oppenheimer-Näherung, ...)
 
+-> Warum ist zeitliche änderung trivial? TODO
+
 \subsection{Variationsformulierung}
-Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert (TODO cite),
+Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert (TODO cite lewars 195),
 wird die exakte Wellenfunktion durch eine Test-Wellenfunktion approximiert.
 Es lässt sich zeigen, 
 dass die Energie dieser Test-Wellenfunktion $E_{test}$ 
@@ -143,6 +145,8 @@ immer über der tatsächlichen Grundzustandsenergie $E_0$ liegt.
 
 \subsubsection*{Beweis}
 TODO das N korrekt?\\
+TODO Auf Rayleigh-ritz erweitern und auf det$|\hat{H}_{ij} - ES_{ij}| = 0$ kommen\\
+TODO test funktion normiert annahme -> $E_0$ kann dann locker ins integral.
 Voraussetzungen:
 \begin{enumerate}
   \item Der Hamiltonian $\hat{H}$ hat die Eigenfunktionen $\psi_i^{}$ mit Eigenwerten $E_i^{}$.
@@ -166,11 +170,58 @@ Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
   &= \sum_n \left\lvert c_n^{} \right\rvert^2 (E_n^{} - E_0^{})
   \quad &\vert \text{ 2. Voraussetzung}\\
   &\geq 0 &\qed
+\end{flalign*}\\
+\cite[S. 187]{atkins_friedman_2011}\\
+%\cite[]{TC2}
+TODO Warum Voraussetzungen erfüllt sind, erklären.
+
+\subsection{Beschreibung von Elektronen}
+Die gesamte Wellenfunktion $\Psi$ muss noch einige Eigenschaften erfüllen, 
+um die Elektronen des Moleküls zu beschreiben:
+
+\begin{enumerate}
+  \item Jedes Elektron verfügt, neben der räumlichen Ausdehnung(TODO: Formulierung), 
+  auch über einen intrinsischen Spin. Dieser Spin kann zwei Zustände annehmen, diese werden über
+  die Spinfunktionen $\alpha$ und $\beta$ dargestellt.
+  \item Die Gesamt-Wellenfunktion muss antisymmetrisch sein 
+  bezüglich dem Austausch von zwei beliebigen Elektronen z.B.
+  $\Psi(1, 2) = - \Psi(2, 1)$
+\end{enumerate}
+TODO cite\\
+Deshalb stellen wir die Gesamtwellenfunktion mit $2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
+\begin{flalign*}
+&\Psi(1, 2, \dots, n) =\\ 
+&\frac{1}{\sqrt{(2n)!}}\left\lvert
+\begin{array}{ccccc} 
+\psi_1(1)\alpha(1) & \psi_1(1)\beta(1) & \cdots & \psi_n(1)\alpha(1) & \psi_n(1)\beta(1)\\ 
+\psi_1(2)\alpha(2) & \psi_1(2)\beta(2) & \cdots & \psi_n(2)\alpha(2) & \psi_n(2)\beta(2)\\ 
+    \vdots         &       \vdots      & \ddots &       \vdots       &       \vdots     \\ 
+\psi_1(2n)\alpha(2n) & \psi_1(2n)\beta(2n) & \cdots & \psi_n(2n)\alpha(2n) & \psi_n(2n)\beta(2n)\\ 
+\end{array}\right\rvert
 \end{flalign*}
 
+TODO zusatzinfos + eqn number? Erklärung spin auf s.200 lewars
+
+
 \section{Hartree-Fock}
-- Herleitung (Variations-Prinzip: Minimierung der Energie,
-Schrödingergleichung u Operatoren)
+
+Im Hartree-Fock-Ansatz wird aus dem Hamilton-Operator, der auf die gesamte Wellenfunktion wirkt, 
+ein 1-Elektronen-Operator entwickelt, der Fock-Operator $\hat{F}$.
+Da dieser Operator nur auf einzelne Elektronen wirkt, 
+kann eine Pseudo-Eigenwerts-Gleichung für jedes Orbital erstellt werden.
+\\\\
+Außerdem ist in diesem Ansatz die Elektron-Elektron-Abstoßung nur approximativ behandelt.
+Dabei wird vereinfacht für die Repulsionen nur die Abstoßung die ein Elektron in einem gemittelten Potential
+, das durch die anderen Elektronen entsteht, berechnet.
+Für eine genauere Beschreibung müsste die Abstoßung aller Elektronen-Paare individuell berücksichtigt werden.
+TODO Visualisierung.\\\\
+Über die Hartree-Fock-Methode folgen diese Gleichung für jedes Spinorbital:
+\begin{equation}
+  \hat{F} \psi_i = \epsilon_i \psi_i \quad i = 0 \dots n
+\end{equation}
+
+\subsection{Fock Operator}
+
 
 - Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
 
