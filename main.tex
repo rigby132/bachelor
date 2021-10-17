@@ -131,7 +131,23 @@ Dabei ist $\psi$ die Lösung für die zeitunabhängige Schrödingergleichung:
 \end{equation}
 \cite[S. 24-25]{atkins_friedman_2011}
 
+\subsection{Hamilton-Operator}
+Der allgemeine Hamilton-Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
+\begin{flalign}
+  \hat{H} &= -\sum_i^N \frac{1}{2} \nabla_i^2 
+            -\sum_\mu^M \frac{m_e}{2 m_\mu} \nabla_\mu^2
+            -\sum_i^N \sum_\mu^M \frac{Z_\mu}{r_{i\mu}}
+            -\frac{1}{2}\sum_{i\neq j} \frac{1}{r_{ij}}
+            -\frac{1}{2}\sum_{\mu \neq \nu } \frac{Z_\mu Z_\nu}{r_{\mu\nu}}\\
+          &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}
+\end{flalign}
+Dabei steht $Z_\mu$ für die Ladung des Atomkerns $\mu$ und 
+$r$ für den Abstand zwischen Elektronen und/oder Atomkernen.
+
 \subsection{Approximationen}
+
+
+
 - Verwendete Approximationen/Annahmen (Born-Oppenheimer-Näherung, ...)
 
 -> Warum ist zeitliche änderung trivial? TODO
