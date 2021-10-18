@@ -8,3 +8,5 @@
 !.latexmkrc
 !res/*
 !res
+!sections/*
+!sections

@@ -10,7 +10,6 @@
 \usetikzlibrary{arrows, automata}
 \usepackage{xcolor}
 \usepackage{forest}
-%\usepackage[margin=23mm, top=40mm, headheight=24pt, bottom=30mm]{geometry}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
@@ -23,6 +22,7 @@
 
 \begin{document}
 
+%TITLE PAGE
 \begin{titlepage}
   \begin{center}
     \includegraphics[width=0.5\linewidth]{res/uni.png}
@@ -48,259 +48,25 @@
 
 \tableofcontents
 
-%=========================================================================
-\chapter{Einleitung}
-\section{Chemischer Hintergrund}
+%INTRODUCTION
+\input{sections/intro.tex}
 
-TODO
-Definition von Chemie
-
-\subsection{Atommodelle}
-In der Chemie wurden immer präzisere 
-und umfangreichere Beschreibungen des Atoms entwickelt,
-zu diesen gehören unter anderen:
-TODO
-\begin{enumerate}
-  \item Demokrit
-  \item Dalton
-  \item Rutherford
-  \item Bohr
-  \item Quantenmechanische Modell
-\end{enumerate}
-
-\section{Ziele dieser Bachelorarbeit}
-Eine wichtige Eigenschaft von Atomen und Molekülen ist die Grundzustandsenergie, 
-mit dieser können viele Prozesse in der Chemie,
-wie Reaktionsabläufe und Molekülstrukturen, erklärt werden.
-Diese Bachelorarbeit befasst sich mit der Berechnung 
-dieser Energie von einfachen Atomen und Molekülen innerhalb einer quantenmechanischen Beschreibung.
-Dafür wird ein theoretisches Verständis entwickelt 
-und diese Theorie dann in einem Programm implementiert.
-
-\section{Relevanz für die Chemie}
-TODO Genaue Verwendung von GZs erklären. 
-
-%=========================================================================
+%THEORY
 \chapter{Theorie und Methoden}
-\section{Allgemeine Theorie}
-\subsection{Grundlegende Defininitionen}
-\subsection{Postulate der Quantenmechanik}
-TODO: $\psi$ als immer normiert annehmen?, Mehr infos + umschreiben?
-\subsubsection{Wellenfunktionen}
-Die sogenannte Wellenfunktion $\Psi(x_1, x_2, \dots, t)$ 
-beschreibt den Zustand eines quantenmechanischen Systems vollständig.\cite[S. 20-21]{atkins_friedman_2011}\\\\
-Durch ein $\psi$ wird nur der räumliche Anteil dargestellt.
 
-\subsubsection{Operatoren}
-Beobachtbare Eigenschaften eines quantenmechanischen Systems 
-werden durch sogenannte Operatoren repräsentiert.
-Diese Operatoren müssen hermitisch sein und folgende Gleichungen erfüllen:
-\begin{flalign*}
-  \hat{q}\hat{p}_{q'} - \hat{p}_{q'}\hat{q} &= i\hbar\delta_{qq'}\\
-  \hat{q}\hat{q}' - \hat{q}'\hat{q} &= 0 \\
-  \hat{p}_{q}\hat{p}_{q'} - \hat{p}_{q'}\hat{p}_{q} &= 0
-\end{flalign*}
-Wobei $\hat{q}, \hat{q}' \in \{\hat{x}, \hat{y}, \hat{z}\}$ die Orts-Operatoren stellen
-und $\hat{p}_q, \hat{p}_{q'}$ die zugehörigen Impuls-Operatoren sind.\cite[S. 21]{atkins_friedman_2011}
+\input{sections/basics.tex}
 
-\subsubsection{Messungen}
-Der Mittelwert von wiederholten Messungen
-entspricht dem Erwartungswert des korrespondierenden Operators auf der Wellenfunktion.\\
-Der Erwartungswert eines Operators $\hat{o}$ ist gegeben durch:
-\begin{equation}
-  \left\langle \hat{o} \right\rangle = \frac{\int \psi^* \hat{o} \psi \,d\tau}{\int \psi^* \psi \,d\tau}
-  =\frac{\left\langle \psi^* \vert \hat{o} \vert \psi \right\rangle}{\left\langle \psi^* \vert \psi \right\rangle}
-\end{equation}\\
-Wenn $\psi$ eine Eigenfunktion eines Operators $\hat{o}$ ist, erhält man den Eigenwert als Erwartungswert.
-\cite[S. 22-23]{atkins_friedman_2011} 
+\input{sections/hf_setup.tex}
 
-\subsubsection{Bornsche Wahrscheinlichkeitsinterpretation}
-Die Wahrscheinlichkeit ein Teilchen in einem Volumenelement $\,d\tau$ zu finden ist geich
-$\vert \psi(x) \vert^2$, wenn $\psi$ normiert ist.\cite[S. 24]{atkins_friedman_2011}
+\input{sections/hf.tex}
 
-\subsubsection{Die Schrödingergleichung}
-Die zeitliche Änderung dieser Wellenfunktion $\Psi(x_1, x_2, \dots, t)$ 
-wird durch die Schrödingergleichung beschrieben:
-\begin{equation}
-  i\hbar\frac{\partial\Psi}{\partial t} = \hat{H}\Psi
-\end{equation}\\
-Sollte die Zeitabhägigkeit der Wellenfunktion trivial sein (TODO erklären?),
-kann diese in 2 Funktionen zerlegt werden:
-\begin{equation*}
-  \Psi(x_1, x_2, \dots, t) = \psi(x_1, x_2, \dots) \exp(\frac{-iEt}{\hbar})
-\end{equation*}\\
-Dabei ist $\psi$ die Lösung für die zeitunabhängige Schrödingergleichung:
-\begin{equation}
-  \hat{H}\psi = E\psi
-\end{equation}
-\cite[S. 24-25]{atkins_friedman_2011}
+%RESULTS
+\input{sections/results.tex}
 
-\subsection{Hamilton-Operator}
-Der allgemeine Hamilton-Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
-\begin{flalign}\label{hamilton}
-  \hat{H} &= -\sum_i^N \frac{1}{2} \nabla_i^2 
-            -\sum_\mu^M \frac{1}{2 m_\mu} \nabla_\mu^2
-            -\sum_i^N \sum_\mu^M \frac{Z_\mu}{r_{i\mu}}
-            +\frac{1}{2}\sum_{i\neq j} \frac{1}{r_{ij}}
-            +\frac{1}{2}\sum_{\mu \neq \nu } \frac{Z_\mu Z_\nu}{r_{\mu\nu}}\nonumber\\
-          &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}
-\end{flalign}
-Dabei steht $Z_\mu$ für die Ladung des Atomkerns $\mu$ und 
-$r$ für den Abstand zwischen Elektronen und/oder Atomkernen.
-\cite[S. 6]{tc2_1}
+%DISCUSSION
+\input{sections/discussion.tex}
 
-\subsection{Born-Oppenheimer-Näherung}
-
-Aufgrund des hohen Masseunterschiedes zwischen Elektronen und Atomkernen
-ist der Einfluss der Elektronen auf die Bewegung der trägeren Atomkerne vernachlässigbar.
-Deshalb werden die Atomkerne innerhalb der Born-Oppenheimer-Näherung als statisch betrachtet 
-bei der Berechnung der Elektronen-Wellenfunktion.
-
-Dafür wird der Allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
-\begin{flalign*}
-  \hat{H} &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}\\
-          &= \hat{T}_A + \hat{H}_{\text{el}}
-\end{flalign*}
-Wir lösen nun die Schrödingergleichung mit dem elektronischen Hamilton-Operator $\hat{H}_{\text{el}}$.
-Bei der Lösung dieser wird eine feste Kerngeometrie angenommen, 
-die wir bei den Operatoren $\hat{V}_{eA}$ und $\hat{V}_{AA}$ verwenden werden. 
-Mit der resultierenden Elektronen-Wellenfunktionen 
-lässt sich dann eine Gesamte Wellenfunktion mit Einbezug der Atomkerne konstruieren.
-\cite[S. 11-14]{tc2_1}
-
-\subsection{Variationsformulierung}
-Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert \cite[S. 195]{lewars_2016},
-wird die exakte Wellenfunktion durch eine Test-Wellenfunktion approximiert.
-Es lässt sich zeigen, 
-dass die Energie dieser Test-Wellenfunktion $E_{test}$ 
-immer über der tatsächlichen Grundzustandsenergie $E_0$ liegt.
-
-\subsubsection*{Beweis}
-TODO das N korrekt?\\
-TODO Auf Rayleigh-ritz erweitern und auf det$|\hat{H}_{ij} - ES_{ij}| = 0$ kommen\\
-TODO test funktion normiert annahme -> $E_0$ kann dann locker ins integral.
-Voraussetzungen:
-\begin{enumerate}
-  \item Der Hamiltonian $\hat{H}$ hat die Eigenfunktionen $\psi_i^{}$ mit Eigenwerten $E_i^{}$.
-  \item Es existiert eine Eigenfunktion $\psi_0^{}$ mit dem niedrigsten  Eigenwert $E_0^{}$.
-  \item Alle Eigenfunktion von $\hat{H}$ sind orthonomal zueinander:\\
-  $\forall i,j \in \mathbb{N}_0 : \langle \psi_i^{} \vert \psi_j^{} \rangle = \delta_{ij}^{}$
-  \item Die Test-Wellenfunktion lässt sich als Lineakombination der Eigenfunktionen darstellen:
-  $\psi_{test}^{} = \sum_{n}^{} c_n^{} \psi_n^{}$
-\end{enumerate}
-Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
-\begin{flalign*}
-  E_{test} - E_0 
-  &= \langle \psi_{test}^{} \vert \hat{H} - E_0^{} \vert \psi_{test}^{} \rangle\\
-  &= \int \psi_{test}^* (\hat{H} - E_0^{}) \psi_{test}^{} \,dx \quad &\vert \text{ 4. Voraussetzung}\\
-  &= \sum_n \sum_m c_n^\ast c_m^{} \int \psi_{n}^* (\hat{H} - E_0^{}) \psi_{m} \,dx 
-  \quad &\vert \text{ 1. Voraussetzung}\\
-  &= \sum_n \sum_m c_n^\ast c_m^{} \int \psi_{n}^* (E_m^{} - E_0^{}) \psi_{m} \,dx 
-  \quad &\vert \text{ 3. Voraussetzung}\\
-  &= \sum_n \left\lvert c_n^{} \right\rvert^2 (E_n^{} - E_0^{}) \int \psi_{n}^* \psi_{n} \,dx 
-  \quad &\vert \text{ 3. Voraussetzung}\\
-  &= \sum_n \left\lvert c_n^{} \right\rvert^2 (E_n^{} - E_0^{})
-  \quad &\vert \text{ 2. Voraussetzung}\\
-  &\geq 0 &\qed
-\end{flalign*}\\
-\cite[S. 187]{atkins_friedman_2011}\\
-%\cite[]{TC2}
-TODO Warum Voraussetzungen erfüllt sind, erklären.
-
-\subsection{Beschreibung von Elektronen}
-Die gesamte Wellenfunktion $\Psi$ muss noch einige Eigenschaften erfüllen, 
-um die Elektronen des Moleküls zu beschreiben:
-
-\begin{enumerate}
-  \item Jedes Elektron verfügt, neben der räumlichen Ausdehnung(TODO: Formulierung), 
-  auch über einen intrinsischen Spin. Dieser Spin kann zwei Zustände annehmen, diese werden über
-  die Spinfunktionen $\alpha$ und $\beta$ dargestellt.
-  \item Die Gesamt-Wellenfunktion muss antisymmetrisch sein 
-  bezüglich dem Austausch von zwei beliebigen Elektronen z.B.
-  $\Psi(1, 2) = - \Psi(2, 1)$
-\end{enumerate}
-TODO cite\\
-Deshalb stellen wir die Gesamtwellenfunktion mit $2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
-\begin{flalign*}
-&\Psi(1, 2, \dots, n) =\\ 
-&\frac{1}{\sqrt{(2n)!}}\left\lvert
-\begin{array}{ccccc} 
-\psi_1(1)\alpha(1) & \psi_1(1)\beta(1) & \cdots & \psi_n(1)\alpha(1) & \psi_n(1)\beta(1)\\ 
-\psi_1(2)\alpha(2) & \psi_1(2)\beta(2) & \cdots & \psi_n(2)\alpha(2) & \psi_n(2)\beta(2)\\ 
-    \vdots         &       \vdots      & \ddots &       \vdots       &       \vdots     \\ 
-\psi_1(2n)\alpha(2n) & \psi_1(2n)\beta(2n) & \cdots & \psi_n(2n)\alpha(2n) & \psi_n(2n)\beta(2n)\\ 
-\end{array}\right\rvert
-\end{flalign*}
-
-TODO zusatzinfos + eqn number? Erklärung spin auf s.200 lewars
-
-
-\section{Hartree-Fock}
-
-Im Hartree-Fock-Ansatz wird aus dem Hamilton-Operator, der auf die gesamte Wellenfunktion wirkt, 
-ein 1-Elektronen-Operator entwickelt, der Fock-Operator $\hat{F}$.
-Da dieser Operator nur auf einzelne Elektronen wirkt, 
-kann eine Pseudo-Eigenwerts-Gleichung für jedes Orbital erstellt werden.
-
-Außerdem ist in diesem Ansatz die Elektron-Elektron-Abstoßung nur approximativ behandelt.
-Dabei wird vereinfacht für die Repulsionen nur die Abstoßung die ein Elektron in einem gemittelten Potential
-, das durch die anderen Elektronen entsteht, berechnet.
-Für eine genauere Beschreibung müsste die Abstoßung aller Elektronen-Paare individuell berücksichtigt werden.
-TODO Visualisierung.
-
-Über die Hartree-Fock-Methode folgen diese Gleichung für jedes Spinorbital:
-\begin{equation}
-  \hat{F} \psi_i = \epsilon_i \psi_i \quad i = 0 \dots n
-\end{equation}
-
-\subsection{Fock Operator}
-
-
-- Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
-
-- Verwendung von Basisfunktionen (Konstruktion der Wellenfunktion)
-
-- Implementierung (größten Probleme: Integral-Evaluierung und
-Matrix-Diagonalisierung)
-
-\section{DFT}
-- Herleitung (Nur die Idee/Ergebnisse, da wahrscheinlich über
-meinem Niveau)
-
-- Konkrete Umsetzung durch die Kohn-Sham-Gleichung (Terme in der
-Schrödinger-Glg. + XC-Funktionale)
-
-- Lösung durch FEM + PINVIT (+ LDA)
-
-- Implemtierung über UG4 LUA
-
-%=========================================================================
-\chapter{Ergebnisse/ Numerische Experimente}
-\section{Erklärung der Experimente}
-- Eigen-Energien als Benchmark + Moleküle zum Testen (Simple wie
-H2O, CH4, ... und Komplexe wie z.b. Benzol, das eine
-Elektronen-Delokalisation aufweist)
-
-\section{Experimente(HF, DFT, FULL-CI(exakt) über NWCHEM oder Literatur)}
-- Präsentation der Ergebnisse(Graphen, Tabellen, usw.)
-- Werden Effekte bei komplexen Molekülen korrekt erfasst?
-
-\section{Vergleich der Methoden/Deutung der Ergebnisse (HF vs. DFT)}
-- Genauigkeit, Kosten, Skalierbarkeit, ...
-
-%=========================================================================
-\chapter{Diskussion/Ausblick}
-\section{Einordnung von HF und DFT in der Chemie}
--> Andere Klassen von Methoden (zb. semiempirische Methoden)
--> Verbesserung dieser Methoden (Post-Hartree-Fock-Methoden)
--> Eingliederung dieser Methoden in der Praxis (Was kann man mit
-diesen Eigenenergien/Funktionen eigentlich machen?).
-
-\section{Wie könnte man von diesem Punkt aus weitermachen?}
--> Code-Optimierung, Anspruchsvoller Methoden implementieren
-(aufbauend auf HF), Geometrie-Optimierung, ...
-
-%=========================================================================
+%BIBLIORAPHY
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv, main}
 
