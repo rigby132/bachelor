@@ -2,31 +2,75 @@
 Wir betrachten zuerst die Energie, die wir minimieren möchten.
 Diese kombinieren wir dann mit unserer Darstellung 
 der Gesamt\-/Wellenfunktion \cref{slater}:
-\begin{flalign*}
-  E_{\text{HF}} &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle \\ 
-                &= \langle \Psi \vert \hat{H}_{\text{core}} + \hat{V}_{ee} \vert \Psi \rangle \\
+\begin{flalign}
+  E_\text{HF} &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle \nonumber\\ 
+                &= \langle \Psi \vert \hat{H}_{\text{core}} + \hat{V}_{ee} \vert \Psi \rangle \nonumber\\
                 &= \langle \Psi \vert \hat{H}_{\text{core}} \vert \Psi \rangle 
-                + \langle \Psi \vert \hat{V}_{ee} \vert \Psi \rangle &\vert \text{ Slater-Condon-Regel} \\
+                + \langle \Psi \vert \hat{V}_{ee} \vert \Psi \rangle &\vert \text{ Slater-Condon-Regel} \nonumber\\
                 %&= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
                 %+ \frac{1}{2} \sum_{i\neq j}^{2n} \left( 
                 %  \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_i(1) \varphi_j(2) \rangle 
                 %- \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_j(1) \varphi_i(2) \rangle 
                 %\right)\\
                 &= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
-                + \frac{1}{2} \sum_{i\neq j}^{2n} \left( 
+                + \frac{1}{2} \sum_{i, j}^{2n} \left( 
                   \left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
                   - \left[ \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
-                \right)\\
-\end{flalign*}
-TODO coulomb und austausch integrale ausschreiben + cite + Terme erklären
+                \right)
+\end{flalign}
 
-Nach Anwendung von Lagrange\-/Multiplikatoren 
-(mit Bedingung $\langle \varphi_i \vert \varphi_j \rangle = \delta_{ij})$ erhalten wir
-die Hartree\-/Fock\-/Gleichungen:
+\cite[S. 235, S.253]{atkins_friedman_2011}
 
-\begin{equation} \label{uhf}
-  \hat{F}(1) \varphi_i(1) = \sum_j^{2n}\lambda_{ij} \varphi_j(1), \quad i = 0 \dots 2n
+Bei den Termen 
+$\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$ und
+$\left[ \varphi_i \varphi_j \vert \varphi_j\varphi_i \right]$
+handelt es sich um 2\-/Elektronen\-/Integrale,
+welche allgemein definiert sind als:
+
+\begin{equation}
+  \left[ \varphi_i \varphi_j \vert \varphi_k \varphi_l \right] := 
+  \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_k^*(2) \varphi_l(2) d\tau_1 d\tau_2
 \end{equation}
+
+
+
+Wir suchen nun nach einer Extremstelle für den Energie-Term $E_\text{HF}$ unter der Bedingung, 
+dass die Spinorbitale orthonormal bleiben. 
+Dafür werden im Folgenden Lagrange\-/Multiplikatoren in einem Variations\-/Verfahren verwendet.
+Wir variieren bezüglich der $\varphi^*$ und erhalten die Gleichung:
+
+\begin{equation*}
+  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_{i, j}^{2n} \left( 
+    \left[ \delta \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
+    - \left[ \delta \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
+  \right) 
+  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle
+  = 0
+\end{equation*}
+
+Wir faktorisiern nun die Summe $\sum_i^{2n}$ und das $\langle \delta \varphi_i \vert$ aus:
+
+\begin{equation*}
+  \sum_i^{2n} \langle \delta \varphi_i \vert \left(
+    \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_j^{2n} \left(
+    \hat{J}_j \vert \varphi_i \rangle
+    - \hat{K}_j \vert \varphi_i \rangle
+  \right) 
+  - \sum_j^{2n}\lambda_{ij} \vert \varphi_j \rangle \right)
+  = 0
+\end{equation*}
+
+Da jedes $\delta \varphi_i^*$ beliebig variiert werden kann, muss der Term in der Klammer für jedes $i$ jeweils null sein.
+Wir erhalten die Hartree\-/Fock\-/Gleichungen:
+
+
+\begin{align} \label{uhf}
+  \left(\hat{H}_{\text{core}} + \sum_j^{2n} \left( \hat{J}_j - \hat{K}_j \right)\right)\varphi_i &= 
+  \sum_j^{2n}\lambda_{ij} \varphi_j \nonumber\\
+  \hat{F}\varphi_i &= \sum_j^{2n}\lambda_{ij} \varphi_j, \quad \forall i = 0 \dots 2n
+\end{align}
 
 Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
 
@@ -34,11 +78,8 @@ Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleic
   \hat{F}(1) \varphi_i'(1) = \epsilon_i \varphi_i'(1), \quad i = 0 \dots 2n
 \end{equation}
 
-Wobei der Fock\-/Operator $\hat{F}$ gegeben ist durch:
+\cite[S. 253]{atkins_friedman_2011}
 
-\begin{equation} \label{fockoperator}
-  \hat{F} = \hat{H}_{\text{core}} + \sum_j^{2n} \left( \hat{J}_j - \hat{K}_j \right)
-\end{equation}
 TODO zeigen was J und K sind + Spin ausintegrieren. bei Operatoren (1) weglassen?
 
 \section{Roothaan-Hall}
