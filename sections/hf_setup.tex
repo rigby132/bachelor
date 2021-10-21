@@ -1,5 +1,5 @@
 \subsection{Hamilton-Operator}
-Der allgemeine Hamilton-Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
+Der allgemeine Hamilton\-/Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
 \begin{flalign}\label{hamilton}
   \hat{H} &= -\sum_i^N \frac{1}{2} \nabla_i^2 
             -\sum_\mu^M \frac{1}{2 m_\mu} \nabla_\mu^2
@@ -12,30 +12,31 @@ Dabei steht $Z_\mu$ für die Ladung des Atomkerns $\mu$ und
 $r$ für den Abstand zwischen Elektronen und/oder Atomkernen.
 \cite[S. 6]{tc2_1}
 
-\subsection{Born-Oppenheimer-Näherung}
+TODO: erkläre alle Terme.
 
+\subsection{Born-Oppenheimer-Näherung}
 Aufgrund des hohen Masseunterschiedes zwischen Elektronen und Atomkernen
 ist der Einfluss der Elektronen auf die Bewegung der trägeren Atomkerne vernachlässigbar.
-Deshalb werden die Atomkerne innerhalb der Born-Oppenheimer-Näherung als statisch betrachtet 
-bei der Berechnung der Elektronen-Wellenfunktion.
+Deshalb können bei der Berechnung der Elektronen\-/Wellenfunktion 
+die Atomkerne approximativ als statisch betrachtet werden.
 
 Dafür wird der Allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
 \begin{flalign*}
   \hat{H} &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}\\
-          &= \hat{T}_A + \hat{H}_{\text{el}}
+          &= \hat{T}_A + \hat{V}_{AA} + \hat{H}_{\text{el}}
 \end{flalign*}
 Wir lösen nun die Schrödingergleichung mit dem elektronischen Hamilton-Operator $\hat{H}_{\text{el}}$.
 Bei der Lösung dieser wird eine feste Kerngeometrie angenommen, 
-die wir bei den Operatoren $\hat{V}_{eA}$ und $\hat{V}_{AA}$ verwenden werden. 
-Mit der resultierenden Elektronen-Wellenfunktionen 
-lässt sich dann eine Gesamte Wellenfunktion mit Einbezug der Atomkerne konstruieren.
+die wir bei dem Operator $\hat{V}_{eA}$ verwenden werden. 
+Mit der resultierenden Elektronen\-/Wellenfunktionen 
+lässt sich dann eine Gesamte Wellenfunktion unter Einbezug der Atomkerne konstruieren.
 \cite[S. 11-14]{tc2_1}
 
 \subsection{Variationsformulierung}
 Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert \cite[S. 195]{lewars_2016},
-wird die exakte Wellenfunktion durch eine Test-Wellenfunktion approximiert.
+wird die exakte Wellenfunktion durch eine Test\-/Wellenfunktion approximiert.
 Es lässt sich zeigen, 
-dass die Energie dieser Test-Wellenfunktion $E_{test}$ 
+dass die Energie dieser Test\-/Wellenfunktion $E_{test}$ 
 immer über der tatsächlichen Grundzustandsenergie $E_0$ liegt.
 
 \subsubsection*{Beweis}
@@ -65,7 +66,7 @@ Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
   &= \sum_n \left\lvert c_n^{} \right\rvert^2 (E_n^{} - E_0^{})
   \quad &\vert \text{ 2. Voraussetzung}\\
   &\geq 0 &\qed
-\end{flalign*}\\
+\end{flalign*}
 \cite[S. 187]{atkins_friedman_2011}\\
 %\cite[]{TC2}
 TODO Warum Voraussetzungen erfüllt sind, erklären.
@@ -78,21 +79,24 @@ um die Elektronen des Moleküls zu beschreiben:
   \item Jedes Elektron verfügt, neben der räumlichen Ausdehnung(TODO: Formulierung), 
   auch über einen intrinsischen Spin. Dieser Spin kann zwei Zustände annehmen, diese werden über
   die Spinfunktionen $\alpha$ und $\beta$ dargestellt.
-  \item Die Gesamt-Wellenfunktion muss antisymmetrisch sein 
+  \item Die Gesamt\-/Wellenfunktion muss antisymmetrisch sein 
   bezüglich dem Austausch von zwei beliebigen Elektronen z.B.
   $\Psi(1, 2) = - \Psi(2, 1)$
 \end{enumerate}
 TODO cite\\
-Deshalb stellen wir die Gesamtwellenfunktion mit $2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
-\begin{flalign*}
-&\Psi(1, 2, \dots, n) =\\ 
-&\frac{1}{\sqrt{(2n)!}}\left\lvert
+Deshalb stellen wir die Gesamt\-/Wellenfunktion mit 
+$2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
+\begin{equation}\label{slater}
+\Psi(1, \dots, n) = 
+\frac{1}{\sqrt{(2n)!}}\left\lvert
 \begin{array}{ccccc} 
 \psi_1(1)\alpha(1) & \psi_1(1)\beta(1) & \cdots & \psi_n(1)\alpha(1) & \psi_n(1)\beta(1)\\ 
 \psi_1(2)\alpha(2) & \psi_1(2)\beta(2) & \cdots & \psi_n(2)\alpha(2) & \psi_n(2)\beta(2)\\ 
     \vdots         &       \vdots      & \ddots &       \vdots       &       \vdots     \\ 
-\psi_1(2n)\alpha(2n) & \psi_1(2n)\beta(2n) & \cdots & \psi_n(2n)\alpha(2n) & \psi_n(2n)\beta(2n)\\ 
-\end{array}\right\rvert
-\end{flalign*}
+\psi_1(2n)\alpha(2n) & \psi_1(2n)\beta(2n) & \cdots & \psi_n(2n)\alpha(2n) & \psi_n(2n) \beta(2n)
+\end{array}
+\right \rvert
+\end{equation}
 
-TODO zusatzinfos + eqn number? Erklärung spin auf s.200 lewars
+TODO zusatzinfos? Erklärung spin auf s.200 lewars\\
++ eine zeile mit $\varphi_1 = \psi_1\alpha$ und $\varphi_2 = \psi_1\beta$

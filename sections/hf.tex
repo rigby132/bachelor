@@ -1,5 +1,53 @@
 \section{Hartree-Fock}
+Wir betrachten zuerst die Energie, die wir minimieren möchten.
+Diese kombinieren wir dann mit unserer Darstellung 
+der Gesamt\-/Wellenfunktion \cref{slater}:
+\begin{flalign*}
+  E_{\text{HF}} &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle \\ 
+                &= \langle \Psi \vert \hat{H}_{\text{core}} + \hat{V}_{ee} \vert \Psi \rangle \\
+                &= \langle \Psi \vert \hat{H}_{\text{core}} \vert \Psi \rangle 
+                + \langle \Psi \vert \hat{V}_{ee} \vert \Psi \rangle &\vert \text{ Slater-Condon-Regel} \\
+                %&= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+                %+ \frac{1}{2} \sum_{i\neq j}^{2n} \left( 
+                %  \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_i(1) \varphi_j(2) \rangle 
+                %- \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_j(1) \varphi_i(2) \rangle 
+                %\right)\\
+                &= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+                + \frac{1}{2} \sum_{i\neq j}^{2n} \left( 
+                  \left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
+                  - \left[ \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
+                \right)\\
+\end{flalign*}
+TODO coulomb und austausch integrale ausschreiben + cite + Terme erklären
 
+Nach Anwendung von Lagrange\-/Multiplikatoren 
+(mit Bedingung $\langle \varphi_i \vert \varphi_j \rangle = 0, i\neq j$) erhalten wir
+die Hartree\-/Fock\-/Gleichungen:
+
+\begin{equation} \label{uhf}
+  \hat{F}(1) \varphi_i(1) = \sum_j^{2n}\lambda_{ij} \varphi_j(1), \quad i = 0 \dots 2n
+\end{equation}
+
+Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
+
+\begin{equation} \label{uhf_can}
+  \hat{F}(1) \varphi_i'(1) = \epsilon_i \varphi_i'(1), \quad i = 0 \dots 2n
+\end{equation}
+
+Wobei der Fock\-/Operator $\hat{F}$ gegeben ist durch:
+
+\begin{equation} \label{fockoperator}
+  \hat{F} = \hat{H}_{\text{core}} + \sum_j^{2n} \left( \hat{J}_j - \hat{K}_j \right)
+\end{equation}
+TODO zeigen was J und K sind + Spin ausintegrieren. bei Operatoren (1) weglassen?
+
+\section{Roothaan-Hall}
+Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
+\begin{equation} \label{roothaan}
+  FC = SC\epsilon
+\end{equation}
+
+\begin{comment}
 Im Hartree-Fock-Ansatz wird aus dem Hamilton-Operator, der auf die gesamte Wellenfunktion wirkt, 
 ein 1-Elektronen-Operator entwickelt, der Fock-Operator $\hat{F}$.
 Da dieser Operator nur auf einzelne Elektronen wirkt, 
@@ -11,14 +59,7 @@ Dabei wird vereinfacht für die Repulsionen nur die Abstoßung die ein Elektron 
 Für eine genauere Beschreibung müsste die Abstoßung aller Elektronen-Paare individuell berücksichtigt werden.
 TODO Visualisierung.
 
-Über die Hartree-Fock-Methode folgen diese Gleichung für jedes Spinorbital:
-\begin{equation}
-  \hat{F} \psi_i = \epsilon_i \psi_i \quad i = 0 \dots n
-\end{equation}
-
 \subsection{Fock Operator}
-
-
 - Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
 
 - Verwendung von Basisfunktionen (Konstruktion der Wellenfunktion)
@@ -36,3 +77,7 @@ Schrödinger-Glg. + XC-Funktionale)
 - Lösung durch FEM + PINVIT (+ LDA)
 
 - Implemtierung über UG4 LUA
+
+Über die Hartree\-/Fock\-/Methode folgen diese Gleichung für jedes Spinorbital:
+
+\end{comment}
