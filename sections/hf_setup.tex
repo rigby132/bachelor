@@ -70,7 +70,7 @@ Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
 %\cite[]{TC2}
 TODO Warum Voraussetzungen erfüllt sind, erklären.
 
-\subsection{Beschreibung von Elektronen}
+\subsection{Beschreibung von Elektronen} \label{section_slater}
 Die gesamte Wellenfunktion $\Psi$ muss noch einige Eigenschaften erfüllen, 
 um die Elektronen des Moleküls zu beschreiben:
 
@@ -86,16 +86,30 @@ TODO cite\\
 Deshalb stellen wir die Gesamt\-/Wellenfunktion mit 
 $2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
 \begin{equation}\label{slater}
-\Psi(1, \dots, n) = 
-\frac{1}{\sqrt{(2n)!}}\left\lvert
+\Psi(1, \dots, 2n) = 
+\frac{1}{\sqrt{(2n)!}}
+\left\lvert
+\begin{array}{ccccc} 
+\varphi_1(1)  & \varphi_2(1)  & \cdots & \varphi_{2n-1}(1)  & \varphi_{2n}(1)\\ 
+\varphi_1(2)  & \varphi_2(2)  & \cdots & \varphi_{2n-1}(2)  & \varphi_{2n}(2)\\ 
+\vdots        & \vdots        & \ddots & \vdots             & \vdots      \\ 
+\varphi_1(2n) & \varphi_2(2n) & \cdots & \varphi_{2n-1}(2n) & \varphi_{2n}(2n)
+\end{array}
+\right\rvert
+\end{equation}
+In unserem Fall ist jedes Raumorbital doppelt besetzt, weshalb $\Psi$ sich auch wie folgt darstellen lässt:
+\begin{equation}
+\Psi(1, \dots, 2n) = 
+\frac{1}{\sqrt{(2n)!}}
+\left\lvert
 \begin{array}{ccccc} 
 \psi_1(1)\alpha(1) & \psi_1(1)\beta(1) & \cdots & \psi_n(1)\alpha(1) & \psi_n(1)\beta(1)\\ 
 \psi_1(2)\alpha(2) & \psi_1(2)\beta(2) & \cdots & \psi_n(2)\alpha(2) & \psi_n(2)\beta(2)\\ 
     \vdots         &       \vdots      & \ddots &       \vdots       &       \vdots     \\ 
 \psi_1(2n)\alpha(2n) & \psi_1(2n)\beta(2n) & \cdots & \psi_n(2n)\alpha(2n) & \psi_n(2n) \beta(2n)
 \end{array}
-\right \rvert
+\right\rvert
 \end{equation}
+Dabei besteht jedes Spinorbital aus einer Spin- und Raum\-/Funktion: $\varphi = \psi \alpha$ oder $\varphi = \psi \beta$
 
-TODO zusatzinfos? Erklärung spin auf s.200 lewars\\
-+ eine zeile mit $\varphi_1 = \psi_1\alpha$ und $\varphi_2 = \psi_1\beta$
+TODO zusatzinfos? Erklärung spin auf s.200 lewars

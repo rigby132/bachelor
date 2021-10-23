@@ -1,4 +1,5 @@
 \section{Hartree-Fock}
+\subsection{Energie}
 Wir betrachten zuerst die Energie, die wir minimieren möchten.
 Diese kombinieren wir dann mit unserer Darstellung 
 der Gesamt\-/Wellenfunktion \cref{slater}:
@@ -21,6 +22,7 @@ der Gesamt\-/Wellenfunktion \cref{slater}:
 
 \cite[S. 235, S.253]{atkins_friedman_2011}
 
+\subsection{2\-/Elektronen\-/Integrale}
 Bei den Termen 
 $\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$ und
 $\left[ \varphi_i \varphi_j \vert \varphi_j\varphi_i \right]$
@@ -29,11 +31,61 @@ welche allgemein definiert sind als:
 
 \begin{equation}
   \left[ \varphi_i \varphi_j \vert \varphi_k \varphi_l \right] := 
-  \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_k^*(2) \varphi_l(2) d\tau_1 d\tau_2
+  \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_k^*(2) \varphi_l(2) \,d\tau_1 \,d\tau_2
 \end{equation}
 
+\cite[S. 19]{tc2_3}
 
+\subsubsection*{Coulomb-Integral}
+Das Coulomb\-/Integral $\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$
+stellt die elektrostatische Abstoßung zwischen den Elektronen der Orbitale $\varphi_i$ und $\varphi_j$ dar:
 
+\begin{align*}
+  \left[ \varphi_i \varphi_i \vert \varphi_j \varphi_j \right] &= 
+  \int \varphi_i^*(1) \varphi_i(1) \frac{1}{r_{12}} \varphi_j^*(2) \varphi_j(2) \,d\tau_1 \,d\tau_2\\
+  &= \int \varphi_i^*(1) \hat{J}_j \varphi_i(1) \,d\tau_1 \\ 
+  &= \langle \varphi_i \vert \hat{J}_j \vert \varphi_i \rangle
+\end{align*}
+
+Der zugehörige Coulomb\-/Operator $\hat{J}_j$ ist definiert als:
+\begin{equation}
+  \hat{J}_j \varphi_i(1):= 
+  \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(2) \varphi_i(1) \,d\tau_2 
+\end{equation}
+
+Das Coulomb\-/Integral alleine überschätzt die elektrostatische Abstoßung zweier Orbitale,
+weil im Integral\-/Bild Elektronen sich beliebig nahekommen können.
+Dies ignoriert jedoch das Pauli-Ausschluss-Prinzip, 
+welches zwei Elektronen mit identischem quantenmechanischem Zustand ausschließt.
+Dieses verstärkte Meiden der Elektronen wird auch Pauli-Repulsion genannt.
+
+\cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
+
+\subsubsection*{Austausch-Integral}
+Aus der Slater\-/Determinante, welche das Pauli-Ausschluss-Prinzip erzwingt,
+geht das Austausch\-/Integral $\left[ \varphi_i \varphi_j \vert \varphi_j\varphi_i \right]$ hervor.
+Dieses Integral ist ein Korrektur\-/Term für die im Coulomb\-/Integral vernachlässigte Pauli\-/Repulsion.
+Es ist gegeben durch:
+
+\begin{align*}
+  \left[ \varphi_i \varphi_j \vert \varphi_j \varphi_i \right] &= 
+  \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_j^*(2) \varphi_i(2) \,d\tau_1 \,d\tau_2\\
+  &= \int \varphi_i^*(1) \hat{K}_j \varphi_i(1) \,d\tau_1 \\ 
+  &= \langle \varphi_i \vert \hat{K}_j \vert \varphi_i \rangle
+\end{align*}
+
+Der zugehörige Austausch\-/Operator $\hat{K}_j$ ist definiert als:
+\begin{align}
+  \hat{K}_j \varphi_i(1)&:= 
+  \int \varphi_j^*(2) \frac{1}{r_{12}} \hat{P}_{12} \varphi_j(2) \varphi_i(1) \,d\tau_2 \\
+  &= \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(1) \varphi_i(2) \,d\tau_2 \nonumber
+\end{align}
+
+Der Permutations-Operator $\hat{P}_{12}$ vertauscht die Elektronen der betroffenen Orbitale.
+
+\cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
+
+\subsection{Herleitung der Hartree-Fock-Gleichungen}
 Wir suchen nun nach einer Extremstelle für den Energie-Term $E_\text{HF}$ unter der Bedingung, 
 dass die Spinorbitale orthonormal bleiben. 
 Dafür werden im Folgenden Lagrange\-/Multiplikatoren in einem Variations\-/Verfahren verwendet.
@@ -75,12 +127,12 @@ Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
 
 \begin{equation} \label{uhf_can}
-  \hat{F}(1) \varphi_i'(1) = \epsilon_i \varphi_i'(1), \quad i = 0 \dots 2n
+  \hat{F} \varphi_i' = \varepsilon_i \varphi_i', \quad i = 0 \dots 2n
 \end{equation}
 
 \cite[S. 253]{atkins_friedman_2011}
 
-TODO zeigen was J und K sind + Spin ausintegrieren. bei Operatoren (1) weglassen?
+TODO Spin ausintegrieren.
 
 \section{Roothaan-Hall}
 Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
