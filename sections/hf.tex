@@ -4,20 +4,16 @@ Wir betrachten zuerst die Energie, die wir minimieren möchten.
 Diese kombinieren wir dann mit unserer Darstellung 
 der Gesamt\-/Wellenfunktion \cref{slater}:
 \begin{flalign}
-  E_\text{HF} &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle \nonumber\\ 
-                &= \langle \Psi \vert \hat{H}_{\text{core}} + \hat{V}_{ee} \vert \Psi \rangle \nonumber\\
-                &= \langle \Psi \vert \hat{H}_{\text{core}} \vert \Psi \rangle 
-                + \langle \Psi \vert \hat{V}_{ee} \vert \Psi \rangle &\vert \text{ Slater-Condon-Regel} \nonumber\\
-                %&= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
-                %+ \frac{1}{2} \sum_{i\neq j}^{2n} \left( 
-                %  \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_i(1) \varphi_j(2) \rangle 
-                %- \langle \varphi_i(1) \varphi_j(2) \vert \tfrac{1}{r_{ij}} \vert \varphi_j(1) \varphi_i(2) \rangle 
-                %\right)\\
-                &= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
-                + \frac{1}{2} \sum_{i, j}^{2n} \left( 
-                  \left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
-                  - \left[ \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
-                \right)
+  E_\textrm{HF}[\Psi] 
+    &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle \nonumber\\ 
+    &= \langle \Psi \vert \hat{H}_{\text{core}} + \hat{V}_{ee} \vert \Psi \rangle \nonumber\\
+    &= \langle \Psi \vert \hat{H}_{\text{core}} \vert \Psi \rangle 
+    + \langle \Psi \vert \hat{V}_{ee} \vert \Psi \rangle &\vert \textrm{ Slater-Condon-Regel} \nonumber\\
+    &= \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+      + \frac{1}{2} \sum_{i, j}^{2n} \left( 
+      \left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
+      - \left[ \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
+      \right)
 \end{flalign}
 
 \cite[S. 235, S.253]{atkins_friedman_2011}
@@ -40,12 +36,14 @@ welche allgemein definiert sind als:
 Das Coulomb\-/Integral $\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$
 stellt die elektrostatische Abstoßung zwischen den Elektronen der Orbitale $\varphi_i$ und $\varphi_j$ dar:
 
-\begin{align*}
+\begin{equation}\label{coulomb}
+\begin{aligned}
   \left[ \varphi_i \varphi_i \vert \varphi_j \varphi_j \right] &= 
   \int \varphi_i^*(1) \varphi_i(1) \frac{1}{r_{12}} \varphi_j^*(2) \varphi_j(2) \,d\tau_1 \,d\tau_2\\
   &= \int \varphi_i^*(1) \hat{J}_j \varphi_i(1) \,d\tau_1 \\ 
   &= \langle \varphi_i \vert \hat{J}_j \vert \varphi_i \rangle
-\end{align*}
+\end{aligned}
+\end{equation}
 
 Der zugehörige Coulomb\-/Operator $\hat{J}_j$ ist definiert als:
 \begin{equation}
@@ -56,7 +54,7 @@ Der zugehörige Coulomb\-/Operator $\hat{J}_j$ ist definiert als:
 Das Coulomb\-/Integral alleine überschätzt die elektrostatische Abstoßung zweier Orbitale,
 weil im Integral\-/Bild Elektronen sich beliebig nahekommen können.
 Dies ignoriert jedoch das Pauli-Ausschluss-Prinzip, 
-welches zwei Elektronen mit identischem quantenmechanischem Zustand ausschließt.
+welches zwei Elektronen mit identischen quantenmechanischen Zuständen ausschließt.
 Dieses verstärkte Meiden der Elektronen wird auch Pauli-Repulsion genannt.
 
 \cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
@@ -67,42 +65,143 @@ geht das Austausch\-/Integral $\left[ \varphi_i \varphi_j \vert \varphi_j\varphi
 Dieses Integral ist ein Korrektur\-/Term für die im Coulomb\-/Integral vernachlässigte Pauli\-/Repulsion.
 Es ist gegeben durch:
 
-\begin{align*}
+
+\begin{equation}\label{exchange}
+  \begin{aligned}
   \left[ \varphi_i \varphi_j \vert \varphi_j \varphi_i \right] &= 
   \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_j^*(2) \varphi_i(2) \,d\tau_1 \,d\tau_2\\
   &= \int \varphi_i^*(1) \hat{K}_j \varphi_i(1) \,d\tau_1 \\ 
   &= \langle \varphi_i \vert \hat{K}_j \vert \varphi_i \rangle
-\end{align*}
+\end{aligned}
+\end{equation}
 
 Der zugehörige Austausch\-/Operator $\hat{K}_j$ ist definiert als:
-\begin{align}
-  \hat{K}_j \varphi_i(1)&:= 
-  \int \varphi_j^*(2) \frac{1}{r_{12}} \hat{P}_{12} \varphi_j(2) \varphi_i(1) \,d\tau_2 \\
-  &= \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(1) \varphi_i(2) \,d\tau_2 \nonumber
-\end{align}
-
-Der Permutations-Operator $\hat{P}_{12}$ vertauscht die Elektronen der betroffenen Orbitale.
+\begin{equation}
+  \hat{K}_j \varphi_i(1) :=
+  \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(1) \varphi_i(2) \,d\tau_2
+\end{equation}
 
 \cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
 
 \subsection{Herleitung der Hartree-Fock-Gleichungen}
-Wir suchen nun nach einer Extremstelle für den Energie-Term $E_\text{HF}$ unter der Bedingung, 
+Wir suchen nun nach einer Extremstelle für das Energie-Funktional $E_\textrm{HF}[\Psi]$ unter der Bedingung, 
 dass die Spinorbitale orthonormal bleiben. 
 Dafür werden im Folgenden Lagrange\-/Multiplikatoren in einem Variations\-/Verfahren verwendet.
-Wir variieren bezüglich der $\varphi^*$ und erhalten die Gleichung:
+Wir variieren beliebig im Bezug auf die Spinorbitale: 
+\begin{equation}
+\Psi \rightarrow \Psi + \delta \Psi
+\text{, sodass alle } \varphi_i \rightarrow \varphi_i + \delta \varphi_i
+\end{equation}
 
-\begin{equation*}
+\subsubsection*{Energie}
+Die Energie für die variierte Wellenfunktion ist dann:
+\begin{equation}
+\begin{aligned}
+  E_\textrm{HF}[\Psi + \delta \Psi]
+  &= \langle \Psi + \delta \Psi \vert \hat{H}_{\text{el}} \vert \Psi + \delta \Psi \rangle\\
+  &= \langle \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle +
+  \underbrace{\langle \delta \Psi \vert \hat{H}_{\text{el}} \vert \Psi \rangle +
+  \langle \Psi \vert \hat{H}_{\text{el}} \vert \delta \Psi \rangle}_\textrm{Erste Variation $\delta E_\textrm{HF}$} +
+  \langle \delta \Psi \vert \hat{H}_{\text{el}} \vert \delta \Psi \rangle
+\end{aligned}
+\end{equation}
+Mit
+\begin{equation}
+  \begin{split}
+  \delta E_\textrm{HF} &= 
   \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \frac{1}{2} \sum_{i, j}^{2n} \left( 
+    \left[ \delta \varphi_i \varphi_i \vert \varphi_j \varphi_j \right]
+  + \left[ \varphi_i \delta \varphi_i \vert \varphi_j \varphi_j \right]
+  - \left[ \delta \varphi_i \varphi_j \vert \varphi_j \varphi_i \right]
+  - \left[ \varphi_i \delta \varphi_j \vert \varphi_j \varphi_i \right]
+  \right)\\
+  &+ \sum_i^{2n} \langle \varphi_i \vert \hat{H}_{\text{core}} \vert \delta \varphi_i \rangle
+  + \frac{1}{2} \sum_{i, j}^{2n} \left( 
+    \left[ \varphi_i \varphi_i \vert \delta \varphi_j \varphi_j \right] 
+  + \left[ \varphi_i \varphi_i \vert \varphi_j \delta \varphi_j \right]
+  - \left[ \varphi_i \varphi_j \vert \delta \varphi_j \varphi_i \right]
+  - \left[ \varphi_i \varphi_j \vert \varphi_j \delta \varphi_i \right]
+  \right)
+  \end{split}
+\end{equation}
+Dies vereinfacht zu
+\begin{equation}\label{E_HF}
+  \begin{split}
+  \delta E_\textrm{HF} &=
+  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_{i, j}^{2n} \left( 
+    \left[ \delta \varphi_i \varphi_i \vert \varphi_j \varphi_j \right]
+  - \left[ \delta \varphi_i \varphi_j \vert \varphi_j \varphi_i \right]
+  \right)\\
+  &+ \underbrace{\left( \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_{i, j}^{2n} \left( 
+    \left[ \delta \varphi_i \varphi_i \vert \varphi_j \varphi_j \right]
+  - \left[ \delta \varphi_i \varphi_j \vert \varphi_j \varphi_i \right]
+  \right)\right)^*}_\textrm{Komplexe Konjugation $\Theta_E$}\\
+  &= 
+  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_{i, j}^{2n} \left( 
+    \left[ \delta \varphi_i \varphi_i \vert \varphi_j \varphi_j \right]
+  - \left[ \delta \varphi_i \varphi_j \vert \varphi_j \varphi_i \right]
+  \right) + \Theta_E
+  \end{split}
+\end{equation}
+Für eine Extremstelle muss diese erste Variation verschwinden, wir fordern:
+\begin{equation}
+  \delta E_\textrm{HF} \overset{!}{=} 0
+\end{equation}
+
+\subsubsection*{Orthonormalität}
+Wir fordern ebenfalls, dass die Spinorbitale orthonormal bleiben:
+\begin{equation}
+  \langle \varphi_i \vert \varphi_j \rangle \overset{!}{=} \delta_{ij}\quad \forall i,j
+\end{equation}
+
+\subsubsection*{Lagrange Multiplikatoren}
+Kombiniert man beide Forderungen mit Lagrange Multiplikatoren erhält man das Funktional:
+\begin{equation}
+  \mathcal{L}[\Phi] = E_\textrm{HF}[\Phi]
+  - \sum_{i,j}^{2n} \lambda_{ij}(\langle \varphi_i \vert \varphi_j \rangle - \delta_{ij})
+\end{equation}
+Es gilt dabei $\lambda_{ij} = \lambda_{ji}^*$,
+also die $\lambda_{ij}$ bilden eine hermitische Matrix. \cite[3.40]{szabo_ostlund_1996}
+
+Eine Extremstelle in $\mathcal{L}$ bedeutet auch eine Extremstelle in $E_\textrm{HF}$
+unter der Orthonormalitäts\-/Bedingung. Also setzten wir die Erste Variation in $\mathcal{L}$ null:
+\begin{equation}
+  \delta \mathcal{L} = \delta E_\textrm{HF}
+  - \sum^{2n}_{i,j} \lambda_{ij} \delta \langle \varphi_i \vert \varphi_j \rangle = 0
+\end{equation}
+
+Wir packen im Folgenden alle komplex konjugierten Terme in $\Theta$,
+dabei gleicht das $\Theta^*$ stets dem restlichen Term.
+\begin{align*}
+  0 &= \delta E_\textrm{HF} 
+  - \sum^{2n}_{i,j} \lambda_{ij} \delta \langle \varphi_i \vert \varphi_j \rangle\\
+  &= \delta E_\textrm{HF}
+  - \sum^{2n}_{i,j} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle
+  - \sum^{2n}_{i,j} \lambda_{ij} \langle \varphi_i \vert \delta \varphi_j \rangle\\
+  &= \delta E_\textrm{HF}
+  - \sum^{2n}_{i,j} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle
+  - \left(\sum^{2n}_{i,j} \lambda_{ji} \langle \delta \varphi_i \vert \varphi_j \rangle \right)^*
+  &| &\textrm{ \cref{E_HF}}\\
+  &=  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
   + \sum_{i, j}^{2n} \left( 
     \left[ \delta \varphi_i \varphi_i \vert \varphi_j\varphi_j \right] 
     - \left[ \delta \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
   \right) 
-  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle
-  = 0
-\end{equation*}
+  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle + \Theta
+  &| &\textrm{ \cref{coulomb}, \cref{exchange}}\\
+  &=  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  + \sum_{i, j}^{2n} \left( 
+    \langle \delta \varphi_i \vert \hat{J}_j \vert \varphi_i \rangle
+    - \langle \delta \varphi_i \vert \hat{K}_j \vert \varphi_i \rangle
+  \right) 
+  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle + \Theta
+\end{align*}
 
 Wir faktorisiern nun die Summe $\sum_i^{2n}$ und das $\langle \delta \varphi_i \vert$ aus:
-
 \begin{equation*}
   \sum_i^{2n} \langle \delta \varphi_i \vert \left(
     \hat{H}_{\text{core}} \vert \varphi_i \rangle
@@ -110,27 +209,32 @@ Wir faktorisiern nun die Summe $\sum_i^{2n}$ und das $\langle \delta \varphi_i \
     \hat{J}_j \vert \varphi_i \rangle
     - \hat{K}_j \vert \varphi_i \rangle
   \right) 
-  - \sum_j^{2n}\lambda_{ij} \vert \varphi_j \rangle \right)
+  - \sum_j^{2n}\lambda_{ij} \vert \varphi_j \rangle \right) + \Theta
   = 0
 \end{equation*}
 
-Da jedes $\delta \varphi_i^*$ beliebig variiert werden kann, muss der Term in der Klammer für jedes $i$ jeweils null sein.
+Da jedes $\delta \varphi_i^*$ beliebig variiert werden kann,
+muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Nullstelle.
 Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 
 
 \begin{align} \label{uhf}
-  \left(\hat{H}_{\text{core}} + \sum_j^{2n} \left( \hat{J}_j - \hat{K}_j \right)\right)\varphi_i &= 
-  \sum_j^{2n}\lambda_{ij} \varphi_j \nonumber\\
+  \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
+  \left( \hat{J}_j - \hat{K}_j \right)\right)\vert\varphi_i\rangle &= 
+  \sum_j^{2n}\lambda_{ij} \vert\varphi_j\rangle \nonumber\\
   \hat{F}\varphi_i &= \sum_j^{2n}\lambda_{ij} \varphi_j, \quad \forall i = 0 \dots 2n
 \end{align}
 
 Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
-
 \begin{equation} \label{uhf_can}
-  \hat{F} \varphi_i' = \varepsilon_i \varphi_i', \quad i = 0 \dots 2n
+  \hat{F} \varphi_i' = \lambda_i \varphi_i', \quad i = 0 \dots 2n
 \end{equation}
+Da die $\lambda_{ij}$ hermitisch sind, ist immer eine Matrix\-/Diagonalisierung möglich.
+Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisierung
+\cite[3.64]{szabo_ostlund_1996}.
 
 \cite[S. 253]{atkins_friedman_2011}
+\cite[S. 115-119]{szabo_ostlund_1996}
 
 TODO Spin ausintegrieren.
 

@@ -2,45 +2,47 @@
 Der allgemeine Hamilton\-/Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
 \begin{flalign}\label{hamilton}
   \hat{H} &= -\sum_i^N \frac{1}{2} \nabla_i^2 
-            -\sum_\mu^M \frac{1}{2 m_\mu} \nabla_\mu^2
-            -\sum_i^N \sum_\mu^M \frac{Z_\mu}{r_{i\mu}}
+            -\sum_A^M \frac{1}{2 m_A} \nabla_A^2
+            -\sum_i^N \sum_A^M \frac{Z_A}{r_{iA}}
             +\frac{1}{2}\sum_{i\neq j} \frac{1}{r_{ij}}
-            +\frac{1}{2}\sum_{\mu \neq \nu } \frac{Z_\mu Z_\nu}{r_{\mu\nu}}\nonumber\\
-          &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}
+            +\frac{1}{2}\sum_{A \neq B } \frac{Z_A Z_B}{r_{AB}}\nonumber\\
+          &= \hat{T}_e + \hat{T}_a + \hat{V}_{ea} + \hat{V}_{ee} + \hat{V}_{aa}
 \end{flalign}
-Dabei steht $Z_\mu$ für die Ladung des Atomkerns $\mu$ und 
+Dabei steht $Z_A$ für die Ladung des Atomkerns $A$ und 
 $r$ für den Abstand zwischen Elektronen und/oder Atomkernen.
 \cite[S. 6]{tc2_1}
 
 TODO: erkläre alle Terme.
 
 \subsection{Born-Oppenheimer-Näherung}
-Aufgrund des hohen Masseunterschiedes zwischen Elektronen und Atomkernen
+Aufgrund des hohen Massenunterschieds zwischen Elektronen und Atomkernen
 ist der Einfluss der Elektronen auf die Bewegung der trägeren Atomkerne vernachlässigbar.
 Deshalb können bei der Berechnung der Elektronen\-/Wellenfunktion 
 die Atomkerne approximativ als statisch betrachtet werden.
 
 Dafür wird der Allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
-\begin{flalign*}
-  \hat{H} &= \hat{T}_e + \hat{T}_A + \hat{V}_{eA} + \hat{V}_{ee} + \hat{V}_{AA}\\
-          &= \hat{T}_A + \hat{V}_{AA} + \hat{H}_{\text{el}}
-\end{flalign*}
+\begin{flalign}
+  \hat{H} &= \hat{T}_e + \hat{T}_a + \hat{V}_{ea} + \hat{V}_{ee} + \hat{V}_{aa} \nonumber\\
+          &= \hat{T}_a + \hat{V}_{aa} + \hat{H}_{\text{el}} \nonumber\\
+  \hat{H}_{\text{el}} &= \hat{T}_e + \hat{V}_{ea} + \hat{V}_{ee}
+\end{flalign}
 Wir lösen nun die Schrödingergleichung mit dem elektronischen Hamilton-Operator $\hat{H}_{\text{el}}$.
 Bei der Lösung dieser wird eine feste Kerngeometrie angenommen, 
 die wir bei dem Operator $\hat{V}_{eA}$ verwenden werden. 
 Mit der resultierenden Elektronen\-/Wellenfunktionen 
 lässt sich dann eine Gesamte Wellenfunktion unter Einbezug der Atomkerne konstruieren.
+
 \cite[S. 11-14]{tc2_1}
 
 \subsection{Variationsformulierung}
-Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert \cite[S. 195]{lewars_2016},
+Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen existiert
+\cite[S. 195]{lewars_2016},
 wird die exakte Wellenfunktion durch eine Test\-/Wellenfunktion approximiert.
 Es lässt sich zeigen, 
 dass die Energie dieser Test\-/Wellenfunktion $E_{test}$ 
 immer über der tatsächlichen Grundzustandsenergie $E_0$ liegt.
 
 \subsubsection*{Beweis}
-TODO Auf Rayleigh-ritz erweitern und auf det$|\hat{H}_{ij} - ES_{ij}| = 0$ kommen\\
 TODO test funktion normiert annahme -> $E_0$ kann dann locker ins integral.
 Voraussetzungen:
 \begin{enumerate}
@@ -70,34 +72,120 @@ Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
 %\cite[]{TC2}
 TODO Warum Voraussetzungen erfüllt sind, erklären.
 
-\subsection{Beschreibung von Elektronen} \label{section_slater}
-Die gesamte Wellenfunktion $\Psi$ muss noch einige Eigenschaften erfüllen, 
-um die Elektronen des Moleküls zu beschreiben:
+\subsection{Beschreibung von Elektronen}\label{section_slater}
+Die Form der Wellenfunktion für Elektronen ist in diesem Modell nicht nur 
+durch die Schrödingergleichung \cref{schroedinger} gegeben.
+Um ein realitätsnahes Bild von Elektronen zu schaffen,
+muss die Wellenfunktionen zusätliche Forderungen erfüllen.
+Diese unerfassten Eigenschaften sind das intrinsisches Drehmoment des Elektrons,
+auch Spin genannt, und die Antisymmetrie der Wellenfunktion
+im Bezug auf den Austausch zweier Elektronen.
 
-\begin{enumerate}
-  \item Jedes Elektron verfügt, neben der räumlichen Ausdehnung(TODO: Formulierung), 
-  auch über einen intrinsischen Spin. Dieser Spin kann zwei Zustände annehmen, diese werden über
-  die Spinfunktionen $\alpha$ und $\beta$ dargestellt.
-  \item Die Gesamt\-/Wellenfunktion muss antisymmetrisch sein 
-  bezüglich dem Austausch von zwei beliebigen Elektronen z.B.
-  $\Psi(1, 2) = - \Psi(2, 1)$
-\end{enumerate}
-TODO cite\\
-Deshalb stellen wir die Gesamt\-/Wellenfunktion mit 
-$2n, n \in \mathbb{N}$ Elektronen als eine Determinante von Spin-Orbitalfunktionen dar:
+\cite[S. 265, 270]{levine_2019}
+
+\subsubsection*{1. Spin}
+Jedes Elektron verfügt, neben einer räumlichen Ausdehnung, 
+auch über einen intrinsischen Spin. 
+Ein Elektron kann lediglich zwei Spin\-/Zustände annehmen.
+Diese Zustände werden mit den Spinfunktionen $\alpha$ und $\beta$ dargestellt und sind gegeben durch:
+\begin{equation}\label{spin_function}
+  \begin{aligned}
+    \alpha(\omega) &:= \delta(\omega - \nicefrac{1}{2})\\
+    \beta(\omega) &:= \delta(\omega + \nicefrac{1}{2})
+  \end{aligned}
+\end{equation}
+mit den Eigenschaften:
+\begin{equation}\label{spin_product}
+  \begin{aligned}
+    \langle \alpha \vert \alpha \rangle &= \langle \beta \vert \beta \rangle = 1 \\
+    \langle \alpha \vert \beta \rangle &= \langle \beta \vert \alpha \rangle = 0
+  \end{aligned}
+\end{equation}
+
+Die Spinkoordinate $\omega$ existiert separat von den räumlichen Koordinaten $x,y,z$.
+Deshalb hängt die Wellenfunktion $\varphi$ eines Elektronens von insgesamt vier Parametern ab
+und wird als Produkt eines Raum- und Spin\-/Orbitals dargestellt:
+
+\begin{equation}\label{spin}
+  \varphi(1) = \varphi(x_1, y_1, z_1, \omega_1) = \begin{cases}
+    \psi(x_1, y_1, z_1) \alpha(\omega_1) = \psi(1) \alpha(1)\\
+    \psi(x_1, y_1, z_1) \beta(\omega_1) = \psi(1) \beta(1)\\
+  \end{cases}
+\end{equation}
+
+Zu beachten ist, dass Elektronen nur für die Werte 
+$\omega = \pm \nicefrac{1}{2}$ existieren können ($\lvert \varphi \rvert^2 > 0$).
+
+\cite[S. 45]{szabo_ostlund_1996}
+
+\subsubsection*{2. Antisymmetrie}
+Diese Forderung besagt, dass eine Elektronen\-/Wellenfunktion im Bezug auf
+den Austausch zweier beliebiger Elektronen\-/Koordinaten antisymmetrisch sein muss:
+
+\begin{equation}\label{antisymmetry}
+  \Psi(1, \dots, i, \dots, j, \dots, N) = - \Psi(1, \dots, j, \dots, i, \dots, N), \quad \forall i,j
+\end{equation}
+
+\cite[S. 45, 46]{szabo_ostlund_1996}
+
+\subsubsection*{Pauli-Ausschluss-Prinzip}
+Aus \cref{spin_product}, \cref{spin} und \cref{antisymmetry} folgt,
+dass zwei Elektronen mit identischem Spin sich nicht an
+den gleichen Raumkoordinaten aufhalten können. Dies ist leicht zu zeigen:
+
+Nehmen wir an, dass zwei Elektronen $i,j$ die selben Raum- und Spin\-/Koordinaten ($i = j$) haben:
+\begin{equation*}
+  \Psi(1, \dots, i, \dots, j, \dots, N) = \Psi(1, \dots, i, \dots, i, \dots, N)
+\end{equation*}
+Wir fordern aber auch Antisymmetrie:
+\begin{equation*}
+  \Psi(1, \dots, i, \dots, j, \dots, N) = -\Psi(1, \dots, j, \dots, i, \dots, N)
+\end{equation*}
+Es folgt aber:
+\begin{flalign*}
+  \Psi(1, \dots, i, \dots, i, \dots, N) &= -\Psi(1, \dots, i, \dots, i, \dots, N) \\
+  2\Psi(1, \dots, i, \dots, i, \dots, N) &= 0
+\end{flalign*}
+$\Rightarrow$ Die Wahrscheinlichkeit, dass zwei Elektronen mit gleichem Spin 
+sich im selben Ort befinden ist null.
+
+Dieses Phenomen auf Spinorbitalen angewandt bedeutet,
+dass zwei Elektronen nicht das selbe Spinorbital besetzen können,
+dies nennt man das Pauli\-/Ausschluss\-/Prinzip.
+Das resultierende Meiden der Elektronen wird Pauli\-/Repulsion genannt.
+
+\cite[S. 271, 276]{levine_2019}
+
+\subsubsection*{Slater-Determinante}
+Um sowohl Spin als auch die Antisymmetrie in unsere Wellenfunktion einzubinden,
+wird diese als Determinante von Spinorbitalen ausgedrückt.
+Dabei wird pro Elektron ein Spinorbital verwendet.
+
 \begin{equation}\label{slater}
-\Psi(1, \dots, 2n) = 
-\frac{1}{\sqrt{(2n)!}}
+\Psi(1, \dots, N) = 
+\frac{1}{\sqrt{N!}}
 \left\lvert
 \begin{array}{ccccc} 
-\varphi_1(1)  & \varphi_2(1)  & \cdots & \varphi_{2n-1}(1)  & \varphi_{2n}(1)\\ 
-\varphi_1(2)  & \varphi_2(2)  & \cdots & \varphi_{2n-1}(2)  & \varphi_{2n}(2)\\ 
-\vdots        & \vdots        & \ddots & \vdots             & \vdots      \\ 
-\varphi_1(2n) & \varphi_2(2n) & \cdots & \varphi_{2n-1}(2n) & \varphi_{2n}(2n)
+\varphi_1(1)  & \varphi_2(1)  & \cdots & \varphi_{N-1}(1)  & \varphi_N(1)\\ 
+\varphi_1(2)  & \varphi_2(2)  & \cdots & \varphi_{N-1}(2)  & \varphi_N(2)\\ 
+\vdots        & \vdots        & \ddots & \vdots            & \vdots      \\ 
+\varphi_1(N)  & \varphi_2(N)  & \cdots & \varphi_{N-1}(N)  & \varphi_N(N)
 \end{array}
 \right\rvert
 \end{equation}
-In unserem Fall ist jedes Raumorbital doppelt besetzt, weshalb $\Psi$ sich auch wie folgt darstellen lässt:
+
+Vertauschen wir zwei Elektronen, gleicht das einem Tausch zweier Zeilen
+und das Vorzeichen der Determinante ändert sich.
+Die Antisymmetrie unserer Wellenfunktion ist gegeben.
+
+Sollten zwei Elektronen das selbe Spinorbital besetzen,
+so wären zwei Spalten identisch, wodurch die Determinante verschwindet.
+Das Pauli\-/Ausschluss\-/Prinzip ist ebenfalls erfüllt.
+
+\cite[S. 50]{szabo_ostlund_1996}
+
+In unserem Fall ist jedes Raumorbital doppelt besetzt,
+weshalb wir $\Psi$ mit nur $n$ Raumorbitalen ($2n = N$) darstellen können:
 \begin{equation}
 \Psi(1, \dots, 2n) = 
 \frac{1}{\sqrt{(2n)!}}
@@ -110,6 +198,7 @@ In unserem Fall ist jedes Raumorbital doppelt besetzt, weshalb $\Psi$ sich auch 
 \end{array}
 \right\rvert
 \end{equation}
-Dabei besteht jedes Spinorbital aus einer Spin- und Raum\-/Funktion: $\varphi = \psi \alpha$ oder $\varphi = \psi \beta$
+\cite[S. 202]{lewars_2016}
 
-TODO zusatzinfos? Erklärung spin auf s.200 lewars
+Wir haben nun eine Beschreibung für die Elektronen\-/Wellenfunktion erhalten,
+welche in der Hartree\-/Fock\-/Theorie verwendet wird.
