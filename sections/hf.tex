@@ -218,7 +218,7 @@ muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Nullstel
 Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 
 
-\begin{align} \label{uhf}
+\begin{align}
   \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
   \left( \hat{J}_j - \hat{K}_j \right)\right)\vert\varphi_i\rangle &= 
   \sum_j^{2n}\lambda_{ij} \vert\varphi_j\rangle \nonumber\\
@@ -226,7 +226,7 @@ Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 \end{align}
 
 Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
-\begin{equation} \label{uhf_can}
+\begin{equation} \label{UHF}
   \hat{F} \varphi_i' = \lambda_i \varphi_i', \quad i = 0 \dots 2n
 \end{equation}
 Da die $\lambda_{ij}$ hermitisch sind, ist immer eine Matrix\-/Diagonalisierung möglich.
@@ -236,7 +236,84 @@ Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisie
 \cite[S. 253]{atkins_friedman_2011}
 \cite[S. 115-119]{szabo_ostlund_1996}
 
-TODO Spin ausintegrieren.
+\subsection{Entfernen des Spins}
+Es ist möglich den Spin aus unserer Hatree\-/Fock\-/Gleichung zu entfernen,
+da wir lediglich Möleküle betrachten,
+dessen Orbitale stets zweifach besetzt sind mit je einem $\alpha$ und $\beta$ Elektron.
+Wir müssen nur für ein beliebiges $\varphi_i$ aus \cref{UHF} umformen:
+\begin{align*}
+  \hat{F} \varphi_i &= \lambda_i \varphi_i \\
+  \hat{F} \psi_i \alpha &= \lambda_i \psi_i \alpha
+\end{align*}
+
+Wir integrieren nun beide Seiten der Gleichung,
+multipliziert mit $\alpha^*$, über die Spinkoordinate $\omega$.
+Wir multiplizieren mit $\langle \alpha \vert$:
+\begin{align*}
+  \langle \alpha \vert \hat{F} \psi_i \vert \alpha \rangle &= \lambda_i \psi_i \vert \alpha \rangle\\
+  \langle \alpha \vert \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
+  \left( \hat{J}_j - \hat{K}_j \right)\right) \psi_i \vert \alpha \rangle &= 
+  \langle \alpha \vert \lambda_i \psi_i \vert \alpha \rangle
+\end{align*}
+
+$\hat{H}_{\text{core}}, \psi_i$ und $\lambda_i$ sind von den Spinkoordinaten unabhängig und
+können außerhalb der der Spin-Integrale stehen:
+\begin{align}
+  \hat{H}_{\text{core}} \psi_i \underbrace{\langle \alpha \vert \alpha \rangle}_{=1} +
+  \langle \alpha \vert \sum_j^{2n} 
+  \left( \hat{J}_j - \hat{K}_j \right) \vert \alpha \rangle \psi_i 
+  &= \lambda_i \psi_i \underbrace{\langle \alpha \vert \alpha \rangle}_{=1} \nonumber\\
+  \hat{H}_{\text{core}} \psi_i + \langle \alpha \vert \sum_j^{2n}
+  \left( \hat{J}_j - \hat{K}_j \right) \vert \alpha \rangle \psi_i 
+  &= \lambda_i \psi_i
+\end{align}
+
+Betrachten wir nun den Term für die Elektron\-/Elektron\-/Interaktionen.
+Da im Coulomb- und Austausch\-/Operator Spin\-/Orbital\-/Funktion vorkommen und
+jedes Orbital zwei Elektronen mit unterschiedlichem Spin enthält, lässt sich die Summe umschreiben zu:
+\begin{align*}
+  \langle \alpha \vert \sum_j^{2n} \left( \hat{J}_j - \hat{K}_j \right) \vert \alpha \rangle
+  &= \sum_j^{2n} \langle \alpha \vert \hat{J}_j \vert \alpha \rangle
+  - \langle \alpha \vert \hat{K}_j \vert \alpha \rangle \\
+  &= \sum_j^{n} 
+  \langle \alpha(1) \vert \langle \alpha(2) \vert \hat{J'}_j \vert \alpha(2) \rangle \vert \alpha(1) \rangle
+  + \langle \alpha(1) \vert \langle \beta(2) \vert \hat{J'}_j \vert \beta(2) \rangle \vert \alpha(1) \rangle\\
+  &- \langle \alpha(1) \vert \langle \alpha(2) \vert \hat{K'}_j \vert \alpha(1) \rangle \vert \alpha(2) \rangle
+  - \langle \alpha(1) \vert \langle \beta(2) \vert \hat{K'}_j \vert \beta(1) \rangle \vert \alpha(2) \rangle
+\end{align*}
+Wir haben die Terme der Summe mit gleichem Raumorbital kombiniert und
+das Spin\-/Integral der Operatoren aus diesen herausgezogen.
+Also hängen die modifizierten Operatorn $\hat{J'}_j$ und $\hat{K'}_j$ nicht von $\omega_1$ oder $\omega_2$ ab.
+Wir können die Operatoren aus den Spin\-/Integralen entfernen:
+\begin{align*}
+  &=\sum_j^{n} 
+  \hat{J'}_j \langle \alpha(1) \vert \langle \alpha(2) \vert \alpha(2) \rangle \vert \alpha(1) \rangle
+  + \hat{J'}_j \langle \alpha(1) \vert \langle \beta(2) \vert \beta(2) \rangle \vert \alpha(1) \rangle\\
+  &- \hat{K'}_j \langle \alpha(1) \vert \langle \alpha(2) \vert \alpha(1) \rangle \vert \alpha(2) \rangle
+  - \hat{K'}_j \langle \alpha(1) \vert \langle \beta(2) \vert \beta(1) \rangle \vert \alpha(2) \rangle\\
+  &=\sum_j^{n} 
+  \hat{J'}_j \underbrace{\langle \alpha(1) \vert \alpha(1) \rangle}_{=1}
+  \underbrace{\langle \alpha(2) \vert \alpha(2) \rangle}_{=1}
+  + \hat{J'}_j \underbrace{\langle \alpha(1) \vert \alpha(1) \rangle}_{=1}
+  \underbrace{\langle \beta(2) \vert \beta(2) \rangle}_{=1}\\
+  &- \hat{K'}_j \underbrace{\langle \alpha(1) \vert \alpha(1) \rangle}_{=1}
+  \underbrace{\langle \alpha(2) \vert \alpha(2) \rangle}_{=1}
+  - \hat{K'}_j \underbrace{\langle \alpha(1) \vert \beta(1) \rangle}_{=0}
+  \underbrace{\langle \beta(2) \vert \alpha(2) \rangle}_{=0}\\
+  &=\sum_j^{n} 2\hat{J'}_j - \hat{K'}_j
+\end{align*}
+
+Setzen wir den letzten Term wieder in die urspüngliche Gleichung ein, erhalten wir:
+\begin{equation}\label{RHF}
+  \left( \hat{H}_{\text{core}} + \sum_j^{n}
+  \left( 2\hat{J'}_j - \hat{K'}_j \right) \right) \psi_i 
+  = \lambda_i \psi_i
+\end{equation}
+Das ist die Hartree\-/Fock\-/Gleichung unter der Bedingung, dass jedes Orbital doppelt besetzt ist.
+Diesen Fall \cref{RHF} nennt man Restricted Hartree\-/Fock (RHF) und
+den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
+
+Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 
 \section{Roothaan-Hall}
 Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
