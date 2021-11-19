@@ -324,6 +324,31 @@ den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
 Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 
 \section{Roothaan-Hall}
+Um die RHF\-/Gleichungen zu lösen, benötigen wir nur noch einen klaren Ausdruck für die $\psi_i$.
+Da die $\psi_i$ Molekül\-/Orbitale darstellen, welche sehr unterschiedlich aufgebaut sein können,
+werden diese als Linearkombination von $m$ Atom\-/Orbitalen $\chi_\nu$ repräsentiert:
+\begin{equation}
+  \psi_i = \sum_\nu^m C_{\nu i} \chi_\nu \quad \forall i 
+\end{equation}
+
+Wir setzen diese Darstellung in die RHF\-/Gleichung \cref{RHF} ein:
+\begin{equation}
+  \sum_\nu^m \hat{F}' C_{\nu i} \chi_\nu = \sum_\nu^m C_{\nu i} \chi_\nu
+\end{equation}
+
+Wir haben nun $n$ dieser Gleichungen, je eine für jedes besetzte Raum\-/Orbital $\psi_i$.
+Wir stellen nun $n'$ weitere Gleichungen auf, sodass $n + n' = m$ ist.
+Wir erhalten dann $n'$ ''virtuelle'' Raum\-/Orbitale, welche keine Elektronen enthalten und
+nicht in der Slater\-/Determinante auftauchen.
+Durch diese Erweiterung bringen wir die Gleichungen in eine Form,
+die sich leicht in eine Matrix\-/Gleichung mit $m\times m$ Matrizen umformen lässt.
+
+Wir definieren die $m\times m$ Matrizen $F$ und $S$ mit den Elementen:
+\begin{align}
+  F_{\mu \nu} &:= \langle \chi_\mu \vert \hat{F}' \vert \chi_\nu \rangle\\
+  S_{\mu \nu} &:= \langle \chi_\mu \vert \chi_\nu \rangle
+\end{align}
+
 Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
 \begin{equation} \label{roothaan_mtx}
   FC = SC\epsilon
