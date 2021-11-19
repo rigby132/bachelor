@@ -165,7 +165,7 @@ Kombiniert man beide Forderungen mit Lagrange Multiplikatoren erhält man das Fu
   - \sum_{i,j}^{2n} \lambda_{ij}(\langle \varphi_i \vert \varphi_j \rangle - \delta_{ij})
 \end{equation}
 Es gilt dabei $\lambda_{ij} = \lambda_{ji}^*$,
-also die $\lambda_{ij}$ bilden eine hermitische Matrix. \cite[3.40]{szabo_ostlund_1996}
+also die $\lambda_{ij}$ bilden eine hermitesche Matrix. \cite[3.40]{szabo_ostlund_1996}
 
 Eine Extremstelle in $\mathcal{L}$ bedeutet auch eine Extremstelle in $E_\textrm{HF}$
 unter der Orthonormalitäts\-/Bedingung. Also setzten wir die Erste Variation in $\mathcal{L}$ null:
@@ -216,20 +216,21 @@ Wir faktorisiern nun die Summe $\sum_i^{2n}$ und das $\langle \delta \varphi_i \
 Da jedes $\delta \varphi_i^*$ beliebig variiert werden kann,
 muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Nullstelle.
 Wir erhalten die Hartree\-/Fock\-/Gleichungen:
-
-
-\begin{align}
+\begin{equation}
   \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
-  \left( \hat{J}_j - \hat{K}_j \right)\right)\vert\varphi_i\rangle &= 
-  \sum_j^{2n}\lambda_{ij} \vert\varphi_j\rangle \nonumber\\
-  \hat{F}\varphi_i &= \sum_j^{2n}\lambda_{ij} \varphi_j, \quad \forall i = 0 \dots 2n
-\end{align}
+  \left( \hat{J}_j - \hat{K}_j \right)\right)\vert\varphi_i\rangle = 
+  \sum_j^{2n}\lambda_{ij} \vert\varphi_j\rangle, \quad \forall i = 0 \dots 2n\nonumber
+\end{equation}
+Kurz als:
+\begin{equation}
+  \hat{F}\varphi_i = \sum_j^{2n}\lambda_{ij} \varphi_j, \quad \forall i = 0 \dots 2n
+\end{equation}
 
 Durch Matrix-Diagonalisierung erhält man die kanonischen Hartree\-/Fock\-/Gleichungen:
 \begin{equation} \label{UHF}
   \hat{F} \varphi_i' = \lambda_i \varphi_i', \quad i = 0 \dots 2n
 \end{equation}
-Da die $\lambda_{ij}$ hermitisch sind, ist immer eine Matrix\-/Diagonalisierung möglich.
+Da die $\lambda_{ij}$ hermitesch sind, ist immer eine Matrix\-/Diagonalisierung möglich.
 Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisierung
 \cite[3.64]{szabo_ostlund_1996}.
 
@@ -239,7 +240,7 @@ Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisie
 \subsection{Entfernen des Spins}
 Es ist möglich den Spin aus unserer Hatree\-/Fock\-/Gleichung zu entfernen,
 da wir lediglich Möleküle betrachten,
-dessen Orbitale stets zweifach besetzt sind mit je einem $\alpha$ und $\beta$ Elektron.
+deren Orbitale stets zweifach besetzt sind mit je einem $\alpha$ und $\beta$ Elektron.
 Wir müssen nur für ein beliebiges $\varphi_i$ aus \cref{UHF} umformen:
 \begin{align*}
   \hat{F} \varphi_i &= \lambda_i \varphi_i \\
@@ -250,7 +251,8 @@ Wir integrieren nun beide Seiten der Gleichung,
 multipliziert mit $\alpha^*$, über die Spinkoordinate $\omega$.
 Wir multiplizieren mit $\langle \alpha \vert$:
 \begin{align*}
-  \langle \alpha \vert \hat{F} \psi_i \vert \alpha \rangle &= \lambda_i \psi_i \vert \alpha \rangle\\
+  \langle \alpha \vert \hat{F} \psi_i \vert \alpha \rangle &= 
+  \langle \alpha \vert\lambda_i \psi_i \vert \alpha \rangle\\
   \langle \alpha \vert \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
   \left( \hat{J}_j - \hat{K}_j \right)\right) \psi_i \vert \alpha \rangle &= 
   \langle \alpha \vert \lambda_i \psi_i \vert \alpha \rangle
@@ -304,11 +306,17 @@ Wir können die Operatoren aus den Spin\-/Integralen entfernen:
 \end{align*}
 
 Setzen wir den letzten Term wieder in die urspüngliche Gleichung ein, erhalten wir:
-\begin{equation}\label{RHF}
-  \left( \hat{H}_{\text{core}} + \sum_j^{n}
-  \left( 2\hat{J'}_j - \hat{K'}_j \right) \right) \psi_i 
+\begin{equation*}
+  \underbrace{\left( \hat{H}_{\text{core}} + \sum_j^{n}
+  \left( 2\hat{J'}_j - \hat{K'}_j \right) \right)}_{\hat{F}'} \psi_i 
   = \lambda_i \psi_i
+\end{equation*}
+
+Dies gilt analog zu einem $\varphi_i$ mit $\beta$ Spin und damit auch für alle $i$:
+\begin{equation}\label{RHF}
+  \hat{F}' \psi_i = \lambda_i \psi_i\quad \forall i
 \end{equation}
+
 Das ist die Hartree\-/Fock\-/Gleichung unter der Bedingung, dass jedes Orbital doppelt besetzt ist.
 Diesen Fall \cref{RHF} nennt man Restricted Hartree\-/Fock (RHF) und
 den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
@@ -317,7 +325,7 @@ Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 
 \section{Roothaan-Hall}
 Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
-\begin{equation} \label{roothaan}
+\begin{equation} \label{roothaan_mtx}
   FC = SC\epsilon
 \end{equation}
 
