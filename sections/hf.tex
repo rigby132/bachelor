@@ -18,6 +18,9 @@ der Gesamt\-/Wellenfunktion \cref{slater}:
 
 \cite[S. 235, S.253]{atkins_friedman_2011}
 
+%================================================
+%2-ELEKTRONEN-INTEGRALE
+%================================================
 \subsection{2\-/Elektronen\-/Integrale}
 Bei den Termen 
 $\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$ und
@@ -83,6 +86,9 @@ Der zugehörige Austausch\-/Operator $\hat{K}_j$ ist definiert als:
 
 \cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
 
+%================================================
+%HERLEITUNG-HF
+%================================================
 \subsection{Herleitung der Hartree-Fock-Gleichungen}
 Wir suchen nun nach einer Extremstelle für das Energie-Funktional $E_\textrm{HF}[\Psi]$ unter der Bedingung, 
 dass die Spinorbitale orthonormal bleiben. 
@@ -237,6 +243,9 @@ Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisie
 \cite[S. 253]{atkins_friedman_2011}
 \cite[S. 115-119]{szabo_ostlund_1996}
 
+%================================================
+%SPIN-AUSINTEGRIEREN
+%================================================
 \subsection{Entfernen des Spins}
 Es ist möglich den Spin aus unserer Hatree\-/Fock\-/Gleichung zu entfernen,
 da wir lediglich Möleküle betrachten,
@@ -323,6 +332,9 @@ den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
 
 Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 
+%================================================
+%ROOTHAAN-HALL
+%================================================
 \section{Roothaan-Hall}
 Um die RHF\-/Gleichungen zu lösen, benötigen wir nur noch einen klaren Ausdruck für die $\psi_i$.
 Da die $\psi_i$ Molekül\-/Orbitale darstellen, welche sehr unterschiedlich aufgebaut sein können,
@@ -345,13 +357,13 @@ die sich leicht in eine Matrix\-/Gleichung mit $m\times m$ Matrizen umformen lä
 
 Wir definieren die $m\times m$ Matrizen $F$ und $S$ mit den Elementen:
 \begin{align}
-  F_{\mu \nu} &:= \langle \chi_\mu \vert \hat{F}' \vert \chi_\nu \rangle\\
-  S_{\mu \nu} &:= \langle \chi_\mu \vert \chi_\nu \rangle
+  \mathcal{F}_{\mu \nu} &:= \langle \chi_\mu \vert \hat{F}' \vert \chi_\nu \rangle\\
+  \mathcal{S}_{\mu \nu} &:= \langle \chi_\mu \vert \chi_\nu \rangle
 \end{align}
 
 Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
 \begin{equation} \label{roothaan_mtx}
-  FC = SC\epsilon
+  \mathcal{F}C = \mathcal{S}C\lambda
 \end{equation}
 
 \begin{comment}
@@ -361,9 +373,11 @@ Da dieser Operator nur auf einzelne Elektronen wirkt,
 kann eine Pseudo-Eigenwerts-Gleichung für jedes Orbital erstellt werden.
 
 Außerdem ist in diesem Ansatz die Elektron-Elektron-Abstoßung nur approximativ behandelt.
-Dabei wird vereinfacht für die Repulsionen nur die Abstoßung die ein Elektron in einem gemittelten Potential
-, das durch die anderen Elektronen entsteht, berechnet.
-Für eine genauere Beschreibung müsste die Abstoßung aller Elektronen-Paare individuell berücksichtigt werden.
+Dabei wird vereinfacht für die Repulsionen nur die Abstoßung,
+die ein Elektron in einem gemittelten Potential,
+das durch die anderen Elektronen entsteht, berechnet.
+Für eine genauere Beschreibung müsste die Abstoßung aller
+Elektronen-Paare individuell berücksichtigt werden.
 TODO Visualisierung.
 
 \subsection{Fock Operator}
