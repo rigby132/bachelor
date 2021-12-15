@@ -21,14 +21,14 @@ der Gesamt\-/Wellenfunktion \cref{slater}:
 %================================================
 %2-ELEKTRONEN-INTEGRALE
 %================================================
-\subsection{2\-/Elektronen\-/Integrale}
+\subsection{2\-/Elektronen\-/Integrale}\label{2e-integrals-section}
 Bei den Termen 
 $\left[ \varphi_i \varphi_i \vert \varphi_j\varphi_j \right]$ und
 $\left[ \varphi_i \varphi_j \vert \varphi_j\varphi_i \right]$
 handelt es sich um 2\-/Elektronen\-/Integrale,
 welche allgemein definiert sind als:
 
-\begin{equation}
+\begin{equation}\label{2e-integral}
   \left[ \varphi_i \varphi_j \vert \varphi_k \varphi_l \right] := 
   \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_k^*(2) \varphi_l(2) \,d\tau_1 \,d\tau_2
 \end{equation}
@@ -49,7 +49,7 @@ stellt die elektrostatische Abstoßung zwischen den Elektronen der Orbitale $\va
 \end{equation}
 
 Der zugehörige Coulomb\-/Operator $\hat{J}_j$ ist definiert als:
-\begin{equation}
+\begin{equation}\label{coulomb-operator}
   \hat{J}_j \varphi_i(1):= 
   \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(2) \varphi_i(1) \,d\tau_2 
 \end{equation}
@@ -79,7 +79,7 @@ Es ist gegeben durch:
 \end{equation}
 
 Der zugehörige Austausch\-/Operator $\hat{K}_j$ ist definiert als:
-\begin{equation}
+\begin{equation}\label{exchange-operator}
   \hat{K}_j \varphi_i(1) :=
   \int \varphi_j^*(2) \frac{1}{r_{12}} \varphi_j(1) \varphi_i(2) \,d\tau_2
 \end{equation}
@@ -279,6 +279,29 @@ können außerhalb der Spin-Integrale stehen:
   &= \lambda_i \psi_i
 \end{align}
 
+Wir definieren spinunabhängige Versionen des Coulomb- und Austausch\-/Operators
+aus \cref{coulomb-operator} und \cref{exchange-operator},
+die im nächsten Schritt verwendet werden:
+\begin{equation}\label{spinless-coulomb-operator}
+    \hat{J}'_j \psi_i(1):= 
+    \int \psi_j^*(2) \frac{1}{r_{12}} \psi_j(2) \psi_i(1) \,d\nu_2 
+\end{equation}
+\begin{equation}\label{spinless-exchange-operator}
+    \hat{K}'_j \psi_i(1) :=
+  \int \psi_j^*(2) \frac{1}{r_{12}} \psi_j(1) \psi_i(2) \,d\nu_2
+\end{equation}
+Man merke:
+\begin{equation}
+    \hat{J}_j = \begin{cases}
+        \langle \alpha \vert \hat{J}'_j \vert \alpha \rangle\\
+        \langle \beta \vert \hat{J}'_j \vert \beta \rangle
+    \end{cases}\quad
+    \hat{K}_j = \begin{cases}
+        \langle \alpha \vert \hat{K}'_j \vert \alpha \rangle\\
+        \langle \beta \vert \hat{K}'_j \vert \beta \rangle
+    \end{cases}
+\end{equation}
+
 Betrachten wir nun den Term für die Elektron\-/Elektron\-/Interaktionen.
 Da im Coulomb- und Austausch\-/Operator Spin\-/Orbital\-/Funktion vorkommen und
 jedes Orbital zwei Elektronen mit unterschiedlichem Spin enthält, lässt sich die Summe umschreiben zu:
@@ -293,9 +316,10 @@ jedes Orbital zwei Elektronen mit unterschiedlichem Spin enthält, lässt sich d
   - \langle \alpha(1) \vert \langle \beta(2) \vert \hat{K'}_j \vert \beta(1) \rangle \vert \alpha(2) \rangle
 \end{align*}
 Wir haben die Terme der Summe mit gleichem Raumorbital kombiniert und
-das Spin\-/Integral der Operatoren aus diesen herausgezogen.
-Also hängen die modifizierten Operatorn $\hat{J'}_j$ und $\hat{K'}_j$ nicht von $\omega_1$ oder $\omega_2$ ab.
-Wir können die Operatoren aus den Spin\-/Integralen entfernen:
+das Spin\-/Integral der Operatoren aus diesen herausgezogen,
+siehe \cref{2e-integrals} für die Definition der Operatoren.
+Also hängen die modifizierten Operatorn $\hat{J'}_j$ und $\hat{K'}_j$ nicht von $\omega_1$ oder $\omega_2$ ab,
+wir können die Operatoren aus den Spin\-/Integralen entfernen:
 \begin{align*}
   &=\sum_j^{n} 
   \hat{J'}_j \langle \alpha(1) \vert \langle \alpha(2) \vert \alpha(2) \rangle \vert \alpha(1) \rangle
@@ -310,16 +334,16 @@ Wir können die Operatoren aus den Spin\-/Integralen entfernen:
   &- \hat{K'}_j \underbrace{\langle \alpha(1) \vert \alpha(1) \rangle}_{=1}
   \underbrace{\langle \alpha(2) \vert \alpha(2) \rangle}_{=1}
   - \hat{K'}_j \underbrace{\langle \alpha(1) \vert \beta(1) \rangle}_{=0}
-  \underbrace{\langle \beta(2) \vert \alpha(2) \rangle}_{=0}\\
-  &=\sum_j^{n} 2\hat{J'}_j - \hat{K'}_j
+  \underbrace{\langle \beta(2) \vert \alpha(2) \rangle}_{=0}
+  =\sum_j^{n} 2\hat{J'}_j - \hat{K'}_j
 \end{align*}
 
 Setzen wir den letzten Term wieder in die urspüngliche Gleichung ein, erhalten wir:
-\begin{equation*}
+\begin{equation}
   \underbrace{\left( \hat{H}_{\text{core}} + \sum_j^{n}
   \left( 2\hat{J'}_j - \hat{K'}_j \right) \right)}_{\hat{F}'} \psi_i 
   = \lambda_i \psi_i
-\end{equation*}
+\end{equation}
 
 Dies gilt analog zu einem $\varphi_i$ mit $\beta$ Spin und damit auch für alle $i$:
 \begin{equation}\label{RHF}
@@ -336,16 +360,18 @@ Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 %ROOTHAAN-HALL
 %================================================
 \section{Roothaan-Hall}
+\subsection{Aufstellung der Gleichungen}
 Um die RHF\-/Gleichungen zu lösen, benötigen wir nur noch einen klaren Ausdruck für die $\psi_i$.
 Da die $\psi_i$ Molekül\-/Orbitale darstellen, welche sehr unterschiedlich aufgebaut sein können,
-werden diese als Linearkombination von $m$ Atom\-/Orbitalen $\chi_\nu$ repräsentiert:
-\begin{equation}
-  \psi_i = \sum_\nu^m C_{\nu i} \chi_\nu \quad \forall i 
+werden diese als Linearkombination von $m$ Atom\-/Orbitalen $\chi_s$ repräsentiert:
+\begin{equation}\label{lin-comb-atomorbitals}
+  \psi_i = \sum_s^m C_{s i} \chi_s \quad \forall i 
 \end{equation}
 
-Wir setzen diese Darstellung in die RHF\-/Gleichung \cref{RHF} ein:
-\begin{equation}
-  \sum_\nu^m \hat{F}' C_{\nu i} \chi_\nu = \sum_\nu^m C_{\nu i} \chi_\nu
+Wir setzen diese Darstellung in die RHF\-/Gleichung \cref{RHF} ein und
+erhalten die Roothaan\-/Hall\-/Gleichungen:
+\begin{equation}\label{roothaan_hall_eq}
+  \sum_s^m \hat{F}' C_{s i} \chi_s = \lambda_i \sum_s^m C_{s i} \chi_s 
 \end{equation}
 
 Wir haben nun $n$ dieser Gleichungen, je eine für jedes besetzte Raum\-/Orbital $\psi_i$.
@@ -356,49 +382,176 @@ Durch diese Erweiterung bringen wir die Gleichungen in eine Form,
 die sich leicht in eine Matrix\-/Gleichung mit $m\times m$ Matrizen umformen lässt.
 
 Wir definieren die $m\times m$ Matrizen $F$ und $S$ mit den Elementen:
-\begin{align}
-  \mathcal{F}_{\mu \nu} &:= \langle \chi_\mu \vert \hat{F}' \vert \chi_\nu \rangle\\
-  \mathcal{S}_{\mu \nu} &:= \langle \chi_\mu \vert \chi_\nu \rangle
-\end{align}
-
-Die Matrix\-/Form der Roothaan\-/Hall\-/Gleichungen:
-\begin{equation} \label{roothaan_mtx}
-  \mathcal{F}C = \mathcal{S}C\lambda
+\begin{equation}\label{rh_mtx_elements}
+  \begin{aligned}
+    F_{r s} &:= \langle \chi_r \vert \hat{F}' \vert \chi_s \rangle\\
+    S_{r s} &:= \langle \chi_r \vert \chi_s \rangle
+  \end{aligned}
 \end{equation}
 
-\begin{comment}
-Im Hartree-Fock-Ansatz wird aus dem Hamilton-Operator, der auf die gesamte Wellenfunktion wirkt, 
-ein 1-Elektronen-Operator entwickelt, der Fock-Operator $\hat{F}$.
-Da dieser Operator nur auf einzelne Elektronen wirkt, 
-kann eine Pseudo-Eigenwerts-Gleichung für jedes Orbital erstellt werden.
+Es lässt sich zeigen, dass man \cref*{roothaan_hall_eq} in diese Matrix\-/Form bringen kann:
+\begin{equation} \label{roothaan_mtx}
+  FC = SC\lambda
+\end{equation}
 
-Außerdem ist in diesem Ansatz die Elektron-Elektron-Abstoßung nur approximativ behandelt.
-Dabei wird vereinfacht für die Repulsionen nur die Abstoßung,
-die ein Elektron in einem gemittelten Potential,
-das durch die anderen Elektronen entsteht, berechnet.
-Für eine genauere Beschreibung müsste die Abstoßung aller
-Elektronen-Paare individuell berücksichtigt werden.
-TODO Visualisierung.
+\subsection{Lösung der Matrix\-/Gleichung}
+Die Matrizen $F$ und $S$ können nun über \cref{rh_mtx_elements} berechnet werden,
+sodass wir nur noch die Koeffizienten\-/Matrix und diagonale Energie\-/Matrix als die Unbekannten haben.
 
-\subsection{Fock Operator}
-- Lösungsweg über das SCF-Verfahren (Matrix-Darstellung, ...)
+Mit der genauen Evaluierung der Matrizen $F$ und 
+$S$ befassen wir uns in \cref{F_S_mtx_calc}.
+Wir nehmen deshalb zunächst an,
+dass wir immer konkrete Werte für die beiden Matrizen berechnen können.
 
-- Verwendung von Basisfunktionen (Konstruktion der Wellenfunktion)
+Bei näherer Betrachtung fällt auf, dass wir eine simple Eingewertsgleichung erhalten,
+wenn die Überlappmatrix $S$ aus \cref{roothaan_mtx} verschwindet:
+\begin{align*}
+    FC &= C\lambda \quad \vert \cdot C^{-1}\\
+    F &= C\lambda C^{-1}
+\end{align*}
 
-- Implementierung (größten Probleme: Integral-Evaluierung und
-Matrix-Diagonalisierung)
+Da $S$ hermitesch ist, existiert eine unitäre Matrix $U$, welche $S$ diagonalisieren kann:
+\begin{equation}
+    S = U s U^\dagger
+\end{equation}
 
-\section{DFT}
-- Herleitung (Nur die Idee/Ergebnisse, da wahrscheinlich über
-meinem Niveau)
+Wir konstruieren nun mit Hilfe der Matrizen $U$ und $s$ eine Transformations\-/Matrix $S^{-1/2}$:
+\begin{equation}
+    S^{-1/2} = U s^{-1/2} U^\dagger
+\end{equation}
+Wir erhalten $s^{-1/2}$, indem die inverse Wurzel für jeden Diagonal\-/Eintrag in $s$ gezogen wird.
 
-- Konkrete Umsetzung durch die Kohn-Sham-Gleichung (Terme in der
-Schrödinger-Glg. + XC-Funktionale)
+Es gilt nun:
+\begin{equation}
+    S^{-1/2} S S^{-1/2} = S^{-1/2} S^{1/2} = S^{0} = \mathbf{1}
+\end{equation}
 
-- Lösung durch FEM + PINVIT (+ LDA)
+Man kann mit $S^{-1/2}$ die Koeffizienten transformieren:
+\begin{equation}\label{trans_C}
+    C = S^{-1/2} C'
+\end{equation}
+Setzen wir \cref{trans_C} in \cref{roothaan_mtx} ein und multiplizieren $S^{-1/2}$ von links,
+können wir unsere Gleichung aus \cref{roothaan_mtx} umschreiben zu:
+\begin{equation}
+    \begin{aligned}
+    \underbrace{S^{-1/2}FS^{-1/2}}_{F'}C' &= \underbrace{S^{-1/2}SS^{-1/2}}_{\mathbf{1}}C'\lambda\\
+    F'C' &= C'\lambda\\
+    F'&= C'\lambda C'^{-1}
+    \end{aligned}
+\end{equation}
 
-- Implemtierung über UG4 LUA
+Man muss nur noch die transformierte Fock\-/Matrix $F'$ diagonalisieren und 
+die erhaltenen Koeffizienten über \cref{trans_C} in die ursprüngliche Basis transformieren.
 
-Über die Hartree\-/Fock\-/Methode folgen diese Gleichung für jedes Spinorbital:
+Die erhaltenen Eigenwerte $\lambda$ entsprechen den Energien der Orbitale,
+welche durch die Koeffizienten in $C$ beschrieben werden.
 
-\end{comment}
+\cite[S. 142-145]{szabo_ostlund_1996}
+
+\subsection{Berechnung der Molekül\-/Orbitale und Orbital\-/Energien}
+Wir können nun die Matrix\-/Gleichung \cref{roothaan_mtx} lösen,
+jedoch handelt es sich um eine nicht lineare Gleichung, weil die Fock\-/Matrix $F$
+von den Raumorbitalen $\varphi_i$ und damit auch von den Koeffizienten in $C$ abhängt.
+
+Wir möchten also die Koeffizienten\-/Matrix $C$ berechnen,
+benötigen aber dafür die Fock\-/Matrix $F$, die wir nur erhalten können,
+wenn wir $C$ bereits berechnet haben.
+
+Dieses Hindernis überwältigen wir,
+indem wir diese Gleichung in einem iterativen Verfahren lösen:
+\begin{enumerate}
+    \item Wir beginnen mit einer hoffentlich guten Schätzung
+    für die Koeffizienten\-/Matrix $C$ bzw. den Raumorbitalen $\varphi_i$.
+    \item Dann lösen wir die Gleichung \cref{roothaan_mtx} mit der neusten Schätzung
+    für $C$ und aktualisieren unsere Schätzung
+    für die Koeffizienten\-/Matrix $C$ mit der Lösung.
+    \item Wir wiederholen den 2. Schritt solange, bis die Koeffizienten\-/Matrix $C$
+    keine signifikanten Veränderungen aufweist. Die Koeffizienten\-/Matrix $C$
+    und die Energien $\lambda$ aus der letzten Iteration stellen die Ergebnisse
+    unseres Verfahrens. 
+\end{enumerate}
+
+Dieses Verfahren wird die Self\-/Consistent Field method (kurz SCF) genannt,
+da wir erst aufhören, wenn die Koeffizienten\-/Matrix $C$
+über mehrere Iterationen hinweg gleich bleibt, also mit sich selbst konsistent ist.\\
+
+\input{sections/scf_chart.tex}
+\subsection{Darstellung des Fock\-/Operators in der Atomorbital\-/Basis}\label{F_S_mtx_calc}
+
+Wir müssen noch die Fock\-/Matrix $F$ und Überlapp\-/Matrix $S$ berechnen,
+um die Gleichung \cref{roothaan_mtx} zu lösen.
+
+Die Berechnung der Überlapp\-/Matrix $S$ ist durch \cref{rh_mtx_elements} bereits vollständig
+als Integrale über Atomorbitale gegeben.
+Die Elemente der Fock\-/Matrix $F$ hingegen benötigen den Fock\-/Operator $\hat{F}'$,
+welcher selber von den Molekülorbitalen abhängt.
+Der UHF Fock\-/Operator $\hat{F}'$ wurde bereits definiert als:
+\begin{equation}
+    \hat{F}' = \hat{H}_{\text{core}} + \sum_j^{n}
+    \left( 2\hat{J'}_j - \hat{K'}_j \right)
+\end{equation}
+Dabei hängen die Coulomb- und Austausch\-/Operatoren $\hat{J'}_j$, $\hat{K'}_j$
+von Molekül\-/Raumorbitalen $\psi_j$ ab.
+Setzt man die Atomobitale $\chi_s$ aus \cref{lin-comb-atomorbitals} in
+die Definitionen von $\hat{J'}_j$\cref{spinless-coulomb-operator} und
+$\hat{K'}_j$ \cref{spinless-exchange-operator} ein, lässt sich $F_{r s}$ schreiben als:
+\begin{equation}
+    F_{rs} = \langle \chi_r \vert \hat{F}' \vert \chi_s \rangle
+    = \langle \chi_r \vert \hat{H}_{\text{core}} \vert \chi_s \rangle
+    + \sum_{tu}^m \sum_j^{n} C_{tj}^*C_{uj}\left( 2[rs\vert tu] - [ru\vert ts] \right)
+\end{equation}
+Die 2\-/Elektronen\-/Integrale $[rs\vert tu]$ und $[ru\vert ts]$
+sind analog zu \cref{2e-integral} definiert, wobei es sich um Atomorbitale handelt ohne Spin.
+
+In dieser Form müssen die 2\-/Elektronen\-/Integrale nur einmal
+zu Beginn für einen Satz Atomorbitale berechnet werden und
+können dann in jeder Iteration wieder verwendet werden,
+da sich nur noch die Koeffizienten\-/Matrix $C$ in jeder Iteration ändern kann.
+
+Zur Berechnung der Fock\-/Matrix $F$ und Überlapp\-/Matrix $S$
+fehlen uns nur noch explizite Terme für die Atomorbitale $\chi$.
+Diese sind Implementierungsabhängig und werden deshalb im nächsten Kapitel
+unter \cref{basis-functions-section} behandelt.
+
+\subsection{Berechnung der Gesamtenergie des Moleküls}
+Ab diesem Punkt sind wir in der Lage die Molekülorbitale und
+deren Eigen\-/Energien zu Berechnen. Um die Gesamtenergie des Moleküls zu erhalten,
+müssen die Orbitalenergien kombiniert werden:
+\begin{equation}
+    E_{\text{HF}} = 2 \sum_i^n \lambda_i - \sum_i^n \sum_j^n
+    2 \langle \psi_i \vert \hat{J}_j \vert \psi_i \rangle
+    - \langle \psi_i \vert \hat{K}_j \vert \psi_i \rangle
+\end{equation}
+Wir zählen alle Orbital\-/Energien doppelt, da wir insgesamt $2n$ Elektronen haben.
+Durch die Summe der Orbital\-/Energien werden die Elektron\-/Repulsions\-/Terme
+jedoch zu oft gezählt, weil ein Repulsions\-/Term immer zwischen zwei Orbitalen wirkt.
+Also wir würden die Repulsion zb. des Orbitals $\psi_i$ mit $\psi_j$ und umgekehrt zählen,
+was zu oft ist.
+Deshalb werden einmal zur Korrektur die Repulsion von den Orbitalenergien abgezogen.
+Die Gleichung kann man weiter umformen zu:
+\begin{equation}
+    E_{\text{HF}} = \sum_i^n \lambda_i
+    + \sum_i^n \langle \psi_i \vert \hat{H}_{\text{core}} \vert \psi_i \rangle
+    = \sum_i^n \lambda_i
+    + \sum_{rs}^m \sum_i^{n} C_{ri}^*C_{si}
+    \langle \chi_r \vert \hat{H}_{\text{core}} \vert \chi_s \rangle
+\end{equation}
+
+\cite[S. 229-230]{lewars_2016}
+
+\section{Implementierung}
+In diesem Abschnitt befassen wir uns mit den wesentliche Implementierungs\-/Details
+der zu dieser Arbeit begleitenden Software.
+
+\subsection{Überblick}
+
+\subsection{Atomorbitale und Basis\-/funktionen}\label{basis-functions-section}
+Wir befassen uns nun genauer mit den verwendeten Atomorbitalen.
+Wie am Anfang des letzten Kapitels beschrieben, werden Atomorbitale verwendet,
+um die Molekülorbitale darzustellen. In diesem Kontext werden die verwendeten Atomorbitale
+Basisfunktionen genannt und die Menge dieser Basisfunktionen
+ist der so genannte Basis\-/Satz.
+
+\subsection{Berechnung der Repulsions\-/Integrale}\label{repulsion-integrals-section}
+
+\subsection{Schätzung der Start-Orbitale}

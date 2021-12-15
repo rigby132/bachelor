@@ -1,0 +1,88 @@
+\usetikzlibrary{positioning}
+
+\tikzset{
+    state/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           minimum height=2em,
+           inner sep=2pt,
+           text centered,
+           },
+}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth']
+
+    \node[state] (Input)
+    {
+        \begin{tabular}{l}
+        \textbf{Input:}\\
+        \parbox{6cm}{\begin{enumerate}
+            \item Anzahl der Elektronen $n$.
+            \item $m$ Atomorbitale $\chi$.
+            \item Molekülstruktur.
+        \end{enumerate}}\\[2em]
+        \end{tabular}
+    };
+
+    \node[state, below left of=Input, node distance=3.5cm] (Overlap)
+    {
+        \begin{tabular}{l}
+        Berechne $S$\\
+        mit \cref{rh_mtx_elements}.
+        \end{tabular}
+    };
+
+    \node[state, below right of=Input, node distance=3.5cm] (Guess)
+    {
+        \begin{tabular}{l}
+        Stell eine Anfangs-Schätzung\\
+        für die Koeffizienten in $C$ auf.
+        \end{tabular}
+    };
+
+    \node[state, below of=Guess, node distance=2cm] (Fock)
+    {
+        \begin{tabular}{l}
+        Berechne $F$\\
+        mit \cref{rh_mtx_elements}.
+        \end{tabular}
+    };
+
+    \node[state, below of=Overlap, node distance=3.5cm] (Roothaan)
+    {
+        \begin{tabular}{l}
+        Löse $FC = SC\lambda$,\\
+        erhalte neue $C, \lambda$.
+        \end{tabular}
+    };
+
+    \node[state, below right of=Roothaan, node distance=3.5cm] (Comp)
+    {
+        \begin{tabular}{l}
+        Vergleiche $C,\lambda$\\
+        mit letzter Iteration. 
+        \end{tabular}
+    };
+
+    \node[state, below right of=Fock, node distance=3.5cm] (Convergence)
+    {
+        Konvergiert?
+    };
+
+    \node[state, above right of=Convergence, node distance=3.5cm] (Done)
+    {
+        Fertig.
+    };
+
+    \path (Input) edge[] (Overlap)
+                  edge[] (Guess)
+        (Overlap) edge[] (Roothaan)
+        (Guess)   edge[] (Fock)
+        (Fock)    edge[] (Roothaan)
+        (Roothaan) edge[] (Comp)
+        (Comp)     edge[] (Convergence)
+        (Convergence) edge[] node[right]{Ja} (Done)
+                      edge[] node[left]{Nein}(Fock);
+\end{tikzpicture}
+\end{center}
