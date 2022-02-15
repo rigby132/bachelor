@@ -1,0 +1,23 @@
+../hfcpp -s HeH.xyz -b ../6-311+g\*\*.d2k -n 1 -d heh_d.cube -w heh_w.cube -o 7 --buffer 4.5 > heh.log
+
+READING STRUCTURE...
+READING BASIS FUNCTIONS...
+SOLVING...
+CALCULATION DID CONVERGE!
+Orbital Energies:
+-1.5961183
+-0.2681187
+ 0.0128686
+ 0.5333363
+ 0.7343180
+ 0.7343180
+ 1.2106629
+ 1.4782406
+ 1.4782406
+ 1.6293899
+ 2.4363644
+ 5.2285241
+HF-Energy = -4.2039775
+INR-Energy = 1.3230258
+Total energy = -2.8809517
+WRITING CUBE OUTPUT...
