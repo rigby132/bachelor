@@ -1,11 +1,44 @@
 \chapter{Diskussion/Ausblick}
 
-\section{Einordnung von HF und DFT in der Chemie}
--> Andere Klassen von Methoden (zb. semiempirische Methoden)
--> Verbesserung dieser Methoden (Post-Hartree-Fock-Methoden)
--> Eingliederung dieser Methoden in der Praxis (Was kann man mit
-diesen Eigenenergien/Funktionen eigentlich machen?).
+\section{Einordnung der Hartee\-/Fock\-/Theorie in der Chemie}
+Die verwendete HF\-/Theorie gehört zur Klasse der Ab\-/Initio\-/Methoden,
+welche versuchen nur basierend auf theoretischen Modellen und
+universellen Konstanten Berechnung durchzuführen.
+Diese Verfahren stehen im Gegensatz zu den Semiempirischen\-/Methoden,
+welche zusätzlich experimentell bestimmte Werte in die Berechnungen einbinden.
 
-\section{Wie könnte man von diesem Punkt aus weitermachen?}
--> Code-Optimierung, Anspruchsvoller Methoden implementieren
-(aufbauend auf HF), Geometrie-Optimierung, ...
+Die HF-Theorie ist der einfachste brauchbare Vertreter
+der Klasse der Ab\-/Initio\-/Methoden
+und wird deshalb bei entweder sonst zu großen System oder
+als Start-Approximation für sehr akkurate Berechnungen verwendet.
+\cite[S. 433]{structure_2013}
+
+Basierend auf der HF-Theorie existieren die Post\-/Hartree\-/Fock\-/Methoden,
+diese verbesseren die Genauigkeit der Ergebnisse hauptsächlich
+durch eine genauere Behandlung der Elektron-Elektron-Interaktionen.
+
+Neben den Post\-/HF\-/Methoden existieren zudem Verfahren
+mit unterschiedlichen Ansätzen. Eine der relevantesten ist
+die Dichte\-/Funktional\-/Theorie (DFT), welche nicht auf
+Wellenfunktionen aufbaut sondern direkt mit den
+Dichtefunktionen der Elektronen arbeitet.
+
+\section{Ausblick}
+In dieser Arbeit wurde mithilfe der dargelegten HF-Theorie
+erfolgreich ein Programm zur qualitativen Berechnung von Molekül\-/Grundzustands\-/Energien
+implementiert. Es bieten sich nun drei Optionen zur Weiterführung diese Projektes an:
+\begin{enumerate}
+    \item Mehr Ergebnisse durch Einführung zusätzlicher Werkzeuge.\\
+    Momentan lassen sich nur die Grundzustandsenergien berechnen und Orbitale exportieren.
+    Jedoch gibt es eine Vielzahl an weiteren Werkzeugen, die nützlich sein können.
+    Zu diesen gehört zum Beispiel die Geometrie-Optimierung durch das Programm. 
+    \item Genauere Ergebnisse durch Erweiterung der entwickelten HF-Theorie.\\
+    Wie bereits erwähnt, kann die entwickelte Software 
+    lediglich qualitativ belastbare Ergebnisse produzieren.
+    Durch Verwendung zusätzlicher Methoden wären dann
+    quantitativ brauchbare Berechnungen möglich.
+    \item Schnellere Ergebnisse durch Optimierungen.\\
+    Beim Berechnen der Resultate ist deutlich geworden,
+    dass diese Implementierung noch vergleichsweise sehr inneffizient ist.
+    Vor allem beim Evaluieren der 2\-/Elektronen\-/Integrale besteht hoher Optimierungsbedarf.
+\end{enumerate}

@@ -1,5 +1,7 @@
 \usetikzlibrary{positioning}
 
+\begin{figure}[h]
+    
 \tikzset{
     state/.style={
            rectangle,
@@ -36,8 +38,8 @@
     \node[state, below right of=Input, node distance=3.5cm] (Guess)
     {
         \begin{tabular}{l}
-        Stell eine Anfangs-Schätzung\\
-        für die Koeffizienten in $C$ auf.
+        Stelle eine Schätzung für\\
+        die Koeffizienten in $C$ auf.
         \end{tabular}
     };
 
@@ -85,4 +87,8 @@
         (Convergence) edge[] node[right]{Ja} (Done)
                       edge[] node[left]{Nein}(Fock);
 \end{tikzpicture}
+
+\caption{Diagramm des SCF-Verfahrens.}\label{scf-chart}
+
 \end{center}
+\end{figure}

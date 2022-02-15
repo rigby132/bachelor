@@ -1,53 +1,90 @@
 \section{Allgemeine Theorie}
 
-\subsection{Grundlegende Defininitionen}
-\subsection{Postulate der Quantenmechanik}
-TODO: $\psi$ als immer normiert annehmen?, Mehr infos + umschreiben?
+\subsection{Grundlegende Definitionen und Notation}
+Um Moleküle in einem quantenmechanischen Modell zu beschreiben,
+müssen wir zunächst einige Definitionen aufstellen:
+
 \subsubsection{Wellenfunktionen}
-Die sogenannte Wellenfunktion $\Psi(x_1, x_2, \dots, t)$ 
-beschreibt den Zustand eines quantenmechanischen Systems vollständig.\cite[S. 20-21]{atkins_friedman_2011}\\\\
-Durch ein $\psi$ wird nur der räumliche Anteil dargestellt.
+Die sogenannte Wellenfunktion $\Psi(x_1, x_2, \dots)$ 
+beschreibt den Zustand eines quantenmechanischen Systems vollständig.
+Im Kontext eines Moleküls entspricht dies der Wellenfunktion für die Atomkerne
+und deren Elektronen.
+
+Zu den Wellenfunktionen $\psi, \varphi$ wird ein Skalarprodukt definiert:
+\begin{equation}
+    \langle \psi(x) \vert \varphi(x) \rangle \equiv  \int \psi^*(x) \phi(x) \,dx
+\end{equation}
+Das Integral geht über den gesamten Raum aller Parameter.
+
+Das Betragsquadrat der Wellenfunktion $\vert \Psi \vert^2$
+lässt sich dabei als Wahrscheinlichkeitsdichte interpretieren, wenn $\Psi$ normiert ist
+($\langle \Psi \vert \Psi \rangle = 1$).
+
+\cite[S. 20-21, 24]{atkins_friedman_2011}
+
+In der restlichen Arbeit gehen wir immer von normierten Wellenfunktionen aus.
+Sollten die Parameter nicht von direkter Relevanz sein, werden diese weggelassen.
 
 \subsubsection{Operatoren}
 Beobachtbare Eigenschaften eines quantenmechanischen Systems 
 werden durch sogenannte Operatoren repräsentiert.
-Diese Operatoren müssen hermitesch sein und folgende Gleichungen erfüllen:
-\begin{flalign*}
-  \hat{q}\hat{p}_{q'} - \hat{p}_{q'}\hat{q} &= i\hbar\delta_{qq'}\\
-  \hat{q}\hat{q}' - \hat{q}'\hat{q} &= 0 \\
-  \hat{p}_{q}\hat{p}_{q'} - \hat{p}_{q'}\hat{p}_{q} &= 0
-\end{flalign*}
-Wobei $\hat{q}, \hat{q}' \in \{\hat{x}, \hat{y}, \hat{z}\}$ die Orts-Operatoren stellen
-und $\hat{p}_q, \hat{p}_{q'}$ die zugehörigen Impuls-Operatoren sind.\cite[S. 21]{atkins_friedman_2011}
+Diese Operatoren werden über das Hut\-/Symbol (zb.: $\hat{o}$) gekennzeichnet
+und müssen hermitesch sein.
+Ein Operator $\hat{o}$ wirkt auf ein quantenmechanisches System $\varphi$
+und verändert diesen in einen anderen Zustand $\psi$.
 
-\subsubsection{Messungen}
-Der Mittelwert von wiederholten Messungen
-entspricht dem Erwartungswert des korrespondierenden Operators auf der Wellenfunktion.\\
-Der Erwartungswert eines Operators $\hat{o}$ ist gegeben durch:
+Wir binden hermitesche Operatoren $\hat{o}$ noch in unsere Notation für das Skalarprodukt ein,
+sodass sich schreiben lässt:
 \begin{equation}
-  \left\langle \hat{o} \right\rangle = \frac{\int \psi^* \hat{o} \psi \,d\tau}{\int \psi^* \psi \,d\tau}
-  =\frac{\left\langle \psi^* \vert \hat{o} \vert \psi \right\rangle}{\left\langle \psi^* \vert \psi \right\rangle}
+    \langle \psi(x) \vert \hat{o} \vert \varphi(x) \rangle \equiv  \int \psi^*(x) \hat{o} \phi(x) \,dx
 \end{equation}
-Wenn $\psi$ eine Eigenfunktion eines Operators $\hat{o}$ ist, erhält man den Eigenwert als Erwartungswert.
-\cite[S. 22-23]{atkins_friedman_2011} 
 
-\subsubsection{Bornsche Wahrscheinlichkeitsinterpretation}
-Die Wahrscheinlichkeit ein Teilchen in einem Volumenelement $\,d\tau$ zu finden ist geich
-$\vert \psi(x) \vert^2$, wenn $\psi$ normiert ist.\cite[S. 24]{atkins_friedman_2011}
-
-\subsubsection{Die Schrödingergleichung}
-Die zeitliche Änderung dieser Wellenfunktion $\Psi(x_1, x_2, \dots, t)$ 
-wird durch die Schrödingergleichung beschrieben:
+Ist das System $\varphi$ eine Eigenfunktion des Operators $\hat{o}$,
+erhalten wir eine Eigenwertsgleichung mit dem Eigenwert $\lambda$:
 \begin{equation}
-  i\hbar\frac{\partial\Psi}{\partial t} = \hat{H}\Psi
-\end{equation}\\
-Sollte die Zeitabhägigkeit der Wellenfunktion trivial sein (TODO erklären?),
-kann diese in 2 Funktionen zerlegt werden:
-\begin{equation*}
-  \Psi(x_1, x_2, \dots, t) = \psi(x_1, x_2, \dots) \exp(\frac{-iEt}{\hbar})
-\end{equation*}\\
-Dabei ist $\psi$ die Lösung für die zeitunabhängige Schrödingergleichung:
+    \hat{o} \varphi = \lambda \varphi
+\end{equation}
+Außerdem gilt für das Skalarprodukt mit sich selbst dann:
+\begin{equation}
+    \langle \varphi(x) \vert \hat{o} \vert \varphi(x) \rangle = \lambda
+\end{equation}
+
+%TODO cite lecture (bookmark)
+
+Sollte $\varphi$ keine Eigenfunktion eines Operators $\hat{o}$ sein,
+so kann man den Erwartungswert der Eigenschaft, welche durch $\hat{o}$ ausgedrückt wird, bestimmen über:
+\begin{equation}
+\langle \psi(x) \vert \hat{o} \vert \psi(x) \rangle
+  = \int \psi^*(x) \hat{o} \psi(x) \,dx
+\end{equation}
+
+%TODO cite lecture (bookmark)
+\cite[S. 21]{atkins_friedman_2011}
+\cite[S. 155-156]{levine_2019}
+
+\subsubsection{Dirac-Notation}
+Im Rahmen dieser Notation lassen sich Funktionen wie $\varphi$
+über sogenannte Bras $\langle \varphi \vert$ und Kets $\vert \varphi \rangle$ schreiben.
+Sollte einem Bra $\langle \varphi \vert$ ein Ket $\vert \psi \rangle$ folgen,
+so steht dies für das Skalarprodukt $\langle \varphi \vert \psi \rangle$.
+
+Zu beachten ist dabei, dass ein Ket mit dessen enthaltener Funktion äquivalent ist:
+\begin{equation}
+    \varphi \equiv \vert \varphi \rangle
+\end{equation}
+Ein Bra hingegen wird als Operation für das Skalarprodukt angesehen.
+
+Die Bra-Ket-Notation wird im Kontext des Skalarprodukts verwendet.
+\subsubsection{Die Schrödingergleichung}
+Im Rahmen dieser Arbeit gehen wir von nur zeitlich statischen Systemen aus,
+welche durch die zeitunabhängige Schrödingergleichung beschrieben werden:
 \begin{equation}\label{schroedinger}
   \hat{H}\psi = E\psi
 \end{equation}
+
+Durch das Lösen dieser Eigenwerts\-/Gleichung sind wir in der Lage
+die Energien und weitere Eigenschaften von Molekülen zu bestimmen.
+Der Operator $\hat{H}$ ist der sogenannte Hamiltonian und
+gibt die Energie $E$ des Systems wieder.
+
 \cite[S. 24-25]{atkins_friedman_2011}
