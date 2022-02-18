@@ -10,6 +10,8 @@ Wie am Anfang des letzten Kapitels beschrieben, werden Atomorbitale verwendet,
 um die Molekülorbitale darzustellen. In diesem Kontext werden die Atomorbitale
 Basisfunktionen genannt und die Menge der verwendeten Basisfunktionen
 ist der so genannte Basis\-/Satz.
+Die Basisfunktionen müssen jedoch nicht auf Atomorbitale beschränkt sein.
+\cite[Ab. 5.3.1]{lewars_2016}
 
 Es werden üblicherweise zwei Arten von Basisfunktionen verwendet,
 um Atomorbitale zu konstruieren:
@@ -20,6 +22,10 @@ um Atomorbitale zu konstruieren:
     und können deshalb die Wellenfunktionen von Atomen sehr genau repräsentieren.
     Jedoch fällt die Berechnung der 2\-/Elektronen\-/Integrale schwer,
     weshalb die Verwendung von so genannten GTOs bevorzugt wird.
+
+    \cite[Ab. 5.2]{cramer_2004}
+    \cite[S. 2]{tc2_6}
+
     \item Gaussian-Type-Orbitals (GTO)\\
     Wie der Name schon bereits sagt, werden Gauss-Funktionen verwendet,
     um die genaueren STOs zu approximieren. Im Gegensatz zu den STOs ist
@@ -40,16 +46,18 @@ um Atomorbitale zu konstruieren:
         \caption{GTOs des S-Orbitals und der drei P-Orbitale mit $N=2$ und $\alpha = 0.5$}
     \end{figure}
 
-    TODO cite essentials of computational chemistry.
+    \cite[Ab. 6.2.1]{cramer_2004}
 \end{enumerate}
 
 In der Implementierung werden GTOs verwendet, aufgrund der leichteren Integral\-/Berechnung,
 welche im \cref{repulsion-integrals-section} genauer behandelt wird.
 Im Programm werden die Parameter der GTOs aus Dateien mit vorgefertigten Basissätzen extrahiert.
 In diesen Dateien gibt es für jedes Atom Parameter zur Konstruktion der relevanten GTOs.
+
 Bei GTOs ist es außerdem üblich, dass eine Linearkombination mehrere GTOs verwendet wird 
 zur Beschreibung eines Atomorbitals, diese Kombination von GTOs wird ein Contracted GTO (CGTO) genannt.
 CGTOs verhalten sich ähnlich zu GTOs und werden deshalb nicht gesondert behandelt.
+\cite[S.255-256]{lewars_2016}
 
 \subsection{Schätzung der Start-Orbitale}
 Im SCF\-/Verfahren wird eine Start\-/Schätzung benötigt, um überhaupt mit dem iterativen Prozess anzufangen.
@@ -61,3 +69,30 @@ und als Ansatz für die Rechnung genommen. Im Rahmen dieser Arbeit genügt diese
 da ebenfalls nur einfache Moleküle betrachtet werden.
 
 \subsection{Berechnung der Repulsions\-/Integrale}\label{repulsion-integrals-section}
+In der Gleichung \cref{fock-matrix-element} für die Fock\-/Matrix\-/Elemente kommen die
+2-Elektronen-Integrale für Atomorbitale \cref{2e-integral-ao} vor.
+Da diese Atomorbitale keinen Spin haben, integriert man insgesamt 6 Variablen
+($2\times (x,y,z)$) über den gesamten Raum, also von $-\infty$ bis $\infty$.
+Dies ist mit konventionellen numerischen Integrations-Methoden nicht in vernüftiger Zeit
+zu bewältigen, weshalb andere Methoden benötigt werden.
+
+In der ursprünglichen Implementierung wurde deshalb die Monte\-/Carlo\-/Integration verwendet.
+Diese Art der Integration berechnet die zu integrierende Funktion an zufällig gewählten Punkten
+im 6 dimensionalen Raum und trägt deren Ergebnisse zusammen. So bleibt die gesamte Integration
+überschaubar und relativ schnell, jedoch ist die Genauigkeit aufgrund des großen Raums unzureichend.
+Abgesehen davon wird die Laufzeit auch schon für Moleküle mit mehr als drei Atomen unzumutbar.
+
+Wie in \cref{basis-functions-section} angedeutet, kann das Integral aus \cref{2e-integral-ao}
+viel schneller und genauer berechnet werden durch den Einsatz von GTOs.
+Es wurden rekursive Algorithmen entwickelt, welche dieses Integral genau lösen können.
+Zu diesen gehört das Obara\-/Saika Schema, welches über mehrere rekusiven Relationen alle
+auftretenden Integrale bei der HF-Methode lösen kann (nicht nur \cref{2e-integral-ao}).
+Leider würde die Auslegung dieses Schemas den Rahmen dieser Arbeit sprengen,
+weshalb hier auf die detaillierte Abhandlung des Themas in
+\cite[Kapitel 9 bzw. 9.10]{structure_2013} verwiesen wird.
+Da das Obara\-/Saika Schema vergleichsweise leicht ist, wurde dieser Implementierungs\-/Ansatz 
+gewählt.
+
+Die Schnelligkeit dieser Implementierung ist außerdem ausschlaggebend
+für die Gesamtlaufzeit des Programms, weil es sich um den
+rechenintensivsten Teil der Gesamt\-/Berechnung handelt.

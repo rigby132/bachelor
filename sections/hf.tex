@@ -356,6 +356,9 @@ den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
 
 Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
 
+\cite[Ab. 3.4.1]{szabo_ostlund_1996}
+\cite[Aufgabe 1]{tc2_spin}
+
 %================================================
 %ROOTHAAN-HALL
 %================================================
@@ -495,13 +498,18 @@ von Molekül\-/Raumorbitalen $\psi_j$ ab.
 Setzt man die Atomobitale $\chi_s$ aus \cref{lin-comb-atomorbitals} in
 die Definitionen von $\hat{J'}_j$\cref{spinless-coulomb-operator} und
 $\hat{K'}_j$ \cref{spinless-exchange-operator} ein, lässt sich $F_{r s}$ schreiben als:
-\begin{equation}
+\begin{equation}\label{fock-matrix-element}
     F_{rs} = \langle \chi_r \vert \hat{F}' \vert \chi_s \rangle
     = \langle \chi_r \vert \hat{H}_{\text{core}} \vert \chi_s \rangle
     + \sum_{tu}^m \sum_j^{n} C_{tj}^*C_{uj}\left( 2[rs\vert tu] - [ru\vert ts] \right)
 \end{equation}
 Die 2\-/Elektronen\-/Integrale $[rs\vert tu]$ und $[ru\vert ts]$
-sind analog zu \cref{2e-integral} definiert, wobei es sich um Atomorbitale handelt ohne Spin.
+sind analog zu \cref{2e-integral} definiert, wobei es sich um Atomorbitale handelt ohne Spin:
+
+\begin{equation}\label{2e-integral-ao}
+    [rs\vert tu] := 
+    \int \chi_r^*(1) \chi_s(1) \frac{1}{r_{12}} \chi_t^*(2) \chi_u(2) \,d\nu _1 \,d\nu_2
+\end{equation}
 
 In dieser Form müssen die 2\-/Elektronen\-/Integrale nur einmal
 zu Beginn für einen Satz Atomorbitale berechnet werden und
@@ -515,7 +523,7 @@ unter \cref{basis-functions-section} behandelt.
 
 \subsection{Berechnung der Gesamtenergie des Moleküls}
 Ab diesem Punkt sind wir in der Lage die Molekülorbitale und
-deren Eigen\-/Energien zu Berechnen. Um die Gesamtenergie des Moleküls zu erhalten,
+deren Eigen\-/Energien zu Berechnen. Um die elektronische Energie des Moleküls zu erhalten,
 müssen die Orbitalenergien kombiniert werden:
 \begin{equation}
     E_{\text{HF}} = 2 \sum_i^n \lambda_i - \sum_i^n \sum_j^n
@@ -537,7 +545,16 @@ Die Gleichung kann man weiter umformen zu:
     \langle \chi_r \vert \hat{H}_{\text{core}} \vert \chi_s \rangle
 \end{equation}
 
-\cite[S. 229-230]{lewars_2016}
+Zum Erhalten der Hartree\-/Fock\-/Energie muss noch die Energie
+der internuklearen Abstoßung hinzugefügt werden.
+Diese Abstoßung wird durch $\hat{V}_{aa}$ aus \cref*{hamilton} beschrieben.
+Da die Kerngeometrie als fest angenommen wird, sind alle Terme in $\hat{V}_{aa}$ konstant
+und können direkt berechnet werden. Wir erhalten die Gleichung für die Hartree-Fock-Energie:
+\begin{equation}
+    E_{\text{HF}}^{\text{total}} := E_{\text{HF}} + \frac{1}{2}\sum_{A \neq B } \frac{Z_A Z_B}{r_{AB}}
+\end{equation}
+
+\cite[S. 229-231]{lewars_2016}
 
 
 
