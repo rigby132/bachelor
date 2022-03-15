@@ -1,8 +1,7 @@
-\chapter{Ergebnisse/ Numerische Experimente}
+\chapter{Ergebnisse}
 Im Folgenden werden einige simple Beispiele betrachtet,
 welche mit dem zur Arbeit begleitenden Programm berechnet wurden.
-Die Ergebnisse werden anschließend mit Werten aus
-einem professionellen Programm verglichen,
+Die Ergebnisse werden anschließend mit Werten aus dem Programm NWChem \cite{nwchem} verglichen,
 um die qualitative Korrektheit der Implementierung zu bestätigen.
 \section{Aufbau}
 Wir schauen uns die folgenden Moleküle an:
@@ -56,16 +55,64 @@ wie zum Beispiel auf den Einsatz zusätzlicher Optimierungen.
 
 Die Hartree\-/Fock\-/Energien sind jedoch nicht die einzigen Ergebnisse,
 wir erhalten noch die Orbital\-/Funktionen und deren zugehörigen Energien.
-Diese lassen sich in einem Isoflächen\-/Plot z.B. vom H$_2$O\-/Molekül gut darstellen:
-\begin{figure}[h]
-    \centering
-\includegraphics[trim=650 650 650 650, clip, width=0.32\textwidth]{res/H2O/h2o_w0.png}
-\includegraphics[trim=650 650 650 650, clip, width=0.32\textwidth]{res/H2O/h2o_w1.png}
-\includegraphics[trim=650 650 650 650, clip, width=0.32\textwidth]{res/H2O/h2o_w2.png}\\
-\includegraphics[trim=650 650 650 650, clip, width=0.32\textwidth]{res/H2O/h2o_w3.png}
-\includegraphics[trim=650 650 650 650, clip, width=0.32\textwidth]{res/H2O/h2o_w4.png}
-\caption{Die fünf besetzten Orbitale des H$_2$O\-/Molekül,
+Diese lassen sich in einem Isoflächen\-/Plot gut darstellen.
+Die nachstehenden Grafiken wurden mithilfe der Programme Avogadro \cite{avogadro}
+und POV-Ray \cite{povray} erzeugt.
+\begin{enumerate}
+\item Heliumhydridion (HeH$^+$):
+\begin{figure}[H]
+\centering
+\includegraphics[trim=300 300 300 300, clip, width=0.45\textwidth]{res/HeH/heh_w0.png}
+\includegraphics[trim=300 300 300 300, clip, width=0.45\textwidth]{res/HeH/heh_w1.png}
+\caption{Die ersten zwei Orbitale des HeH$^+$\-/Moleküls,
+nach aufsteigender Energie sortiert.
+\textcolor{blue}{$\blacksquare$} positiv,
+\textcolor{red}{$\blacksquare$} negativ.}\label{heh_orbitals}
+\end{figure}
+
+\newpage
+\item Wasser (H$_2$O):
+\begin{figure}[H]
+\centering
+\includegraphics[trim=700 800 700 600, clip, width=0.45\textwidth]{res/H2O/h2o_w0.png}
+\includegraphics[trim=700 800 700 600, clip, width=0.45\textwidth]{res/H2O/h2o_w1.png}\\
+\includegraphics[trim=700 800 700 600, clip, width=0.45\textwidth]{res/H2O/h2o_w2.png}
+\includegraphics[trim=700 800 700 600, clip, width=0.45\textwidth]{res/H2O/h2o_w3.png}\\
+\includegraphics[trim=700 800 700 600, clip, width=0.45\textwidth]{res/H2O/h2o_w4.png}
+\caption{Die fünf besetzten Orbitale des H$_2$O\-/Moleküls,
 nach aufsteigender Energie sortiert.
 \textcolor{blue}{$\blacksquare$} positiv,
 \textcolor{red}{$\blacksquare$} negativ.}\label{h2o_orbitals}
 \end{figure}
+
+\newpage
+\item Ammoniak (NH$_3$):
+\begin{figure}[H]
+\centering
+\includegraphics[trim=700 1200 1200 700, clip, width=0.45\textwidth]{res/NH3/nh3_w0.png}
+\includegraphics[trim=700 1200 1200 700, clip, width=0.45\textwidth]{res/NH3/nh3_w1.png}\\
+\includegraphics[trim=700 1200 1200 700, clip, width=0.45\textwidth]{res/NH3/nh3_w2.png}
+\includegraphics[trim=700 1200 1200 700, clip, width=0.45\textwidth]{res/NH3/nh3_w3.png}\\
+\includegraphics[trim=700 1200 1200 700, clip, width=0.45\textwidth]{res/NH3/nh3_w4.png}
+\caption{Die fünf besetzten Orbitale des NH$_3$\-/Moleküls,
+nach aufsteigender Energie sortiert.
+\textcolor{blue}{$\blacksquare$} positiv,
+\textcolor{red}{$\blacksquare$} negativ.}\label{nh3_orbitals}
+\end{figure}
+
+\newpage
+\item Methan (CH$_4$):
+\begin{figure}[H]
+\centering
+\includegraphics[trim=1200 1200 1200 1200, clip, width=0.45\textwidth]{res/CH4/ch4_w0.png}
+\includegraphics[trim=1200 1200 1200 1200, clip, width=0.45\textwidth]{res/CH4/ch4_w1.png}\\
+\includegraphics[trim=1200 1200 1200 1200, clip, width=0.45\textwidth]{res/CH4/ch4_w2.png}
+\includegraphics[trim=1200 1200 1200 1200, clip, width=0.45\textwidth]{res/CH4/ch4_w3.png}\\
+\includegraphics[trim=1200 1200 1200 1200, clip, width=0.45\textwidth]{res/CH4/ch4_w4.png}
+\caption{Die fünf besetzten Orbitale des CH$_4$\-/Moleküls,
+nach aufsteigender Energie sortiert.
+\textcolor{blue}{$\blacksquare$} positiv,
+\textcolor{red}{$\blacksquare$} negativ.}\label{ch4_orbitals}
+\end{figure}
+
+\end{enumerate}

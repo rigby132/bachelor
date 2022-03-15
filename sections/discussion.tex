@@ -1,44 +1,31 @@
-\chapter{Diskussion/Ausblick}
+\chapter{Ausblick}
 
-\section{Einordnung der Hartee\-/Fock\-/Theorie in der Chemie}
-Die verwendete HF\-/Theorie gehört zur Klasse der Ab\-/Initio\-/Methoden,
-welche versuchen nur basierend auf theoretischen Modellen und
-universellen Konstanten Berechnung durchzuführen.
-Diese Verfahren stehen im Gegensatz zu den Semiempirischen\-/Methoden,
-welche zusätzliche experimentell bestimmte Werte in die Berechnungen einbinden.
-
-Die HF-Theorie ist der einfachste brauchbare Vertreter
-der Klasse der Ab\-/Initio\-/Methoden
-und wird deshalb bei entweder sonst zu großen System oder
-als Start-Approximation für sehr akkurate Berechnungen verwendet.
-\cite[S. 433]{structure_2013}
-
-Basierend auf der HF-Theorie existieren die Post\-/Hartree\-/Fock\-/Methoden,
-diese verbesseren die Genauigkeit der Ergebnisse hauptsächlich
-durch eine genauere Behandlung der Elektron-Elektron-Interaktionen.
-
-Neben den Post\-/HF\-/Methoden existieren zudem Verfahren
-mit unterschiedlichen Ansätzen. Eine der relevantesten ist
-die Dichte\-/Funktional\-/Theorie (DFT), welche nicht auf
-Wellenfunktionen aufbaut sondern direkt mit den
-Dichtefunktionen der Elektronen arbeitet.
-
-\section{Ausblick}
 In dieser Arbeit wurde mithilfe der dargelegten HF-Theorie
 erfolgreich ein Programm zur qualitativen Berechnung von Molekül\-/Energien
-implementiert. Es bieten sich nun drei Optionen zur Weiterführung diese Projektes an:
+implementiert. Es bieten sich nun einige Optionen zur Weiterführung diese Projektes an.
+
+\section{Erweiterung der Funktionalitäten}
+Momentan lassen sich nur die Hartree\-/Fock\-/Energie berechnen und Orbitale exportieren.
+Jedoch gibt es eine Vielzahl an weiteren Funktionalitäten, die nützlich sein können.
+Zu diesen gehört zum Beispiel die Geometrie-Optimierung durch das Programm. 
+
+\section{Quantitative Berechnungen}
+Wie bereits erwähnt, kann die entwickelte Software 
+lediglich qualitativ belastbare Ergebnisse produzieren.
+Durch Verwendung zusätzlicher Methoden wären
+quantitativ brauchbare Berechnungen möglich.
+
+\section{Post-Hartree-Fock}
+Wie in \cref{posthf} erwähnt, gibt es Weiterentwicklungen der HF-Theorie,
+welche die Elektronen-Interaktionen genauer behandeln.
+Zu diesen gehören unter anderem die Theorien:
 \begin{enumerate}
-    \item Mehr Ergebnisse durch Einführung zusätzlicher Werkzeuge.\\
-    Momentan lassen sich nur die Grundzustandsenergien berechnen und Orbitale exportieren.
-    Jedoch gibt es eine Vielzahl an weiteren Werkzeugen, die nützlich sein können.
-    Zu diesen gehört zum Beispiel die Geometrie-Optimierung durch das Programm. 
-    \item Genauere Ergebnisse durch Erweiterung der entwickelten HF-Theorie.\\
-    Wie bereits erwähnt, kann die entwickelte Software 
-    lediglich qualitativ belastbare Ergebnisse produzieren.
-    Durch Verwendung zusätzlicher Methoden wären dann
-    quantitativ brauchbare Berechnungen möglich.
-    \item Schnellere Ergebnisse durch Optimierungen.\\
-    Beim Berechnen der Resultate ist deutlich geworden,
-    dass diese Implementierung noch vergleichsweise sehr inneffizient ist.
-    Vor allem beim Evaluieren der 2\-/Elektronen\-/Integrale besteht hoher Optimierungsbedarf.
+    \item 
 \end{enumerate}
+
+\section{Optimierung}
+Trotz der bereits vorhandenen Optimierungen wird beim Berechnen der Resultate deutlich,
+dass diese Implementierung noch vergleichsweise ineffizient ist. Vor allem beim Evaluieren
+der 2\-/Elektronen\-/Integrale besteht hoher Optimierungsbedarf. Ein konkrete Optimierung wäre z.B.
+das Ausnutzen molekularer Symmetrien, über diese lassen sich einzelne Rechnungen mehrfach anwenden
+und insgesamt dadurch Laufzeit einsparen.
