@@ -2,30 +2,92 @@
 
 In dieser Arbeit wurde mithilfe der dargelegten HF-Theorie
 erfolgreich ein Programm zur qualitativen Berechnung von Molekül\-/Energien
-implementiert. Es bieten sich nun einige Optionen zur Weiterführung diese Projektes an.
+implementiert. Es bieten sich nun einige Optionen zur Weiterführung dieses Projektes an.
 
 \section{Erweiterung der Funktionalitäten}
-Momentan lassen sich nur die Hartree\-/Fock\-/Energie berechnen und Orbitale exportieren.
-Jedoch gibt es eine Vielzahl an weiteren Funktionalitäten, die nützlich sein können.
-Zu diesen gehört zum Beispiel die Geometrie-Optimierung durch das Programm. 
-
-\section{Quantitative Berechnungen}
-Wie bereits erwähnt, kann die entwickelte Software 
-lediglich qualitativ belastbare Ergebnisse produzieren.
-Durch Verwendung zusätzlicher Methoden wären
-quantitativ brauchbare Berechnungen möglich.
-
-\section{Post-Hartree-Fock}
-Wie in \cref{posthf} erwähnt, gibt es Weiterentwicklungen der HF-Theorie,
-welche die Elektronen-Interaktionen genauer behandeln.
-Zu diesen gehören unter anderem die Theorien:
+Momentan lassen sich nur Hartree\-/Fock\-/Energien berechnen und Orbitale exportieren.
+Jedoch gibt es eine Vielzahl an weiteren Funktionalitäten oder Ergebnissen, die nützlich sein können.
+Zu diesen gehören unter anderem:
 \begin{enumerate}
-    \item 
+    \item Berechnungen mit der unrestricted Hartree-Fock-Methode (UHF):\\
+            Wie bei \cref{RHF} bereits erwähnt, können mit diesem Ansatz 
+            nur Moleküle mit vollständig besetzten Orbitalen behandelt werden (restricted HF).
+            Mit der Erweiterung zu UHF wären Berechnungen möglich
+            mit nur halb besetzten Orbitalen, welche ebenfalls stabile
+            Lösungen zulassen. 
+            Dazu müsste man jedoch den Spin beibehalten
+            und nicht wie in \cref*{remove-spin-section} entfernen.
+    \item Berechnung weiterer Energien:\\
+            Es gibt neben der Hartree-Fock-Energie noch
+            viele weitere Energien die berechnet werden können.
+            Einer dieser ist z.B. die Grundzustandsenergie, welche die Energie
+            eines Moleküls bei 0 Kelvin angibt. \cite[S. 40]{lewars_2016}
+    \item Geometrie-Optimierungen:\\
+            In der derzeitigen Implementierung wird als Eingabe
+            eine Molekülgeometrie (Positionen aller Atomkerne) erwartet.
+            Jedoch gibt es ausgehend von dieser Eingabe keine automatisierte Möglichkeit
+            eine Geometrie zu erlangen, welche die HF-Energie des Moleküls minimiert.
+    \item Schwingungs-Frequenzen:\\
+            Das sind Frequenzen periodischer Bewegungen innerhalb eines Moleküls
+            und finden verschiedene Anwendungen. Diese Frequenzen werden benötigt,
+            um die erwähnte Grundzustandsenergie zu berechnen und können auch bei einer
+            Geometrie-Optimierung helfen. Außerdem lassen sich dadurch auch
+            Infrarot-Spektren generieren.\cite[2.5, 5.5.3]{lewars_2016}
 \end{enumerate}
 
+\section{Verbesserung der Hartree-Fock Implementierung}
+Wie bereits erwähnt, kann die entwickelte Software qualitativ
+Ergebnisse produzieren. Jedoch gibt es eine Vielzahl an
+möglichen Implementierungen der Theorie.
+Die Optimierung über das SCF-Verfahren kann auch durch
+andere herkömmliche Methoden umgesetzt werden. Außerdem gibt
+es auch mehrere Wege die 2\-/Elektronen\-/Integrale zu berechnen,
+hier kann ebenfalls ein alternatives Schema gewählt werden.
+Man könnte auch andere Basisfunktionen verwenden statt der Atomorbitale.
+Dies sind nur einige Beispiele für alternative Implementierungen
+innerhalb der HF\-/Theorie. TODO cite
+
+\section{Post-Hartree-Fock}
+Die Energien in der HF-Theorie überschätzen die Abstoßung der Elektronen untereinander,
+weshalb Weiterentwicklungen der HF-Theorie erstellt wurden,
+welche die Elektronen-Interaktionen genauer behandeln.
+Zu diesen gehören Methoden wie das Møller\-/Plesset- (MP)
+und Configuration\-/Interaction\-/Verfahren (CI).
+Diese erweitern die HF-Theorie um weitere Terme,
+welche Elektronen aus besetzten Orbitalen in virtuelle Orbitale setzen.
+Durch das Einbinden dieser zusätzlichen Zustände lassen
+sich die Elektronen\-/Repulsionen exakter beschreiben.
+
+\cite[S. 3]{tc2_phf}
+\cite[5.4.2, 5.4.3]{lewars_2016}
+
 \section{Optimierung}
-Trotz der bereits vorhandenen Optimierungen wird beim Berechnen der Resultate deutlich,
-dass diese Implementierung noch vergleichsweise ineffizient ist. Vor allem beim Evaluieren
-der 2\-/Elektronen\-/Integrale besteht hoher Optimierungsbedarf. Ein konkrete Optimierung wäre z.B.
-das Ausnutzen molekularer Symmetrien, über diese lassen sich einzelne Rechnungen mehrfach anwenden
-und insgesamt dadurch Laufzeit einsparen.
+Wie in \cref{implementation-section} zu sehen ist,
+wurden wichtige und naheliegende Optimierungen
+sowohl auf theoretischer als auch auf programmier-technischer Seite bereits durchgeführt.
+Diese sind besonders auf die Berechnung der 2\-/Elektronen\-/Integrale fokusiert,
+da dieser Teil bei Weitem die meiste Rechenzeit erfordert.
+
+In der zu dieser Arbeit begleitenden Software handelt es sich
+um eine direkte Implementierung der besprochenen Theorie.
+Um die Einfachheit dieser Implementierung zu wahren, wurde auf den Einsatz von
+fortgeschrittenen Optimierungsstrategien verzichtet.
+Diese könnten jedoch in weiterführenden Implementierungen eingeführt werden,
+wodurch auch die Berechnung großer molekularer System möglich wäre.
+
+Im theoretischen Bereich bietet sich dazu die Umsetzung der Fast-Multipole-Method an,
+in welcher Interaktionen zwischen relativ weit entfernten Atomen
+je nach benötigter Präzision systematisch approximiert werden.
+Außerdem sind noch Laufzeit-Verbesserungen durch das Ausnutzen von Molekül-Symmetrien möglich,
+diese erlauben z.B. das Wiederverwenden von einzelnen berechneten Werten.
+
+Neben der auf Theorie basierenden Optimierungen können ebenfalls Verbesserungen
+durch effektivere Verwendung der Computerhardware erzielt werden.
+Die Einführung cache-freundlicher Speicherstrukturen sowie das Meiden redundanter
+Berechnungen ist deshalb besonders naheliegend.
+Zudem können zusätzliche Verfahren für das parallele Berechnen der HF-Methode eingebaut werden,
+zu diesen gehören Optionen wie das Rechnen auf GPUs mit OpenCL\cite{opencl}
+oder sogar Cluster-Systemen über z.B. MPI\cite{mpi}.
+
+Erst durch die Verwendung dieser fortgeschrittenen Optimierungen sollte es möglich sein
+vergleichbare Laufzeiten zu denen aus professionellen Programmen zu erzielen.

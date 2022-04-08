@@ -204,18 +204,24 @@ dabei gleicht das $\Theta^*$ stets dem restlichen Term.
     \langle \delta \varphi_i \vert \hat{J}_j \vert \varphi_i \rangle
     - \langle \delta \varphi_i \vert \hat{K}_j \vert \varphi_i \rangle
   \right) 
-  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle + \Theta
+  - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle + \Theta\\
+  &=  \sum_i^{2n} \int \delta \varphi_i^* \hat{H}_{\text{core}} \varphi_i \,d\tau
+  + \sum_{i, j}^{2n} \left( 
+    \int \delta \varphi_i^* \hat{J}_j \varphi_i \,d\tau
+    - \int \delta \varphi_i^* \hat{K}_j \varphi_i \,d\tau
+  \right) 
+  - \sum_{i,j}^{2n} \lambda_{ij} \int \delta \varphi_i^* \varphi_j \,d\tau + \Theta
 \end{align*}
 
-Wir faktorisiern nun die Summe $\sum_i^{2n}$ und das $\langle \delta \varphi_i \vert$ aus:
+Wir faktorisiern nun die Summen $\sum_i^{2n}$ und die Integrale aus:
 \begin{equation*}
-  \sum_i^{2n} \langle \delta \varphi_i \vert \left(
-    \hat{H}_{\text{core}} \vert \varphi_i \rangle
+  \sum_i^{2n} \int \delta \varphi_i^* \left(
+    \hat{H}_{\text{core}} \varphi_i
   + \sum_j^{2n} \left(
-    \hat{J}_j \vert \varphi_i \rangle
-    - \hat{K}_j \vert \varphi_i \rangle
+    \hat{J}_j \varphi_i
+    - \hat{K}_j \varphi_i
   \right) 
-  - \sum_j^{2n}\lambda_{ij} \vert \varphi_j \rangle \right) + \Theta
+  - \sum_j^{2n}\lambda_{ij} \varphi_j \right) \,d\tau + \Theta
   = 0
 \end{equation*}
 
@@ -224,8 +230,8 @@ muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Nullstel
 Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 \begin{equation}
   \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
-  \left( \hat{J}_j - \hat{K}_j \right)\right)\vert\varphi_i\rangle = 
-  \sum_j^{2n}\lambda_{ij} \vert\varphi_j\rangle, \quad \forall i = 0 \dots 2n\nonumber
+  \left( \hat{J}_j - \hat{K}_j \right)\right) \varphi_i = 
+  \sum_j^{2n}\lambda_{ij} \varphi_j, \quad \forall i = 0 \dots 2n\nonumber
 \end{equation}
 Kurz als:
 \begin{equation}
@@ -246,7 +252,7 @@ Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisie
 %================================================
 %SPIN-AUSINTEGRIEREN
 %================================================
-\subsection{Entfernen des Spins}
+\subsection{Entfernen des Spins}\label{remove-spin-section}
 Es ist möglich den Spin aus unserer Hatree\-/Fock\-/Gleichung zu entfernen,
 da wir lediglich Möleküle betrachten,
 deren Orbitale stets zweifach besetzt sind mit je einem $\alpha$ und $\beta$ Elektron.
@@ -257,8 +263,7 @@ Wir müssen nur für ein beliebiges $\varphi_i$ aus \cref{UHF} umformen:
 \end{align*}
 
 Wir integrieren nun beide Seiten der Gleichung,
-multipliziert mit $\alpha^*$, über die Spinkoordinate $\omega$.
-Wir multiplizieren mit $\langle \alpha \vert$:
+multipliziert mit $\alpha^*$, über die Spinkoordinate $\omega$:
 \begin{align*}
   \langle \alpha \vert \hat{F} \psi_i \vert \alpha \rangle &= 
   \langle \alpha \vert\lambda_i \psi_i \vert \alpha \rangle\\
@@ -316,8 +321,7 @@ jedes Orbital zwei Elektronen mit unterschiedlichem Spin enthält, lässt sich d
   - \langle \alpha(1) \vert \langle \beta(2) \vert \hat{K'}_j \vert \beta(1) \rangle \vert \alpha(2) \rangle
 \end{align*}
 Wir haben die Terme der Summe mit gleichem Raumorbital kombiniert und
-das Spin\-/Integral der Operatoren aus diesen herausgezogen,
-siehe \cref{2e-integrals} für die Definition der Operatoren.
+das Spin\-/Integral der Operatoren aus diesen herausgezogen.
 Also hängen die modifizierten Operatorn $\hat{J'}_j$ und $\hat{K'}_j$ nicht von $\omega_1$ oder $\omega_2$ ab,
 wir können die Operatoren aus den Spin\-/Integralen entfernen:
 \begin{align*}

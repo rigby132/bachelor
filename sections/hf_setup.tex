@@ -33,7 +33,7 @@ ist der Einfluss der Elektronen auf die Bewegung der trägeren Atomkerne vernach
 Deshalb können bei der Berechnung der Elektronen\-/Wellenfunktion 
 die Atomkerne approximativ als statisch betrachtet werden.
 
-Dafür wird der Allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
+Dafür wird der allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
 \begin{flalign}
   \hat{H} &= \hat{T}_e + \hat{T}_a + \hat{V}_{ea} + \hat{V}_{ee} + \hat{V}_{aa} \nonumber\\
           &= \hat{T}_a + \hat{V}_{aa} + \hat{H}_{\text{el}} \nonumber\\
@@ -53,7 +53,7 @@ Da eine analytische Lösung zur Schrödingergleichung nur in speziellen Fällen 
 wird die exakte Wellenfunktion durch eine Test\-/Wellenfunktion approximiert.
 Es lässt sich zeigen, 
 dass die Energie dieser Test\-/Wellenfunktion $E_{test}$ 
-immer über der tatsächlichen Grundzustandsenergie $E_0$ liegt.
+immer über der tatsächlichen Energie $E_0$ liegt.
 
 \subsubsection*{Beweis}
 Voraussetzungen:
@@ -62,9 +62,13 @@ Voraussetzungen:
   \item Es existiert eine Eigenfunktion $\psi_0^{}$ mit dem niedrigsten  Eigenwert $E_0^{}$.
   \item Alle Eigenfunktion von $\hat{H}$ sind orthonomal zueinander:\\
   $\langle \psi_i^{} \vert \psi_j^{} \rangle = \delta_{ij}^{},\quad\forall i,j$
-  \item Die Test-Wellenfunktion lässt sich als Lineakombination der Eigenfunktionen darstellen:
+  \item Die Test-Wellenfunktion lässt sich als Linearkombination der Eigenfunktionen darstellen:
   $\psi_{test}^{} = \sum_{n}^{} c_n^{} \psi_n^{}$
 \end{enumerate}
+
+Diese Voraussetzungen sind anzunehmen, da der Hamiltonian hermitesch ist und
+vor allem bei 2. Voraussetzung diese unserer physikalischen Realität entspricht.
+
 Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
 \begin{flalign*}
   E_{test} - E_0 
@@ -80,9 +84,7 @@ Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
   \quad &\vert \text{ 2. Voraussetzung}\\
   &\geq 0 &\qed
 \end{flalign*}
-\cite[S. 187]{atkins_friedman_2011}\\
-%\cite[]{TC2}
-TODO Warum Voraussetzungen erfüllt sind, erklären.
+\cite[S. 187]{atkins_friedman_2011}
 
 \subsection{Beschreibung von Elektronen}\label{section_slater}
 Die Form der Wellenfunktion für Elektronen ist in diesem Modell nicht nur 
@@ -101,12 +103,12 @@ und nicht wie hier künstlich eingebaut werden müssen.
 \cite[S. 265, 270]{levine_2019}
 \cite[4.5.3]{cramer_2004}
 
-Diese zusätzlichen Forderungen an die Wellenfunktion werden aufgrund beobachtbarer Eigenschaften 
 \subsubsection*{1. Spin}
 Jedes Elektron verfügt, neben einer räumlichen Ausdehnung, 
 auch über einen intrinsischen Spin. 
 Ein Elektron kann lediglich zwei Spin\-/Zustände annehmen.
-Diese Zustände werden mit den Spinfunktionen $\alpha$ und $\beta$ dargestellt und sind gegeben durch:
+Diese Zustände werden mit den Spinfunktionen $\alpha$ und
+$\beta$ dargestellt und sind gegeben durch:
 \begin{equation}\label{spin_function}
   \begin{aligned}
     \alpha(\omega) &:= \delta(\omega - \nicefrac{1}{2})\\
@@ -122,8 +124,12 @@ mit den Eigenschaften:
 \end{equation}
 
 Die Spinkoordinate $\omega$ existiert separat von den räumlichen Koordinaten $x,y,z$.
-Deshalb hängt die Wellenfunktion $\varphi$ eines Elektronens von insgesamt vier Parametern ab
-und wird als Produkt eines Raum- und Spin\-/Orbitals dargestellt:
+Deshalb hängt die Wellenfunktion $\varphi$ eines einzigen Elektronens
+von insgesamt vier Parametern ab
+und wird als Produkt einer Raum- und Spin\-/Funktion dargestellt.
+Im Kontext eines Moleküls werden die Raumwellenfunktionen auch Orbitale genannt, welche
+je zwei Elektronen mit entgegengesetztem Spin enthalten können.
+Das Produkt der Raum- und Spin\-/Funktion wird deshalb auch als Spinorbital bezeichnet.
 
 \begin{equation}\label{spin}
   \varphi(1) = \varphi(x_1, y_1, z_1, \omega_1) = \begin{cases}
@@ -206,7 +212,7 @@ Die Antisymmetrie unserer Wellenfunktion ist gegeben.
 
 Sollten zwei Elektronen das selbe Spinorbital besetzen,
 so wären zwei Spalten identisch, wodurch die Determinante verschwindet.
-Das Pauli\-/Ausschluss\-/Prinzip ist ebenfalls erfüllt.
+Das Pauli\-/Ausschluss\-/Prinzip ist ebenfalls erfüllt. TODO richtig?
 
 \cite[S. 50]{szabo_ostlund_1996}
 
