@@ -42,10 +42,11 @@ möglichen Implementierungen der Theorie.
 Die Optimierung über das SCF-Verfahren kann auch durch
 andere herkömmliche Methoden umgesetzt werden. Außerdem gibt
 es auch mehrere Wege die 2\-/Elektronen\-/Integrale zu berechnen,
-hier kann ebenfalls ein alternatives Schema gewählt werden.
+hier kann ebenfalls ein alternatives Verfahren gewählt werden
+wie die Rys-Quadratur oder das McMurchie\-/Davidson\-/Schema \cite[9.9, 9.11]{structure_2013}.
 Man könnte auch andere Basisfunktionen verwenden statt der Atomorbitale.
 Dies sind nur einige Beispiele für alternative Implementierungen
-innerhalb der HF\-/Theorie. TODO cite
+innerhalb der HF\-/Theorie.
 
 \section{Post-Hartree-Fock}
 Die Energien in der HF-Theorie überschätzen die Abstoßung der Elektronen untereinander,
@@ -63,8 +64,8 @@ sich die Elektronen\-/Repulsionen exakter beschreiben.
 
 \section{Optimierung}
 Wie in \cref{implementation-section} zu sehen ist,
-wurden wichtige und naheliegende Optimierungen
-sowohl auf theoretischer als auch auf programmier-technischer Seite bereits durchgeführt.
+wurden bereits wichtige und naheliegende Optimierungen
+sowohl auf theoretischer als auch auf programmier-technischer Seite durchgeführt.
 Diese sind besonders auf die Berechnung der 2\-/Elektronen\-/Integrale fokusiert,
 da dieser Teil bei Weitem die meiste Rechenzeit erfordert.
 
@@ -75,7 +76,7 @@ fortgeschrittenen Optimierungsstrategien verzichtet.
 Diese könnten jedoch in weiterführenden Implementierungen eingeführt werden,
 wodurch auch die Berechnung großer molekularer System möglich wäre.
 
-Im theoretischen Bereich bietet sich dazu die Umsetzung der Fast-Multipole-Method an,
+Im theoretischen Bereich bietet sich dazu die Umsetzung der Fast-Multipole-Method \cite[9.14.3]{structure_2013} an,
 in welcher Interaktionen zwischen relativ weit entfernten Atomen
 je nach benötigter Präzision systematisch approximiert werden.
 Außerdem sind noch Laufzeit-Verbesserungen durch das Ausnutzen von Molekül-Symmetrien möglich,
@@ -85,9 +86,9 @@ Neben der auf Theorie basierenden Optimierungen können ebenfalls Verbesserungen
 durch effektivere Verwendung der Computerhardware erzielt werden.
 Die Einführung cache-freundlicher Speicherstrukturen sowie das Meiden redundanter
 Berechnungen ist deshalb besonders naheliegend.
-Zudem können zusätzliche Verfahren für das parallele Berechnen der HF-Methode eingebaut werden,
+Zudem können Verfahren für das parallele Berechnen der HF-Methode eingebaut werden,
 zu diesen gehören Optionen wie das Rechnen auf GPUs mit OpenCL\cite{opencl}
-oder sogar Cluster-Systemen über z.B. MPI\cite{mpi}.
+oder Cluster-Systemen über z.B. MPI\cite{mpi}.
 
 Erst durch die Verwendung dieser fortgeschrittenen Optimierungen sollte es möglich sein
-vergleichbare Laufzeiten zu denen aus professionellen Programmen zu erzielen.
+vergleichbare Laufzeiten zu denen aus kommerziellen Programmen zu erzielen.

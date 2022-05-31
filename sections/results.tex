@@ -21,7 +21,7 @@ Wir schauen uns die folgenden Moleküle an:
 \end{figure}
 Diese Moleküle sind verglichen zu
 allen möglichen organischen Verbindungen
-relativ einfache Konstrukte und dienen nur zum Testen
+relativ einfache Konstrukte und dienen zum Testen
 der grundlegenden Funktionalität.
 
 Wir berechnen nun für jedes dieser Moleküle die Hartree\-/Fock\-/Energie, 
@@ -29,8 +29,9 @@ welche sich aus der elektronischen Energie und
 der Internuklearen\-/Abstoßungs\-/Energie zusammen setzt.
 Diese Energien vergleichen wir dann mit den
 zuverlässigen Ergebnissen aus der NWChem\-/Software.
-Es wird lediglich der 6-311+g** Basis\-/Satz verwendet,
-dieser ist groß genug, um einigermaßen genaue Berechnungen zu ermöglichen.
+Es wird lediglich ein 6-311+g** Basis\-/Satz verwendet,
+welcher groß genug ist, um einigermaßen genaue Berechnungen zu ermöglichen.
+Der Basis\-/Satz entstammt der Basis Set Exchange \cite{bse}.
 Bei den Berechnungen wurden für möglichst identische Startbedingungen gesorgt.
 
 \section{Numerische Experimente}
@@ -49,19 +50,20 @@ Wie klar zu erkennen ist, sind die berechneten Energien der eigenen Implementier
 im Bereich der Ergebnisse der NWChem\-/Software. Es lässt sich schlussfolgern,
 dass die Implementierung korrekt ist.
 
-\section{Diskussion}
 Die deutlich besseren Ergebnisse der NWChem-Software
 trotz gleicher Startbedingungen sind sehr wahrscheinlich 
 auf Unterschiede in der Implementierung zurückzuführen,
 wie zum Beispiel auf den Einsatz zusätzlicher Optimierungen.
+Es wäre auch möglich, dass kleinere Fehler in der Implementierung
+für diese Abweichungen sorgen.
 
 \section{Visualisierung}
-Die Hartree\-/Fock\-/Energien sind jedoch nicht die einzigen Ergebnisse,
+Die Hartree\-/Fock\-/Energien sind nicht die einzigen Ergebnisse,
 wir erhalten noch die Orbital\-/Funktionen und deren zugehörigen Energien.
 Diese lassen sich in einem Isoflächen\-/Plot gut darstellen.
 Die nachstehenden Grafiken wurden mithilfe der Programme Avogadro \cite{avogadro}
 und POV-Ray \cite{povray} erzeugt.
-\begin{enumerate}
+\begin{enumerate}\bfseries
 \item Heliumhydridion (HeH$^+$):
 \begin{figure}[H]
 \centering
@@ -119,3 +121,27 @@ nach aufsteigender Energie sortiert.
 \end{figure}
 
 \end{enumerate}
+
+Diese berechneten Orbitale stimmen auch visuell mit denen aus NWChem überein
+und bestätigen ebenfalls, dass die Implementierung richtig ist.
+
+Wichtig ist noch, dass man die hier dargestellten Wellenfunktionen von deren Aufenthaltsdichten trennt.
+Die Wellenfunktion eines Moleküls ist keine reale messbare Eigenschaft,
+sondern ein theoretisches Konstrukt.
+Die Aufenthaltsdichte hingegen kann im Experiment beobachtet werden.
+Dennoch ist es üblich die Wellenfunktion-Darstellung zu verwenden.
+
+Zum Vergleich die Aufenthaltsdichten der Orbitale des Wassermoleküls:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim=1200 1200 1200 1200, clip, width=0.32\textwidth]{res/H2O/h2o_d0.png}
+    \includegraphics[trim=1200 1200 1200 1200, clip, width=0.32\textwidth]{res/H2O/h2o_d1.png}
+    \includegraphics[trim=1200 1200 1200 1200, clip, width=0.32\textwidth]{res/H2O/h2o_d2.png}\\
+    \includegraphics[trim=1200 1200 1200 1200, clip, width=0.32\textwidth]{res/H2O/h2o_d3.png}
+    \includegraphics[trim=1200 1200 1200 1200, clip, width=0.32\textwidth]{res/H2O/h2o_d4.png}
+    \caption{Die Aufenthaltsdichten der besetzten Orbitale des H$_2$O\-/Moleküls
+    in aufsteigender Energie.
+    \textcolor{blue}{$\blacksquare$} positiv,
+    \textcolor{red}{$\blacksquare$} negativ.}\label{h2o_densities}
+\end{figure}

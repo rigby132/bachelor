@@ -33,6 +33,16 @@ welche allgemein definiert sind als:
   \int \varphi_i^*(1) \varphi_j(1) \frac{1}{r_{12}} \varphi_k^*(2) \varphi_l(2) \,d\tau_1 \,d\tau_2
 \end{equation}
 
+Das $\,d\tau_i$ steht für den Parametersatz des $i$-ten Elektrons,
+also für $\,dx_i, \,dy_i, \,dz_i$ und $\,d\omega_i$.
+Sollte ein $\,d\nu_i$ verwendet werden,
+so integriert man nur über die räumlichen Koordinaten des $i$-ten Elektrons.
+
+Also gilt:
+\begin{equation*}
+    \,d\tau = \,d\nu \,d\omega = \,dx \,dy \,dz \,d\omega
+\end{equation*}
+
 \cite[S. 19]{tc2_3}
 
 \subsubsection*{Coulomb-Integral}
@@ -58,7 +68,6 @@ Das Coulomb\-/Integral alleine überschätzt die elektrostatische Abstoßung zwe
 weil im Integral\-/Bild Elektronen sich beliebig nahekommen können.
 Dies ignoriert jedoch das Pauli-Ausschluss-Prinzip, 
 welches zwei Elektronen mit identischen quantenmechanischen Zuständen ausschließt.
-Dieses verstärkte Meiden der Elektronen wird auch Pauli-Repulsion genannt.
 
 \cite[S. 206]{lewars_2016} \cite[S. 23]{tc2_3}
 
@@ -67,7 +76,6 @@ Aus der Slater\-/Determinante, welche das Pauli-Ausschluss-Prinzip erzwingt,
 geht das Austausch\-/Integral $\left[ \varphi_i \varphi_j \vert \varphi_j\varphi_i \right]$ hervor.
 Dieses Integral ist ein Korrektur\-/Term für die im Coulomb\-/Integral vernachlässigte Pauli\-/Repulsion.
 Es ist gegeben durch:
-
 
 \begin{equation}\label{exchange}
   \begin{aligned}
@@ -153,7 +161,7 @@ Dies vereinfacht zu
   \right) + \Theta_E
   \end{split}
 \end{equation}
-Für eine Extremstelle muss diese erste Variation verschwinden, wir fordern:
+Für eine Extremstelle muss diese erste Variation null sein, wir fordern:
 \begin{equation}
   \delta E_\textrm{HF} \overset{!}{=} 0
 \end{equation}
@@ -174,7 +182,7 @@ Es gilt dabei $\lambda_{ij} = \lambda_{ji}^*$,
 also die $\lambda_{ij}$ bilden eine hermitesche Matrix. \cite[3.40]{szabo_ostlund_1996}
 
 Eine Extremstelle in $\mathcal{L}$ bedeutet auch eine Extremstelle in $E_\textrm{HF}$
-unter der Orthonormalitäts\-/Bedingung. Also setzten wir die Erste Variation in $\mathcal{L}$ null:
+unter der Orthonormalitätsbedingung. Also setzen wir die erste Variation in $\mathcal{L}$ null:
 \begin{equation}
   \delta \mathcal{L} = \delta E_\textrm{HF}
   - \sum^{2n}_{i,j} \lambda_{ij} \delta \langle \varphi_i \vert \varphi_j \rangle = 0
@@ -198,7 +206,7 @@ dabei gleicht das $\Theta^*$ stets dem restlichen Term.
     - \left[ \delta \varphi_i\varphi_j \vert \varphi_j\varphi_i \right]
   \right) 
   - \sum_{i,j}^{2n} \lambda_{ij} \langle \delta \varphi_i \vert \varphi_j \rangle + \Theta
-  &| &\textrm{ \cref{coulomb}, \cref{exchange}}\\
+  &| &\begin{matrix}\textrm{ \cref{coulomb}}\\ \textrm{ \cref{exchange}}\end{matrix}\\
   &=  \sum_i^{2n} \langle \delta \varphi_i \vert \hat{H}_{\text{core}} \vert \varphi_i \rangle
   + \sum_{i, j}^{2n} \left( 
     \langle \delta \varphi_i \vert \hat{J}_j \vert \varphi_i \rangle
@@ -226,7 +234,7 @@ Wir faktorisiern nun die Summen $\sum_i^{2n}$ und die Integrale aus:
 \end{equation*}
 
 Da jedes $\delta \varphi_i^*$ beliebig variiert werden kann,
-muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Nullstelle.
+muss der Term in der Klammer für jedes $i$ jeweils null sein für eine Extremstelle.
 Wir erhalten die Hartree\-/Fock\-/Gleichungen:
 \begin{equation}
   \left(\hat{H}_{\text{core}} + \sum_j^{2n} 
@@ -254,8 +262,8 @@ Dabei ist der Fock\-/Operator $\hat{F}$ invariant bezüglich dieser Diagonalisie
 %================================================
 \subsection{Entfernen des Spins}\label{remove-spin-section}
 Es ist möglich den Spin aus unserer Hatree\-/Fock\-/Gleichung zu entfernen,
-da wir lediglich Möleküle betrachten,
-deren Orbitale stets zweifach besetzt sind mit je einem $\alpha$ und $\beta$ Elektron.
+da wir lediglich Moleküle betrachten,
+deren Orbitale stets zweifach mit je einem $\alpha$ und $\beta$ Elektron besetzt sind.
 Wir müssen nur für ein beliebiges $\varphi_i$ aus \cref{UHF} umformen:
 \begin{align*}
   \hat{F} \varphi_i &= \lambda_i \varphi_i \\
@@ -320,7 +328,7 @@ jedes Orbital zwei Elektronen mit unterschiedlichem Spin enthält, lässt sich d
   &- \langle \alpha(1) \vert \langle \alpha(2) \vert \hat{K'}_j \vert \alpha(1) \rangle \vert \alpha(2) \rangle
   - \langle \alpha(1) \vert \langle \beta(2) \vert \hat{K'}_j \vert \beta(1) \rangle \vert \alpha(2) \rangle
 \end{align*}
-Wir haben die Terme der Summe mit gleichem Raumorbital kombiniert und
+Wir haben die Terme der Summe mit dem gleichen Raumorbital kombiniert und
 das Spin\-/Integral der Operatoren aus diesen herausgezogen.
 Also hängen die modifizierten Operatorn $\hat{J'}_j$ und $\hat{K'}_j$ nicht von $\omega_1$ oder $\omega_2$ ab,
 wir können die Operatoren aus den Spin\-/Integralen entfernen:
@@ -358,7 +366,7 @@ Das ist die Hartree\-/Fock\-/Gleichung unter der Bedingung, dass jedes Orbital d
 Diesen Fall \cref{RHF} nennt man Restricted Hartree\-/Fock (RHF) und
 den Fall mit Spin\-/Orbitalen aus \cref{UHF} Unrestricted Hartree\-/Fock (UHF).
 
-Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits festgelegt.
+Wir beschränken uns nur auf Restricted Hartree\-/Fock, wie bereits im \cref*{spin-section} festgelegt.
 
 \cite[Ab. 3.4.1]{szabo_ostlund_1996}
 \cite[Aufgabe 1]{tc2_spin}
@@ -401,9 +409,11 @@ Es lässt sich zeigen, dass man \cref*{roothaan_hall_eq} in diese Matrix\-/Form 
   FC = SC\lambda
 \end{equation}
 
+\cite[5.2.3.6.1]{lewars_2016}
+
 \subsection{Lösung der Matrix\-/Gleichung}
 Die Matrizen $F$ und $S$ können nun über \cref{rh_mtx_elements} berechnet werden,
-sodass wir nur noch die Koeffizienten\-/Matrix und diagonale Energie\-/Matrix als die Unbekannten haben.
+sodass wir nur noch die Koeffizienten\-/Matrix und diagonale Energie\-/Matrix als Unbekannte haben.
 
 Mit der genauen Evaluierung der Matrizen $F$ und 
 $S$ befassen wir uns in \cref{F_S_mtx_calc}.
@@ -453,6 +463,7 @@ die erhaltenen Koeffizienten über \cref{trans_C} in die ursprüngliche Basis tr
 Die erhaltenen Eigenwerte $\lambda$ entsprechen den Energien der Orbitale,
 welche durch die Koeffizienten in $C$ beschrieben werden.
 
+\cite[5.2.3.6.2]{lewars_2016}
 \cite[S. 142-145]{szabo_ostlund_1996}
 
 \subsection{Berechnung der Molekül\-/Orbitale und Orbital\-/Energien}
@@ -467,7 +478,7 @@ wenn wir $C$ bereits berechnet haben.
 Dieses Hindernis überwältigen wir,
 indem wir diese Gleichung in einem iterativen Verfahren lösen:
 \begin{enumerate}
-    \item Wir beginnen mit einer hoffentlich guten Schätzung
+    \item Wir beginnen mit einer Schätzung
     für die Koeffizienten\-/Matrix $C$ bzw. den Raumorbitalen $\varphi_i$.
     \item Dann lösen wir die Gleichung \cref{roothaan_mtx} mit der neusten Schätzung
     für $C$ und aktualisieren unsere Schätzung
@@ -478,11 +489,14 @@ indem wir diese Gleichung in einem iterativen Verfahren lösen:
     unseres Verfahrens. 
 \end{enumerate}
 
-Dieses Verfahren wird die Self\-/Consistent Field method (kurz SCF) genannt,
+Dieses Verfahren wird die self\-/consistent field method (kurz SCF) genannt,
 da wir erst aufhören, wenn die Koeffizienten\-/Matrix $C$
 über mehrere Iterationen hinweg gleich bleibt, also mit sich selbst konsistent ist.\\
 
 \input{sections/scf_chart.tex}
+
+\cite[9.3]{atkins_friedman_2011}
+\cite[Figure 9.1]{atkins_friedman_2011}
 \subsection{Darstellung des Fock\-/Operators in der Atomorbital\-/Basis}\label{F_S_mtx_calc}
 
 Wir müssen noch die Fock\-/Matrix $F$ und Überlapp\-/Matrix $S$ berechnen,
@@ -492,7 +506,7 @@ Die Berechnung der Überlapp\-/Matrix $S$ ist durch \cref{rh_mtx_elements} berei
 als Integrale über Atomorbitale gegeben.
 Die Elemente der Fock\-/Matrix $F$ hingegen benötigen den Fock\-/Operator $\hat{F}'$,
 welcher selber von den Molekülorbitalen abhängt.
-Der UHF Fock\-/Operator $\hat{F}'$ wurde bereits definiert als:
+Der RHF Fock\-/Operator $\hat{F}'$ wurde bereits definiert als:
 \begin{equation}
     \hat{F}' = \hat{H}_{\text{core}} + \sum_j^{n}
     \left( 2\hat{J'}_j - \hat{K'}_j \right)
@@ -524,6 +538,9 @@ Zur Berechnung der Fock\-/Matrix $F$ und Überlapp\-/Matrix $S$
 fehlen uns nur noch explizite Terme für die Atomorbitale $\chi$.
 Diese sind Implementierungsabhängig und werden deshalb im nächsten Kapitel
 unter \cref{basis-functions-section} behandelt.
+
+\cite[5.2.3.6.3]{lewars_2016}
+\cite[3.4.4]{szabo_ostlund_1996}
 
 \subsection{Berechnung der Gesamtenergie des Moleküls}
 Ab diesem Punkt sind wir in der Lage die Molekülorbitale und

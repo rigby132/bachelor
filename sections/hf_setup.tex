@@ -1,5 +1,5 @@
 \subsection{Hamilton-Operator}
-Der allgemeine Hamilton\-/Operator für Möleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
+Der allgemeine Hamilton\-/Operator für Moleküle mit $N$ Elektronen und $M$ Atomkernen lautet:
 \begin{flalign}\label{hamilton}
   \hat{H} &= -\sum_i^N \frac{1}{2} \nabla_i^2 
             -\sum_A^M \frac{1}{2 m_A} \nabla_A^2
@@ -39,7 +39,8 @@ Dafür wird der allgemeine Hamilton-Operator \cref{hamilton} aufgeteilt:
           &= \hat{T}_a + \hat{V}_{aa} + \hat{H}_{\text{el}} \nonumber\\
   \hat{H}_{\text{el}} &= \hat{T}_e + \hat{V}_{ea} + \hat{V}_{ee}
 \end{flalign}
-Wir lösen nun die Schrödingergleichung mit dem elektronischen Hamilton-Operator $\hat{H}_{\text{el}}$.
+Wir lösen nun die Schrödingergleichung \cref*{schroedinger}
+mit dem elektronischen Hamilton-Operator $\hat{H}_{\text{el}}$.
 Bei der Lösung dieser wird eine feste Kerngeometrie angenommen, 
 die wir bei dem Operator $\hat{V}_{eA}$ verwenden werden. 
 Mit der resultierenden Elektronen\-/Wellenfunktionen 
@@ -66,10 +67,10 @@ Voraussetzungen:
   $\psi_{test}^{} = \sum_{n}^{} c_n^{} \psi_n^{}$
 \end{enumerate}
 
-Diese Voraussetzungen sind anzunehmen, da der Hamiltonian hermitesch ist und
-vor allem bei 2. Voraussetzung diese unserer physikalischen Realität entspricht.
+Die Voraussetzungen (1), (3) und (4) sind anzunehmen, da der Hamiltonian hermitesch ist.
+Die 2. Voraussetzung hingegen entspricht unserer physikalischen Realität.
 
-Zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
+Es ist zu zeigen: $E_{test}^{} \geq E_0^{}$ oder $E_{test}^{} - E_0^{} \geq 0$
 \begin{flalign*}
   E_{test} - E_0 
   &= \langle \psi_{test}^{} \vert \hat{H} - E_0^{} \vert \psi_{test}^{} \rangle\\
@@ -103,7 +104,19 @@ und nicht wie hier künstlich eingebaut werden müssen.
 \cite[S. 265, 270]{levine_2019}
 \cite[4.5.3]{cramer_2004}
 
-\subsubsection*{1. Spin}
+\subsubsection*{Notation}
+Da jedes Elektron mindestens 3 Parameter ($x, y, z$) zur Beschreibung benötigt,
+kann dies bei größeren Systemen schnell unübersichtlich werden.
+Deshalb ist es üblich die Parameter eines Elektrons durch eine natürliche Zahl abzukürzen:
+
+\begin{equation}
+    \Psi(1, 2, 3, \dots) \equiv  \Psi(x_1, y_1, z_1, \quad
+    x_2, y_2, z_2,\quad x_3, y_3, z_3, \quad\dots)
+\end{equation}
+
+Diese verkürzte Notation wird in der restlichen Arbeit verwendet.
+
+\subsubsection*{1. Spin}\label{spin-section}
 Jedes Elektron verfügt, neben einer räumlichen Ausdehnung, 
 auch über einen intrinsischen Spin. 
 Ein Elektron kann lediglich zwei Spin\-/Zustände annehmen.
@@ -124,7 +137,7 @@ mit den Eigenschaften:
 \end{equation}
 
 Die Spinkoordinate $\omega$ existiert separat von den räumlichen Koordinaten $x,y,z$.
-Deshalb hängt die Wellenfunktion $\varphi$ eines einzigen Elektronens
+Deshalb hängt die Wellenfunktion $\varphi$ eines einzigen Elektrons
 von insgesamt vier Parametern ab
 und wird als Produkt einer Raum- und Spin\-/Funktion dargestellt.
 Im Kontext eines Moleküls werden die Raumwellenfunktionen auch Orbitale genannt, welche
@@ -132,23 +145,29 @@ je zwei Elektronen mit entgegengesetztem Spin enthalten können.
 Das Produkt der Raum- und Spin\-/Funktion wird deshalb auch als Spinorbital bezeichnet.
 
 \begin{equation}\label{spin}
-  \varphi(1) = \varphi(x_1, y_1, z_1, \omega_1) = \begin{cases}
+  \varphi(1) := \varphi(x_1, y_1, z_1, \omega_1) = \begin{cases}
     \psi(x_1, y_1, z_1) \alpha(\omega_1) = \psi(1) \alpha(1)\\
     \psi(x_1, y_1, z_1) \beta(\omega_1) = \psi(1) \beta(1)\\
   \end{cases}
 \end{equation}
 
 Zu beachten ist, dass Elektronen nur für die Werte 
-$\omega = \pm \nicefrac{1}{2}$ existieren können ($\lvert \varphi \rvert^2 > 0$).
+$\omega = \pm \nicefrac{1}{2}$ existieren können ($\lvert \varphi \rvert^2 > 0$) und
+der Parametersatz eines Elektrons durch eine natürliche Zahl abgekürzt werden kann.
 
 \cite[S. 45]{szabo_ostlund_1996}
 
-TODO bild
-
-Diese Spin-Eigenschaft wurde erstmals im Stern-Gerlach-Experiment in 1921 beobachtet, 
+Diese Spin-Eigenschaft wurde erstmals im Stern-Gerlach-Experiment (1921) beobachtet, 
 welches in Frankfurt am Main durchgeführt wurde.
-
 \cite{tc1_spin}
+
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{res/sterngerlach2.jpg}
+\end{center}
+    \caption{Plakette zum Gedenken an das Stern-Gerlach-Experiment. \cite{sterngerlach}}
+\end{figure}
+
 
 \subsubsection*{2. Antisymmetrie}
 Diese Forderung besagt, dass eine Elektronen\-/Wellenfunktion im Bezug auf
@@ -163,25 +182,25 @@ den Austausch zweier beliebiger Elektronen\-/Koordinaten antisymmetrisch sein mu
 \subsubsection*{Pauli-Ausschluss-Prinzip}
 Aus \cref{spin_product}, \cref{spin} und \cref{antisymmetry} folgt,
 dass zwei Elektronen mit identischem Spin sich nicht an
-den gleichen Raumkoordinaten aufhalten können. Dies ist leicht zu zeigen:
+den gleichen Raumkoordinaten aufhalten können. Dies ergibt sich aus folgendem Beweis:
 
 Nehmen wir an, dass zwei Elektronen $i,j$ die selben Raum- und Spin\-/Koordinaten ($i = j$) haben:
 \begin{equation*}
   \Psi(1, \dots, i, \dots, j, \dots, N) = \Psi(1, \dots, i, \dots, i, \dots, N)
 \end{equation*}
-Wir fordern aber auch Antisymmetrie:
+Wir fordern auch Antisymmetrie:
 \begin{equation*}
   \Psi(1, \dots, i, \dots, j, \dots, N) = -\Psi(1, \dots, j, \dots, i, \dots, N)
 \end{equation*}
-Es folgt aber:
+Es folgt daher:
 \begin{flalign*}
   \Psi(1, \dots, i, \dots, i, \dots, N) &= -\Psi(1, \dots, i, \dots, i, \dots, N) \\
   2\Psi(1, \dots, i, \dots, i, \dots, N) &= 0
 \end{flalign*}
 $\Rightarrow$ Die Wahrscheinlichkeit, dass zwei Elektronen mit gleichem Spin 
-sich am selben Ort befinden ist null.
+sich am selben Ort befinden ist null. \qed
 
-Dieses Phenomen auf Spinorbitalen angewandt bedeutet,
+Dieses Phänomen auf Spinorbitalen angewandt bedeutet,
 dass zwei Elektronen nicht das selbe Spinorbital besetzen können,
 dies nennt man das Pauli\-/Ausschluss\-/Prinzip.
 Das resultierende Meiden der Elektronen wird Pauli\-/Repulsion genannt.
@@ -212,12 +231,12 @@ Die Antisymmetrie unserer Wellenfunktion ist gegeben.
 
 Sollten zwei Elektronen das selbe Spinorbital besetzen,
 so wären zwei Spalten identisch, wodurch die Determinante verschwindet.
-Das Pauli\-/Ausschluss\-/Prinzip ist ebenfalls erfüllt. TODO richtig?
+Das Pauli\-/Ausschluss\-/Prinzip ist ebenfalls erfüllt.
 
 \cite[S. 50]{szabo_ostlund_1996}
 
-In unserem Fall ist jedes Raumorbital doppelt besetzt,
-weshalb wir $\Psi$ mit nur $n$ Raumorbitalen ($2n = N$) darstellen können:
+Sollte jedes Raumorbital doppelt besetzt sein,
+so können wir $\Psi$ mit nur $n$ Raumorbitalen ($2n = N$) darstellen:
 \begin{equation}
 \Psi(1, \dots, 2n) = 
 \frac{1}{\sqrt{(2n)!}}
@@ -234,3 +253,6 @@ weshalb wir $\Psi$ mit nur $n$ Raumorbitalen ($2n = N$) darstellen können:
 
 Wir haben nun eine Beschreibung für die Elektronen\-/Wellenfunktion erhalten,
 die in der Hartree\-/Fock\-/Theorie verwendet wird.
+
+Um die Theorie überschaubar zu halten,
+werden nur Molekulare\-/Systeme mit doppelt besetzten Raumorbitalen betrachtet.

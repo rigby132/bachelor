@@ -4,10 +4,8 @@ der zu dieser Arbeit begleitenden Software. Für die Implementierung wurde
 die Programmiersprache C++ gewählt. Aufgrund der hohen Effizienz von C++ ist die Sprache
 gut geeignet für diese Art von Problem.
 
-\subsection{Überblick}
- TODO diagramm?
 \subsection{Verwendete Bibliotheken}
-Es wurden drei externe Bibliotheken neben der STL verwendet:
+Es wurden drei externe Bibliotheken neben der standard template library (STL) verwendet:
 \begin{enumerate}
     \item CLI11 \cite{cl11}\\
     Für den leichten Umgang mit Terminal\-/Eingaben.
@@ -17,7 +15,7 @@ Es wurden drei externe Bibliotheken neben der STL verwendet:
     Zur Parallelsierung der Integralberechnung.
 \end{enumerate}
 
-\subsection{Atomorbitale und Basis\-/funktionen}\label{basis-functions-section}
+\subsection{Atomorbitale und Basis\-/Funktionen}\label{basis-functions-section}
 Wir befassen uns nun genauer mit den verwendeten Atomorbitalen.
 Wie am Anfang des letzten Kapitels beschrieben, werden Atomorbitale verwendet,
 um die Molekülorbitale darzustellen. In diesem Kontext werden die Atomorbitale
@@ -33,23 +31,23 @@ um Atomorbitale zu konstruieren:
     \item Slater-Type-Orbitals (STO)\\
     STOs werden durch die analytischen Lösungen des Wasserstoff\-/Atoms dargestellt
     und können deshalb die Wellenfunktionen von Atomen sehr genau repräsentieren.
-    Jedoch fällt die Berechnung der 2\-/Elektronen\-/Integrale schwer,
-    weshalb die Verwendung von so genannten GTOs bevorzugt wird.
+    Da die Berechnung der 2\-/Elektronen\-/Integrale aufwendig ist,
+    wird die Verwendung von so genannten GTOs bevorzugt.
 
     \cite[Ab. 5.2]{cramer_2004}
     \cite[S. 2]{tc2_6}
 
     \item Gaussian-Type-Orbitals (GTO)\\
-    Wie der Name schon bereits sagt, werden Gaussfunktionen verwendet,
+    Wie der Name schon sagt, werden Gaussfunktionen verwendet,
     um die genaueren STOs zu approximieren. Im Gegensatz zu den STOs ist
-    die Evaluierung der 2\-/Elektronen\-/Integrale mit GTOs viel leichter.
+    die Evaluierung der 2\-/Elektronen\-/Integrale mit GTOs simpler.
     GTOs werden durch die folgende kartesische Form definiert:\\
     \begin{equation}\label{gto-function}
         \chi(x,y,z) = N \cdot x^i y^j z^k \cdot \exp (-\alpha (x^2+y^2+z^2))
     \end{equation}
 
     Die Parameter $i,j,k$ entscheiden über die Art und Form des Orbitals (S, P, D ...).
-    Die restlichen Parameter $N, \alpha$ dienen der Normierung und Anpassung der Größe des Orbitals.
+    Die restlichen Parameter $N$ und $\alpha$ dienen der Normierung und Anpassung der Größe des Orbitals.
 
     \begin{figure}[H]
         \includegraphics[trim=50 0 50 0, clip, width=0.24\textwidth]{res/GTOs/ao_0_0_0.png}
@@ -68,9 +66,13 @@ Diese Änderung ermöglicht ein exaktes Lösen der 2-Elektronen-Integrale,
 die mit STOs nur numerisch genähert werden können.\cite[6.2.1]{cramer_2004}
 
 In der Implementierung werden GTOs verwendet, aufgrund der leichteren Integral\-/Berechnung,
-welche im \cref{repulsion-integrals-section} genauer behandelt wird.
+welche im \cref{repulsion-integrals-section} genauer behandelt werden.
 Im Programm werden die Parameter der GTOs aus Dateien mit vorgefertigten Basissätzen extrahiert.
 In diesen Dateien gibt es für jedes Atom Parameter zur Konstruktion der relevanten GTOs.
+Die Online-Datenbank Basis Set Exchange \cite{bse} wurde verwendet,
+um die Dateien im korrekten Format zu erhalten.
+Das in der Implementierung genutzte Format entspricht dem des deMon2K-Formats,
+wobei der Header weggelassen werden muss.
 
 Bei GTOs ist es außerdem üblich, dass eine Linearkombination mehrere GTOs verwendet wird 
 zur Beschreibung eines Atomorbitals, diese Kombination von GTOs wird ein Contracted GTO (CGTO) genannt.
@@ -78,7 +80,8 @@ CGTOs verhalten sich ähnlich zu GTOs und werden deshalb nicht gesondert behande
 \cite[S.255-256]{lewars_2016}
 
 \subsection{Schätzung der Start-Orbitale}
-Im SCF\-/Verfahren wird eine Start\-/Schätzung benötigt, um überhaupt mit dem iterativen Prozess anzufangen.
+Im SCF\-/Verfahren wird zu Beginn eine Schätzung benötigt,
+um mit dem iterativen Prozess anzufangen.
 Es wurde sich für die leichteste Approximation entschieden, welche die Koeffizienten alle null setzt.
 Dies kommt einem Iterationsschritt gleich,
 bei dem jegliche Elektron\-/Elektron\-/Interaktionen vernachlässigt werden.
@@ -91,16 +94,16 @@ In der Gleichung \cref{fock-matrix-element} für die Fock\-/Matrix\-/Elemente ko
 2-Elektronen-Integrale für Atomorbitale \cref{2e-integral-ao} vor.
 Da diese Atomorbitale keinen Spin haben, integriert man insgesamt 6 Variablen
 ($2\times (x,y,z)$) über den gesamten Raum, also von $-\infty$ bis $+\infty$.
-Dies ist mit konventionellen numerischen Integrations-Methoden nicht in vernüftiger Zeit
+Dies ist mit konventionellen numerischen Integrations-Methoden nicht in angemessener Zeit
 zu bewältigen, weshalb andere Methoden benötigt werden. Es handelt sich hierbei 
-um den rechenintensivsten Teil der Gesamt\-/Berechnung, weshalb die Schnelligkeit
+um den rechenintensivsten Teil der gesamten Berechnung, weshalb die Schnelligkeit
 der Implementierung entscheidend für die Gesamtlaufzeit des Programms ist.
 
 \subsubsection{Erste Implementierung}
 In der ursprünglichen Implementierung wurde deshalb die Monte\-/Carlo\-/Integration verwendet.
 Diese Art der Integration berechnet die zu integrierende Funktion an zufällig gewählten Punkten
 im 6 dimensionalen Raum und trägt deren Ergebnisse zusammen. Die Implementierung ist relativ simple
-und kann dennoch Ergebnisse produzieren.
+und kann dennoch vergleichsweise schnell Ergebnisse produzieren.
 \begin{figure}[H]
 \begin{minted}[linenos,
     frame=single]{c++}
@@ -130,7 +133,7 @@ T mc_integrate(const FUNC& fn, DIST& dist, const unsigned long sample_size)
 \caption{Die urspünglich verwendete Implementierung der Monte\-/Carlo\-/Integration mit wählbarer Verteilung.}
 \end{figure}
 
-Im normalen Fall wählt man eine uniforme-Verteilung beim Sampeln. Jedoch kann man hier
+Im normalen Fall wählt man eine uniforme-Verteilung beim Sampeln. Man kann hier
 über die Angabe einer eigenen Verteilung die Stellen von hohem Beitrag
 zum Integral öfter sampeln und somit das Integral genauer bestimmen.
 Diese Technik nennt sich Importance\-/Sampling
@@ -152,9 +155,9 @@ viel schneller und genauer berechnet werden durch den Einsatz von GTOs.
 Es wurden rekursive Algorithmen entwickelt, welche dieses Integral genau lösen können.
 Zu diesen gehört das Obara\-/Saika Schema, welches über mehrere rekusive Relationen alle
 auftretenden Integrale bei der HF-Methode lösen kann (nicht nur \cref{2e-integral-ao}).
-Leider würde die Auslegung dieses Schemas den Rahmen dieser Arbeit sprengen,
+Die Auslegung dieses Schemas würde den Rahmen dieser Arbeit sprengen,
 weshalb hier auf die detaillierte Abhandlung des Themas in
-\cite[Kapitel 9 bzw. 9.10]{structure_2013} verwiesen wird.
+\cite[Kapitel 9 bzw. 9.10]{structure_2013} und \cite{obara_saika_1988} verwiesen wird.
 Da das Obara\-/Saika\-/Schema vergleichsweise leicht ist, wird dieser Implementierungs\-/Ansatz 
 gewählt.
 
